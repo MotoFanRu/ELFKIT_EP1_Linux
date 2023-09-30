@@ -1,0 +1,50 @@
+;   a_v =					;   a_h =
+;BASELINE=64 //only text	;RIGHT=8
+;BOTTOM=32					;LEFT=4
+;TOP=16						;HCENTER=1
+;VCENTER=2 //only picture
+
+;  FontStyle =
+;PLAIN=255
+;ITALIC=1
+;BOLD=2
+;BOLD_ITALIC=3
+
+;  color = 0x8Red8Green8Blue8Transparent 
+
+; Strings:  x  y  (a_v|a_h)  FontID  FontStyle  ForegroundColor  BackgroundColor 
+
+TrackNumber = 10 58 20 1 0 0x00000000 0x000000FF
+Playlist = 10 78 20 1 0 0x0000FF00 0x000000FF
+Artist = 123 178 17 1 0 0x00000000 0x000000FF
+Title = 123 198 17 1 0 0x00000000 0x000000FF
+Album = 123 218 17 1 0 0x00000000 0x000000FF
+Time = 113 280 36 1 0 0x0000B000 0xFFFFFF00
+TimeCurrent = 10 280 36 1 0 0x0000B000 0xFFFFFF00
+TimeElapsed = 208 280 36 1 0 0x0000B000 0xFFFFFF00
+SoftLabel = 3 317 36 1 0 0x0000B000 0x000000FF
+
+; Pictures:  x  y  (a_v|a_h) 
+
+TitlePicture = 0 0 20
+SoftPicture = 0 320 36
+Backward = 17 240 20
+Play = 71 240 20
+Pause = 119 240 20
+Stop = 168 240 20
+Forward = 205 240 20
+Random = 220 60 20
+RepetitionOne = 199 60 20
+RepetitionAll = 199 60 20
+Mute = 175 60 20
+Animation = 106 107 20
+
+; Objects:  x  y  w  h  color
+
+Background = 0 16 240 320 0xFFFFFF00
+ProgressBar = 10 261 216 10 0x0000B000
+VolumeBar = 10 261 216 10 0x00B00000
+
+; Setting: 1 - on, 0 - off
+
+StatusLine = 0

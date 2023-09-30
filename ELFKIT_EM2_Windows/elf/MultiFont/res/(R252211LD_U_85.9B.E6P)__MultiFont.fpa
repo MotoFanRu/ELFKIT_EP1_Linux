@@ -1,0 +1,10 @@
+[Patch_Info]
+SW_Ver=R252211LD_U_85.9B.E6P
+Description=MultiFont patch
+Author=zeDDer
+
+[Patch_Code]
+07B5834: 09 6C 3C 00
+0B27CAC: 00
+0B27CC4: 00
+0B27CCA: 00

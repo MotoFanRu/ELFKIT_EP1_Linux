@@ -1,0 +1,17 @@
+#define DEBUG
+
+#ifndef INIPARSER_H
+#define INIPARSER_H
+
+#include <mem.h>
+#include <filesystem.h>
+#include <utilities.h>
+
+UINT32 OpenINI (WCHAR *uri);
+BOOL ReadParamINI (char * param_name, char *value_buf, UINT32 buf_size, const char *default_value);
+
+inline void CloseINI (void);
+inline void setSeparator (char sep);
+inline void setBuffer (char *buf);
+
+#endif

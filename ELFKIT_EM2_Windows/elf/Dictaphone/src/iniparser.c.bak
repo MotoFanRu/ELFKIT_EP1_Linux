@@ -1,0 +1,82 @@
+#include "iniparser.h"
+
+char *bufR = NULL;
+char separator = '=';
+
+UINT32 OpenINI (WCHAR *uri)
+{
+    UINT32 fSize;
+    FILE_HANDLE_T hFile;
+
+    hFile = DL_FsOpenFile(uri, FILE_READ_MODE, 0);
+    if(hFile == FILE_HANDLE_INVALID) return RESULT_FAIL;
+
+    fSize = DL_FsGetFileSize(hFile);
+    bufR = (char *)malloc(fSize + 2);
+
+    bufR[0] = ' ';
+    DL_FsReadFile(bufR + 1, 1, fSize, fSize, &fSize);
+    bufR[fSize + 1] = 0;
+    DL_FsCloseFile(hFile);
+
+    dbg("Ini file has been opened successfully!");
+    return RESULT_OK;
+}
+
+BOOL ReadParamINI (char *param_name, char *value_buf, UINT32 buf_size, const char *default_value)
+{
+    char *offset;
+    BOOL val = FALSE;
+    UINT32 i = 0;
+
+    if (bufR == NULL)
+    {
+        strcpy(value_buf, (char*)default_value);
+        return RESULT_FAIL;
+    }
+
+    offset = (char *)strstr(bufR, param_name);
+    if (offset == bufR || offset == NULL)
+    {
+        dbg("Param no find");
+        strcpy(value_buf, (char*)default_value);
+        return RESULT_FAIL;
+    }
+
+    offset += strlen(param_name) - 1;
+
+    while (*offset != 0x0A && *offset != 0)
+    {
+        offset++;
+        if (val == false)
+        {
+            if (*offset == separator ) val = true;
+        }
+        else
+        {
+            if (*offset <= ' ') continue; // пропускать
+            if (i >= buf_size) return RESULT_OK;
+
+            value_buf[i] = *offset;
+            value_buf[i+1] = 0;
+            i++;
+        }
+    }
+
+    return RESULT_OK;
+}
+
+inline void CloseINI (void)
+{
+    free(bufR);
+}
+
+inline void setSeparator(char sep)
+{
+    separator = sep;
+}
+
+inline void setBuffer(char *buf)
+{
+	free(bufR);
+}

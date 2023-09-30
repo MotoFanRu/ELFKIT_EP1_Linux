@@ -1,0 +1,18 @@
+[Проект]
+RedMenu
+
+[Требования]
+EP2
+
+[Описание]
+Вместо выключения телефона выводится дополнительное меню. 
+Картинки:
+apps.gif
+end_java.gif
+lock_keyb.gif
+no_icon.gif
+restart.gif
+turn_off.gif
+положить в папку с эльфом
+
+Выход через ProcessManager
