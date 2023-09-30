@@ -1,0 +1,234 @@
+
+================================================================================
+
+Memory Map of the image
+
+  Image Entry point : 0x10d7ae20
+
+  Load Region UpdDisplInjection (Base: 0x100b4864, Size: 0x00000004, Max: 0x00000004, ABSOLUTE)
+
+    Execution Region UpdDisplInjection.bin (Base: 0x100b4864, Size: 0x00000004, Max: 0xffffffff, ABSOLUTE)
+
+    Base Addr    Size         Type   Attr  Idx  E Section Name        Object
+
+    0x100b4864   0x00000004   Code   RO    56     UpdateDisplayInj    UpdateDisplayInjection.o
+
+
+
+  Load Region patch (Base: 0x10d7ae20, Size: 0x00005340, Max: 0x00011bbc, ABSOLUTE)
+
+    Execution Region patch.bin (Base: 0x10d7ae20, Size: 0x00005044, Max: 0xffffffff, ABSOLUTE, FIXED)
+
+    Base Addr    Size         Type   Attr  Idx  E Section Name        Object
+
+    0x10d7ae20   0x0000001c   Code   RO    61   * Veneers             veneers.o
+    0x10d7ae3c   0x000006b8   Code   RO     1     .text               API.o
+    0x10d7b4f4   0x00000114   Code   RO     5     .text               autorun.o
+    0x10d7b608   0x000002b4   Code   RO     8     .text               config.o
+    0x10d7b8bc   0x0000062c   Code   RO    12     .text               console.o
+    0x10d7bee8   0x0000009c   Code   RO    16     .text               dd.o
+    0x10d7bf84   0x0000014c   Code   RO    19     .text               dispCallBacks.o
+    0x10d7c0d0   0x00000970   Code   RO    23     .text               elfloaderApp.o
+    0x10d7ca40   0x00000e48   Code   RO    39     .text               loadCommon.o
+    0x10d7d888   0x00000544   Code   RO    43     .text               loadDefLib.o
+    0x10d7ddcc   0x000002a8   Code   RO    45     .text               loadElf.o
+    0x10d7e074   0x00000540   Code   RO    47     .text               loadLibrary.o
+    0x10d7e5b4   0x00000030   Code   RO    50     .text               lolvl.o
+    0x10d7e5e4   0x00000400   Code   RO    53     .text               parser.o
+    0x10d7e9e4   0x000003a8   Code   RO    58     .text               utils.o
+    0x10d7ed8c   0x00000038   Code   RO    57     UpdateDisplayInjCode  UpdateDisplayInjection.o
+    0x10d7edc4   0x00000002   Code   RO    30     asm.__call_via_r0   libc.o
+    0x10d7edc6   0x00000002   PAD
+    0x10d7edc8   0x00000002   Code   RO    31     asm.__call_via_r1   libc.o
+    0x10d7edca   0x00000002   PAD
+    0x10d7edcc   0x00000002   Code   RO    32     asm.__call_via_r2   libc.o
+    0x10d7edce   0x00000002   PAD
+    0x10d7edd0   0x00000002   Code   RO    33     asm.__call_via_r3   libc.o
+    0x10d7edd2   0x00000002   PAD
+    0x10d7edd4   0x00000002   Code   RO    34     asm.__call_via_r4   libc.o
+    0x10d7edd6   0x00000002   PAD
+    0x10d7edd8   0x00000002   Code   RO    35     asm.__call_via_r5   libc.o
+    0x10d7edda   0x00000002   PAD
+    0x10d7eddc   0x00000002   Code   RO    36     asm.__call_via_r6   libc.o
+    0x10d7edde   0x00000002   PAD
+    0x10d7ede0   0x00000002   Code   RO    37     asm.__call_via_r7   libc.o
+    0x10d7ede2   0x00000002   PAD
+    0x10d7ede4   0x00000054   Code   RO    38     asm.cpp_operators   libc.o
+    0x10d7ee38   0x00000024   Code   RO    22     elfloader           dlopen.o
+    0x10d7ee5c   0x0000000c   Code   RO    29     elfloader           ldrUnloadElf.o
+    0x10d7ee68   0x00000009   Data   RO     2     .constdata          API.o
+    0x10d7ee71   0x00000001   PAD
+    0x10d7ee72   0x00000104   Data   RO     6     .constdata          autorun.o
+    0x10d7ef76   0x00000002   PAD
+    0x10d7ef78   0x0000032c   Data   RO     9     .constdata          config.o
+    0x10d7f2a4   0x00000008   Data   RO    13     .constdata          console.o
+    0x10d7f2ac   0x0000001c   Data   RO    24     .constdata          elfloaderApp.o
+    0x10d7f2c8   0x00000030   Data   RO    26     .constdata          elfloaderApp.o
+    0x10d7f2f8   0x00000384   Data   RO    55     patchLib            patchlib.o
+    0x10d7f67c   0x00000700   Data   RO    28     .constdata          font.o
+    0x10d7fd7c   0x000000c6   Data   RO    49     .constdata          logo.o
+    0x10d7fe42   0x00000020   Data   RO    52     .constdata          palette.o
+
+
+    Execution Region ven (Base: 0x10d7fe64, Size: 0x000002fc, Max: 0xffffffff, ABSOLUTE)
+
+    Base Addr    Size         Type   Attr  Idx  E Section Name        Object
+
+    0x10d7fe64   0x00000010   Code   RO    63     Veneer$$Code        anon$$obj.o
+    0x10d7fe74   0x00000010   Code   RO    64     Veneer$$Code        anon$$obj.o
+    0x10d7fe84   0x00000010   Code   RO    65     Veneer$$Code        anon$$obj.o
+    0x10d7fe94   0x00000010   Code   RO    66     Veneer$$Code        anon$$obj.o
+    0x10d7fea4   0x00000010   Code   RO    67     Veneer$$Code        anon$$obj.o
+    0x10d7feb4   0x00000010   Code   RO    68     Veneer$$Code        anon$$obj.o
+    0x10d7fec4   0x0000000c   Code   RO    69     Veneer$$Code        anon$$obj.o
+    0x10d7fed0   0x0000000c   Code   RO    70     Veneer$$Code        anon$$obj.o
+    0x10d7fedc   0x00000010   Code   RO    71     Veneer$$Code        anon$$obj.o
+    0x10d7feec   0x00000010   Code   RO    72     Veneer$$Code        anon$$obj.o
+    0x10d7fefc   0x00000008   Code   RO    73     Veneer$$Code        anon$$obj.o
+    0x10d7ff04   0x00000008   Code   RO    74     Veneer$$Code        anon$$obj.o
+    0x10d7ff0c   0x00000008   Code   RO    75     Veneer$$Code        anon$$obj.o
+    0x10d7ff14   0x0000000c   Code   RO    76     Veneer$$Code        anon$$obj.o
+    0x10d7ff20   0x00000008   Code   RO    77     Veneer$$Code        anon$$obj.o
+    0x10d7ff28   0x00000008   Code   RO    78     Veneer$$Code        anon$$obj.o
+    0x10d7ff30   0x00000008   Code   RO    79     Veneer$$Code        anon$$obj.o
+    0x10d7ff38   0x00000008   Code   RO    80     Veneer$$Code        anon$$obj.o
+    0x10d7ff40   0x00000008   Code   RO    81     Veneer$$Code        anon$$obj.o
+    0x10d7ff48   0x00000008   Code   RO    82     Veneer$$Code        anon$$obj.o
+    0x10d7ff50   0x00000008   Code   RO    83     Veneer$$Code        anon$$obj.o
+    0x10d7ff58   0x00000008   Code   RO    84     Veneer$$Code        anon$$obj.o
+    0x10d7ff60   0x00000008   Code   RO    85     Veneer$$Code        anon$$obj.o
+    0x10d7ff68   0x00000008   Code   RO    86     Veneer$$Code        anon$$obj.o
+    0x10d7ff70   0x00000008   Code   RO    87     Veneer$$Code        anon$$obj.o
+    0x10d7ff78   0x0000000c   Code   RO    88     Veneer$$Code        anon$$obj.o
+    0x10d7ff84   0x0000000c   Code   RO    89     Veneer$$Code        anon$$obj.o
+    0x10d7ff90   0x00000010   Code   RO    90     Veneer$$Code        anon$$obj.o
+    0x10d7ffa0   0x00000008   Code   RO    91     Veneer$$Code        anon$$obj.o
+    0x10d7ffa8   0x00000008   Code   RO    92     Veneer$$Code        anon$$obj.o
+    0x10d7ffb0   0x00000008   Code   RO    93     Veneer$$Code        anon$$obj.o
+    0x10d7ffb8   0x00000008   Code   RO    94     Veneer$$Code        anon$$obj.o
+    0x10d7ffc0   0x00000008   Code   RO    95     Veneer$$Code        anon$$obj.o
+    0x10d7ffc8   0x00000010   Code   RO    96     Veneer$$Code        anon$$obj.o
+    0x10d7ffd8   0x00000010   Code   RO    97     Veneer$$Code        anon$$obj.o
+    0x10d7ffe8   0x00000010   Code   RO    98     Veneer$$Code        anon$$obj.o
+    0x10d7fff8   0x00000010   Code   RO    99     Veneer$$Code        anon$$obj.o
+    0x10d80008   0x00000010   Code   RO   100     Veneer$$Code        anon$$obj.o
+    0x10d80018   0x00000010   Code   RO   101     Veneer$$Code        anon$$obj.o
+    0x10d80028   0x00000010   Code   RO   102     Veneer$$Code        anon$$obj.o
+    0x10d80038   0x00000010   Code   RO   103     Veneer$$Code        anon$$obj.o
+    0x10d80048   0x00000008   Code   RO   104     Veneer$$Code        anon$$obj.o
+    0x10d80050   0x00000010   Code   RO   105     Veneer$$Code        anon$$obj.o
+    0x10d80060   0x00000010   Code   RO   106     Veneer$$Code        anon$$obj.o
+    0x10d80070   0x00000010   Code   RO   107     Veneer$$Code        anon$$obj.o
+    0x10d80080   0x00000010   Code   RO   108     Veneer$$Code        anon$$obj.o
+    0x10d80090   0x00000010   Code   RO   109     Veneer$$Code        anon$$obj.o
+    0x10d800a0   0x00000010   Code   RO   110     Veneer$$Code        anon$$obj.o
+    0x10d800b0   0x00000008   Code   RO   111     Veneer$$Code        anon$$obj.o
+    0x10d800b8   0x00000010   Code   RO   112     Veneer$$Code        anon$$obj.o
+    0x10d800c8   0x00000010   Code   RO   113     Veneer$$Code        anon$$obj.o
+    0x10d800d8   0x00000010   Code   RO   114     Veneer$$Code        anon$$obj.o
+    0x10d800e8   0x00000010   Code   RO   115     Veneer$$Code        anon$$obj.o
+    0x10d800f8   0x00000008   Code   RO   116     Veneer$$Code        anon$$obj.o
+    0x10d80100   0x00000010   Code   RO   117     Veneer$$Code        anon$$obj.o
+    0x10d80110   0x00000010   Code   RO   118     Veneer$$Code        anon$$obj.o
+    0x10d80120   0x00000010   Code   RO   119     Veneer$$Code        anon$$obj.o
+    0x10d80130   0x00000010   Code   RO   120     Veneer$$Code        anon$$obj.o
+    0x10d80140   0x00000010   Code   RO   121     Veneer$$Code        anon$$obj.o
+    0x10d80150   0x00000010   Code   RO   122     Veneer$$Code        anon$$obj.o
+
+
+
+  Load Region RAM (Base: 0x1446428c, Size: 0x00000000, Max: 0x000003e9, ABSOLUTE)
+
+    Execution Region RAM1 (Base: 0x1446428c, Size: 0x000001c4, Max: 0x00000200, ABSOLUTE)
+
+    Base Addr    Size         Type   Attr  Idx  E Section Name        Object
+
+    0x1446428c   0x00000004   Zero   RW     3     .bss                API.o
+    0x14464290   0x00000024   Zero   RW    10     .bss                config.o
+    0x144642b4   0x0000001c   Zero   RW    14     .bss                console.o
+    0x144642d0   0x00000018   Zero   RW    17     .bss                dd.o
+    0x144642e8   0x000000c4   Zero   RW    20     .bss                dispCallBacks.o
+    0x144643ac   0x00000028   Zero   RW    25     .bss                elfloaderApp.o
+    0x144643d4   0x00000064   Zero   RW    40     .bss                loadCommon.o
+    0x14464438   0x0000000c   Zero   RW    41     .bss                loadCommon.o
+    0x14464444   0x0000000c   Zero   RW    59     .bss                utils.o
+
+
+
+  Load Region LR$$Debug (Base: 0x00000000, Size: 0x00000000, Max: 0xffffffff, ABSOLUTE)
+
+    Execution Region ER$$Debug (Base: 0x00000000, Size: 0x00000000, Max: 0xffffffff, ABSOLUTE)
+
+    Base Addr    Size         Type   Attr  Idx  E Section Name        Object
+
+    0x00000000   0x000003bc   Dbug   RW     4     .debug_frame        API.o
+    0x000003bc   0x00000058   Dbug   RW     7     .debug_frame        autorun.o
+    0x00000414   0x0000010c   Dbug   RW    11     .debug_frame        config.o
+    0x00000520   0x00000194   Dbug   RW    15     .debug_frame        console.o
+    0x000006b4   0x00000078   Dbug   RW    18     .debug_frame        dd.o
+    0x0000072c   0x00000104   Dbug   RW    21     .debug_frame        dispCallBacks.o
+    0x00000830   0x00000268   Dbug   RW    27     .debug_frame        elfloaderApp.o
+    0x00000a98   0x00000278   Dbug   RW    42     .debug_frame        loadCommon.o
+    0x00000d10   0x000000a0   Dbug   RW    44     .debug_frame        loadDefLib.o
+    0x00000db0   0x000000e4   Dbug   RW    46     .debug_frame        loadElf.o
+    0x00000e94   0x00000124   Dbug   RW    48     .debug_frame        loadLibrary.o
+    0x00000fb8   0x0000005c   Dbug   RW    51     .debug_frame        lolvl.o
+    0x00001014   0x00000104   Dbug   RW    54     .debug_frame        parser.o
+    0x00001118   0x00000218   Dbug   RW    60     .debug_frame        utils.o
+
+
+================================================================================
+
+Image component sizes
+
+
+      Code    RO Data    RW Data    ZI Data      Debug   Object Name
+
+      1720          9          0          4        956   API.o
+        48          0          0          0         92   lolvl.o
+        12          0          0          0          0   ldrUnloadElf.o
+         0       1792          0          0          0   font.o
+      1348          0          0          0        160   loadDefLib.o
+      1580          8          0         28        404   console.o
+         0        198          0          0          0   logo.o
+       764          0          0          0          0   anon$$obj.o
+       156          0          0         24        120   dd.o
+      1344          0          0          0        292   loadLibrary.o
+         0         32          0          0          0   palette.o
+       332          0          0        196        260   dispCallBacks.o
+       680          0          0          0        228   loadElf.o
+        36          0          0          0          0   dlopen.o
+        60          0          0          0          0   UpdateDisplayInjection.o
+         0        900          0          0          0   patchlib.o
+       936          0          0         12        536   utils.o
+       100          0          0          0          0   libc.o
+       692        812          0         36        268   config.o
+      3656          0          0        112        632   loadCommon.o
+      2416         76          0         40        616   elfloaderApp.o
+      1024          0          0          0        260   parser.o
+       276        260          0          0         88   autorun.o
+        28          0          0          0          0   veneers.o
+
+    ------------------------------------------------------------------------
+     17208       4087          0        452       4912   Object Totals
+
+    ------------------------------------------------------------------------
+         0          0          0          0          0   Library Totals
+
+    ------------------------------------------------------------------------
+
+================================================================================
+
+
+      Code    RO Data    RW Data    ZI Data      Debug   
+
+     17208       4087          0        452       4912   Grand Totals
+
+================================================================================
+
+    Total RO  Size(Code + RO Data)                21295 (  20.80kB)
+    Total RW  Size(RW Data + ZI Data)               452 (   0.44kB)
+    Total ROM Size(Code + RO Data + RW Data)      21295 (  20.80kB)
+
+================================================================================
+
