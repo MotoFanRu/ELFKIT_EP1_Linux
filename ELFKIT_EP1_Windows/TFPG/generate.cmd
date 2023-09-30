@@ -1,0 +1,2 @@
+task_patchgen E398_R373_49R_CG1.bin 0x10080000
+pause

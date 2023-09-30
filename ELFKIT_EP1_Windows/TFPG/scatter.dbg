@@ -1,0 +1,44 @@
+PATCH 0x%.8X 0x600
+{
+	PATCH.bin +0
+	{
+		my_usr_sysinit.o
+	}
+}
+
+SUALLOC 0x%.8X 0x206
+{
+	SUALLOC.bin +0
+	{
+		suAllocMem.o(CODE, +FIRST)
+		suAllocMem.o(*)
+		suCreateTask.o(UtilLogStringData)
+		suCreateTask.o(suDeleteTask)
+	}
+}
+
+SUFREE 0x%.8X 0x16A
+{
+	SUFREE.bin +0
+	{
+		suFreeMem.o
+	}
+}
+
+SUCREATETASK 0x%.8X 0x174
+{
+	SUCREATETASK.bin +0 FIXED
+	{
+		suCreateTask.o(suCreateTask, +FIRST)
+		suCreateTask.o(*)
+	}
+}
+
+SUDELETETASK 0x%.8X 0x22
+{
+	SUDELETETASK.bin +0
+	{
+		suDeleteTask_ven.o
+	}
+}
+
