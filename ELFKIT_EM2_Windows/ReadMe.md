@@ -7,7 +7,8 @@ This package for Windows platform contains the following tools:
 * Elfs sources and build scripts.
 * ElfLoader sources and build scripts.
 * LibraryEditor, MidWay programs, some utilities by z3DD3r.
-* SDK header files by theC0r3, flash.tato, z3DD3r, Chik_v, Andy51, G-XaD, om2804, kadukmm, and other developers from MotoFan.Ru forum.
+* SDK header files by theC0r3, flash.tato, z3DD3r, Chik_v, Andy51, tim_apple, Macho, G-XaD, om2804, kadukmm, fkcoder, EXL, and other developers from MotoFan.Ru forum.
+* CMake build system module by EXL.
 
 ## Install
 
@@ -17,15 +18,22 @@ Unpack archive and copy all files to `C:\MCORE_EM2` directory, add it to `%PATH%
 
 Set proper paths to GCC compiler, libraries and SDK headers in `make.cmd`, `make.bat`, `build.cmd`, `compile.bat` and other build scripts.
 
-```
+```bat
 C:\Project> make
 C:\Project> build
 C:\Project> compile
 ```
 
+## Usage CMake and Ninja
+
+```bat
+C:\Project> cmake . -G Ninja -DELFPACK=EM2
+C:\Project> ninja -v
+```
+
 ## Authors
 
-theC0r3, flash.tato, z3DD3r, Chik_v, Andy51, G-XaD, om2804, kadukmm, etc.
+theC0r3, flash.tato, z3DD3r, Chik_v, Andy51, tim_apple, Macho, G-XaD, om2804, kadukmm, fkcoder, EXL, etc.
 
 ## Additional Information
 
