@@ -27,6 +27,13 @@ C:\Project> make
 C:\Project> build
 ```
 
+## Usage CMake and Ninja
+
+```bat
+C:\Project> cmake . -G Ninja -DELFPACK=EP1
+C:\Project> ninja -v
+```
+
 ## Usage PortKit
 
 ```bat
