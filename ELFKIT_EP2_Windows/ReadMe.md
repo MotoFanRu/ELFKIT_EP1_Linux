@@ -6,7 +6,8 @@ This package for Windows platform contains the following tools:
 * ARM C/C++ GCC Compiler 4.4.0 (devkitARM release 26) for compiling source code.
 * LibGen and PostLink utility by Andy51 and tim_apple for generate ELFs and ELF libraries.
 * PostLink utility and ElfPack 2.0 source code by Andy51 and tim_apple.
-* SDK header files by Andy51, G-XaD, om2804, EXL, and other developers from MotoFan.Ru forum.
+* SDK header files by Andy51, tim_apple, Macho, G-XaD, om2804, fkcoder, EXL, and other developers from MotoFan.Ru forum.
+* CMake build system modules by EXL.
 * Ninja v1.11.1 build tool (x86_64 arch version).
 
 ## Install
@@ -46,7 +47,7 @@ C:\devkitARM\elfpack2> R373_G_0E.30.49R.cmd
 
 ## Authors
 
-Andy51, tim_apple, G-XaD, om2804, kadukmm, EXL, etc.
+Andy51, tim_apple, Macho, G-XaD, om2804, kadukmm, fkcoder, EXL, etc.
 
 ## Additional Information
 
