@@ -6,18 +6,18 @@ set(CMAKE_SYSTEM_PROCESSOR "ARM")
 set(P2K_EP1_TOOLCHAIN_ROOT "${CMAKE_CURRENT_LIST_DIR}/..")
 
 if(ARM_MODE STREQUAL "Thumb")
-	set(CMAKE_C_COMPILER "${P2K_EP1_TOOLCHAIN_ROOT}/tcc")
-	set(CMAKE_CXX_COMPILER "${P2K_EP1_TOOLCHAIN_ROOT}/tcpp")
+	set(CMAKE_C_COMPILER "${P2K_EP1_TOOLCHAIN_ROOT}/bin/tcc")
+	set(CMAKE_CXX_COMPILER "${P2K_EP1_TOOLCHAIN_ROOT}/bin/tcpp")
 elseif(ARM_MODE STREQUAL "ARM")
-	set(CMAKE_C_COMPILER "${P2K_EP1_TOOLCHAIN_ROOT}/armcc")
-	set(CMAKE_CXX_COMPILER "${P2K_EP1_TOOLCHAIN_ROOT}/armcpp")
+	set(CMAKE_C_COMPILER "${P2K_EP1_TOOLCHAIN_ROOT}/bin/armcc")
+	set(CMAKE_CXX_COMPILER "${P2K_EP1_TOOLCHAIN_ROOT}/bin/armcpp")
 else()
 	message(FATAL_ERROR "Please set '$ARM_MODE' to 'Thumb' or 'ARM'!")
 endif()
-set(CMAKE_ASM_COMPILER "${P2K_EP1_TOOLCHAIN_ROOT}/armasm")
-set(CMAKE_AR "${P2K_EP1_TOOLCHAIN_ROOT}/armar")
-set(CMAKE_C_LINK_EXECUTABLE "${P2K_EP1_TOOLCHAIN_ROOT}/armlink")
-set(CMAKE_CXX_LINK_EXECUTABLE "${P2K_EP1_TOOLCHAIN_ROOT}/armlink")
+set(CMAKE_ASM_COMPILER "${P2K_EP1_TOOLCHAIN_ROOT}/bin/armasm")
+set(CMAKE_AR "${P2K_EP1_TOOLCHAIN_ROOT}/bin/armar")
+set(CMAKE_C_LINK_EXECUTABLE "${P2K_EP1_TOOLCHAIN_ROOT}/bin/armlink")
+set(CMAKE_CXX_LINK_EXECUTABLE "${P2K_EP1_TOOLCHAIN_ROOT}/bin/armlink")
 if(WIN32)
 	set(CMAKE_C_COMPILER "${CMAKE_C_COMPILER}.exe")
 	set(CMAKE_CXX_COMPILER "${CMAKE_CXX_COMPILER}.exe")
@@ -49,18 +49,32 @@ if(ARM_MODE STREQUAL "Thumb")
 	set(P2K_GENERAL_C_FLAGS "-bigend -apcs /interwork")
 	set(P2K_GENERAL_CXX_FLAGS "-bigend -apcs /interwork")
 	set(P2K_GENERAL_ASM_FLAGS "-32 -bi -apcs /interwork")
-	set(P2K_GENERAL_C_LINK_FLAGS
-		"-nolocals -reloc -first ${P2K_LIB_FILE}(${P2K_LIB_NAME}) ${P2K_DIRECTORY_LIBRARIES}/${P2K_LIB_FILE}")
-	set(P2K_GENERAL_CXX_LINK_FLAGS
-		"-nolocals -reloc -first ${P2K_LIB_FILE}(${P2K_LIB_NAME}) ${P2K_DIRECTORY_LIBRARIES}/${P2K_LIB_FILE}")
+	if(WIN32)
+		set(P2K_GENERAL_C_LINK_FLAGS
+			"-nolocals -reloc -first ${P2K_LIB_FILE}(${P2K_LIB_NAME}) ${P2K_DIRECTORY_LIBRARIES}/${P2K_LIB_FILE}")
+		set(P2K_GENERAL_CXX_LINK_FLAGS
+			"-nolocals -reloc -first ${P2K_LIB_FILE}(${P2K_LIB_NAME}) ${P2K_DIRECTORY_LIBRARIES}/${P2K_LIB_FILE}")
+	else()
+		set(P2K_GENERAL_C_LINK_FLAGS
+			"-nolocals -reloc -first ${P2K_LIB_FILE}\\(${P2K_LIB_NAME}\\) ${P2K_DIRECTORY_LIBRARIES}/${P2K_LIB_FILE}")
+		set(P2K_GENERAL_CXX_LINK_FLAGS
+			"-nolocals -reloc -first ${P2K_LIB_FILE}\\(${P2K_LIB_NAME}\\) ${P2K_DIRECTORY_LIBRARIES}/${P2K_LIB_FILE}")
+	endif()
 elseif(ARM_MODE STREQUAL "ARM")
 	set(P2K_GENERAL_C_FLAGS "-bigend -apcs /interwork")
 	set(P2K_GENERAL_CXX_FLAGS "-bigend -apcs /interwork")
 	set(P2K_GENERAL_ASM_FLAGS "-32 -bi -apcs /interwork")
-	set(P2K_GENERAL_C_LINK_FLAGS
-		"-nolocals -reloc -first ${P2K_LIB_FILE}(${P2K_LIB_NAME}) ${P2K_DIRECTORY_LIBRARIES}/${P2K_LIB_FILE}")
-	set(P2K_GENERAL_CXX_LINK_FLAGS
-		"-nolocals -reloc -first ${P2K_LIB_FILE}(${P2K_LIB_NAME}) ${P2K_DIRECTORY_LIBRARIES}/${P2K_LIB_FILE}")
+	if(WIN32)
+		set(P2K_GENERAL_C_LINK_FLAGS
+			"-nolocals -reloc -first ${P2K_LIB_FILE}(${P2K_LIB_NAME}) ${P2K_DIRECTORY_LIBRARIES}/${P2K_LIB_FILE}")
+		set(P2K_GENERAL_CXX_LINK_FLAGS
+			"-nolocals -reloc -first ${P2K_LIB_FILE}(${P2K_LIB_NAME}) ${P2K_DIRECTORY_LIBRARIES}/${P2K_LIB_FILE}")
+	else()
+		set(P2K_GENERAL_C_LINK_FLAGS
+			"-nolocals -reloc -first ${P2K_LIB_FILE}\\(${P2K_LIB_NAME}\\) ${P2K_DIRECTORY_LIBRARIES}/${P2K_LIB_FILE}")
+		set(P2K_GENERAL_CXX_LINK_FLAGS
+			"-nolocals -reloc -first ${P2K_LIB_FILE}\\(${P2K_LIB_NAME}\\) ${P2K_DIRECTORY_LIBRARIES}/${P2K_LIB_FILE}")
+	endif()
 else()
 	message(FATAL_ERROR "Please set '$ARM_MODE' to 'Thumb' or 'ARM'!")
 endif()
