@@ -1,13 +1,14 @@
-Motorola ElfPack 1.0 SDK
+Motorola ElfPack 1.x SDK
 ========================
 
 This package for Linux platform contains the following tools:
 
 * ARM C/C++ Compiler, ADS1.2 [Build 848] for compiling source code.
-* SDK header files by Andy51, G-XaD, and other developers from MotoFan.Ru forum.
+* SDK header files by Andy51, tim_apple, Macho, G-XaD, om2804, EXL, fkcoder and other developers from MotoFan.Ru forum.
 * FBrowser ELF application by Andy51 and auto.run file.
 * QBS build system module files by kuzulis.
 * PDF documentation by ARM Limited Ltd.
+* CMake build system module by EXL.
 
 ## Install
 
@@ -29,6 +30,13 @@ make clean
 make
 ```
 
+## Usage CMake and Ninja
+
+```sh
+cmake . -G Ninja -DELFPACK=EP1
+ninja -v
+```
+
 ## Pack SDK
 
 After some SDK changes.
@@ -42,7 +50,7 @@ cd ~/Downloads/
 
 ## Authors
 
-Andy51, G-XaD, om2804, kadukmm, EXL, kuzulis, etc.
+Andy51, tim_apple, Macho, G-XaD, om2804, kadukmm, fkcoder, EXL, kuzulis, etc.
 
 ## Additional Information
 
