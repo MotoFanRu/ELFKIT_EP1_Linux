@@ -1,0 +1,5422 @@
+<?xml version="1.0"?>
+<!DOCTYPE armperip SYSTEM "armperip.dtd">
+<!-- Copyright (c) ARM Limited 2000-2002. All Rights Reserved. -->
+
+<!-- Definitions of ARM standard boards -->
+
+<!--
+The following references were used in the construction of this document:
+[1] ARM Integrator/CM7TDMI User Guide, ARM DUI 0126A, ARM Ltd., 1999
+[2] Integrator CM9x6ES Datasheet, CONGO-0021-CUST-DSHT-B02, ARM Ltd., 1999
+[3] Integrator CM10200 Datasheet, CONGO-0022-CUST-DSHT-B, ARM Ltd., 2000
+[4] ARM Integrator/AP User Guide, ARM DUI 0098A, ARM Ltd., 1999
+[5] ARM Architecture Reference Manual, ARM DDI 0100E, ARM Ltd, 1996-2000
+[6] ARM1020T (Rev 0) Technical Reference Manual, ARM DDI 0135A, ARM Ltd., 2001
+[7] ARM1020E Technical Reference Manual, ARM DDI 0177A, ARM Ltd., 2001
+[8] ARM922T (Rev 0) Technical Reference Manual, ARM DDI 0184B, ARM Ltd., 2001
+-->
+
+<armperip>
+
+<cvs_info>
+  <author>$Author: hbullman $</author>
+  <revision>$Revision: 1.3.14.2 $</revision>
+  <date>$Date: 2002/05/03 17:35:08 $</date>
+</cvs_info>
+
+<displaytype>
+  <name>PCSR</name>
+  <requires></requires>
+  <definition>
+TYPEDEF UnCS ENUM(WIDTH=3, DEFAULT="?")
+{
+        "IN"    =0,
+        "EX"    =1
+}
+
+TYPEDEF PCSR_CT0CS ENUM(WIDTH=1, DEFAULT="?")
+{
+        "IN"    =0,
+        "EX"    =1
+}
+  
+TYPEDEF PCSR_CT1CS ENUM(WIDTH=1, DEFAULT="?")
+{
+        "IN"    =0,
+        "EX"    =1
+}
+
+TYPEDEF PCSR_CT2CS ENUM(WIDTH=1, DEFAULT="?")
+{
+        "IN"    =0,
+        "EX"    =1
+}
+
+TYPEDEF PCSR_LCDCE ENUM(WIDTH=1, DEFAULT="?")
+{
+        "IN"    =0,
+        "EX"    =1
+}
+
+TYPEDEF PCSR_PWMCE ENUM(WIDTH=1, DEFAULT="?")
+{
+        "IN"    =0,
+        "EX"    =1
+}
+
+TYPEDEF PCSR_SIRCE ENUM(WIDTH=1, DEFAULT="?")
+{
+        "IN"    =0,
+        "EX"    =1
+}
+
+TYPEDEF PCSR(NAME="PCSR", CLASS="Board") COMPOSITE(WIDTH=9)
+{
+        SEPARATOR(TEXTNAME="UnCS-"),
+        FIELD[2:0](NAME="CLK_SRC", TYPE=UnCS, ACCESS="R"),
+        SEPARATOR(TEXTNAME=" T0-"),
+        FIELD[3](NAME="TIMER0", TYPE=PCSR_CT0CS, ACCESS="R"),
+        SEPARATOR(TEXTNAME=" T1-"),
+        FIELD[4](NAME="TIMER1", TYPE=PCSR_CT1CS, ACCESS="R"),
+        SEPARATOR(TEXTNAME=" T2-"),
+        FIELD[5](NAME="TIMER2", TYPE=PCSR_CT2CS, ACCESS="R"),
+        SEPARATOR(TEXTNAME=" LCDCE-"),
+        FIELD[6](NAME="LCDCE", TYPE=PCSR_LCDCE, ACCESS="R"),
+        SEPARATOR(TEXTNAME=" PMWCE-"),
+        FIELD[7](NAME="PMWCE", TYPE=PCSR_PWMCE, ACCESS="R"),
+        SEPARATOR(TEXTNAME=" SIFCE-"),
+        FIELD[8](NAME="SIFCE", TYPE=PCSR_SIRCE, ACCESS="RW")    
+}
+</definition>   
+</displaytype>
+
+<displaytype>
+  <name>UART0</name>
+  <requires></requires>
+  <definition>
+TYPEDEF UART0_FREQ ENUM(WIDTH=9, DEFAULT="?")
+{
+                "OFF"           =   0,
+                "XCLK"          =       1,
+                "XCLK/2"        =       2,
+                "XCLK/4"        =       4,
+                "XCLK/8"        =       8,
+                "XCLK/16"       =       16,
+                "XCLK/32"       =       32,
+                "XCLK/64"       =       64,
+                "XCLK/128"      =       128,
+                "XCLK/256"      =       256
+}
+
+
+TYPEDEF UART0(NAME="UART0", CLASS="Board") COMPOSITE(WIDTH=9)
+{
+        SEPARATOR(TEXTNAME="FREQ "),
+        FIELD[8:0](NAME="UART0_FREQ", TYPE=UART0_FREQ, ACCESS="R")
+}
+</definition>   
+</displaytype>
+
+<displaytype>
+  <name>UART1</name>
+  <requires></requires>
+  <definition>
+TYPEDEF UART1_FREQ ENUM(WIDTH=9, DEFAULT="?")
+{
+                "OFF"           =   0,
+                "XCLK"          =       1,
+                "XCLK/2"        =       2,
+                "XCLK/4"        =       4,
+                "XCLK/8"        =       8,
+                "XCLK/16"       =       16,
+                "XCLK/32"       =       32,
+                "XCLK/64"       =       64,
+                "XCLK/128"      =       128,
+                "XCLK/256"      =       256
+}
+
+
+TYPEDEF UART1(NAME="UART1", CLASS="Board") COMPOSITE(WIDTH=9)
+{
+        SEPARATOR(TEXTNAME="FREQ "),
+        FIELD[8:0](NAME="UART1_FREQ", TYPE=UART1_FREQ, ACCESS="R")
+}
+</definition>   
+</displaytype>
+
+<displaytype>
+        <name>UART_RSR</name>
+        <definition>
+
+TYPEDEF UART_RSR_ERROR ENUM(WIDTH=1, DEFAULT="?")
+{
+        "YES"           = 1,
+        "NO"            = 0
+}
+
+TYPEDEF UART_RSR (NAME="UART_RSR", CLASS="Integrator") COMPOSITE(WIDTH=8)
+{
+        SEPARATOR(TEXTNAME="OE="),
+        FIELD[3] (NAME="OE", TYPE=UART_RSR_ERROR, ACCESS="R"),
+        SEPARATOR(TEXTNAME=" BE="),
+        FIELD[2] (NAME="BE", TYPE=UART_RSR_ERROR, ACCESS="R"),
+        SEPARATOR(TEXTNAME=" PE="),
+        FIELD[1] (NAME="PE", TYPE=UART_RSR_ERROR, ACCESS="R"),
+        SEPARATOR(TEXTNAME=" FE="),
+        FIELD[0] (NAME="FE", TYPE=UART_RSR_ERROR, ACCESS="R")
+}
+
+        </definition> 
+</displaytype>
+
+<displaytype>
+        <name>UART_LCRH</name>
+        <definition>
+
+TYPEDEF UART_LCRH_WLEN ENUM(WIDTH=2, DEFAULT="?")
+{
+        "8Bits"         = 3,
+        "7Bits"         = 2,
+        "6Bits"         = 1,
+        "5Bits"         = 0
+}
+
+TYPEDEF UART_LCRH_ENA   ENUM(WIDTH=1, DEFAULT="?")
+{
+        "ENA"           = 1,
+        "DIS"           = 0
+}
+
+TYPEDEF UART_LCRH_ODD   ENUM(WIDTH=1, DEFAULT="?")
+{
+        "ODD"           = 0,
+        "EVEN"          = 1
+}
+
+TYPEDEF UART_LCRH (NAME="UART_LCRCH", CLASS="Integrator") COMPOSITE(WIDTH=8)
+{
+        SEPARATOR(TEXTNAME="WLEN="),
+        FIELD[6:5] (NAME="WLEN", TYPE=UART_LCRH_WLEN, ACCESS="RW"),
+        SEPARATOR(TEXTNAME=" FIFOS="),
+        FIELD[4] (NAME="FEN", TYPE=UART_LCRH_ENA, ACCESS="RW"),
+        SEPARATOR(TEXTNAME=" STP2="),
+        FIELD[3] (NAME="STP2", TYPE=UART_LCRH_ENA, ACCESS="RW"),
+        SEPARATOR(TEXTNAME=" PEN="),
+        FIELD[1] (NAME="PARITYEN", TYPE=UART_LCRH_ENA, ACCESS="RW"),
+        SEPARATOR(TEXTNAME=" EPS="),
+        FIELD[2] (NAME="PARITY", TYPE=UART_LCRH_ODD, ACCESS="RW"),
+        SEPARATOR(TEXTNAME=" BRK="),
+        FIELD[0] (NAME="BREAK", TYPE=UART_LCRH_ENA, ACCESS="RW")
+}
+        
+        </definition>
+</displaytype>
+
+<displaytype>
+        <name>UART_FR</name>
+        <definition>
+
+TYPEDEF UART_FR_SET ENUM(WIDTH=1, DEFAULT="?")  
+{
+        "1"                     = 1,
+        "0"                     = 0
+}
+
+TYPEDEF UART_FR_BUSY ENUM(WIDTH=1, DEFAULT="?")
+{
+        "BUSY"          = 1,
+        "IDLE"          = 0
+}
+
+TYPEDEF UART_FR (NAME="UART_FR", CLASS="Integrator") COMPOSITE(WIDTH=8)
+{
+        SEPARATOR(TEXTNAME="TXFE="),
+        FIELD[7] (NAME="TXFE", TYPE=UART_FR_SET, ACCESS="R"),
+        SEPARATOR(TEXTNAME=" RXFF="),
+        FIELD[6] (NAME="RXFF", TYPE=UART_FR_SET, ACCESS="R"),
+        SEPARATOR(TEXTNAME=" TXFF="),
+        FIELD[5] (NAME="TXFF", TYPE=UART_FR_SET, ACCESS="R"),
+        SEPARATOR(TEXTNAME=" BUSY="),
+        FIELD[3] (NAME="BUSY", TYPE=UART_FR_BUSY, ACCESS="R"),
+        SEPARATOR(TEXTNAME=" DCD="),
+        FIELD[2] (NAME="DCD", TYPE=UART_FR_SET, ACCESS="R"),
+        SEPARATOR(TEXTNAME=" DSR="),
+        FIELD[1] (NAME="DSR", TYPE=UART_FR_SET, ACCESS="R"),
+        SEPARATOR(TEXTNAME=" CTS="),
+        FIELD[0] (NAME="CTS", TYPE=UART_FR_SET, ACCESS="R")
+}
+
+        </definition>
+</displaytype>
+
+<displaytype>
+        <name>UART_IIR</name>
+        <definition>
+
+TYPEDEF UART_IIR_SET ENUM(WIDTH=1, DEFAULT="?")
+{
+        "1"                     = 1,
+        "0"                     = 0
+}
+
+TYPEDEF UART_IIR (NAME="UART_IIR", CLASS="Integrator") COMPOSITE(WIDTH=8)
+{
+        SEPARATOR(TEXTNAME="RTIS="),
+        FIELD[3] (NAME="RTIS", TYPE=UART_IIR_SET, ACCESS="R"),
+        SEPARATOR(TEXTNAME=" TIS="),
+        FIELD[2] (NAME="TIS", TYPE=UART_IIR_SET, ACCESS="R"),
+        SEPARATOR(TEXTNAME=" RIS="),
+        FIELD[1] (NAME="RIS", TYPE=UART_IIR_SET, ACCESS="R"),
+        SEPARATOR(TEXTNAME=" MIS="),
+        FIELD[0] (NAME="MIS", TYPE=UART_IIR_SET, ACCESS="R")
+}
+
+        </definition>
+</displaytype>
+
+<displaytype>
+        <name>UART_CR</name>
+        <definition>
+
+TYPEDEF UART_CR_LBE ENUM(WIDTH=1, DEFAULT="?")
+{
+        "0"                     = 0,
+        "1"                     = 1
+}
+
+TYPEDEF UART_CR_ENA ENUM(WIDTH=1, DEFAULT="?")
+{
+        "ENA"           = 1,
+        "DIS"           = 0
+}
+
+TYPEDEF UART_CR (NAME="UART_CR", CLASS="Integrator") COMPOSITE(WIDTH=8)
+{
+        SEPARATOR(TEXTNAME="UART="),
+        FIELD[0] (NAME="UARTEN", TYPE=UART_CR_ENA, ACCESS="RW"),
+        SEPARATOR(TEXTNAME=" LBE="),
+        FIELD[7] (NAME="LBE", TYPE=UART_CR_LBE, ACCESS="RW"),
+        SEPARATOR(TEXTNAME=" RTIE="),
+        FIELD[6] (NAME="RTIE", TYPE=UART_CR_ENA, ACCESS="RW"),
+        SEPARATOR(TEXTNAME=" TIE="),
+        FIELD[5] (NAME="TIE", TYPE=UART_CR_ENA, ACCESS="RW"),
+        SEPARATOR(TEXTNAME=" RIE="),
+        FIELD[4] (NAME="RIE", TYPE=UART_CR_ENA, ACCESS="RW"),
+        SEPARATOR(TEXTNAME=" MSIE="),
+        FIELD[3] (NAME="MSIE", TYPE=UART_CR_ENA, ACCESS="RW")
+}
+        
+        </definition>
+</displaytype>
+
+
+<displaytype>
+        <name>KMI_CR</name>
+        <definition>
+
+TYPEDEF KMI_CR_TYPE ENUM(WIDTH=1, DEFAULT="?")
+{
+        "PS2/AT"        = 0,
+        "None"          = 1
+}
+
+TYPEDEF KMI_CR_EIN ENUM(WIDTH=1, DEFAULT="?")
+{
+        "ENA"           = 1,
+        "DIS"           = 0
+}
+
+TYPEDEF KMI_CR_FK ENUM(WIDTH=1, DEFAULT="?")
+{
+        "SET"           = 1,
+        "NOT SET"       = 0
+}
+
+TYPEDEF KMI_CR (NAME="KMI_CRI", CLASS="Integrator") COMPOSITE(WIDTH=8)
+{
+        SEPARATOR(TEXTNAME="Type="),
+        FIELD[5] (NAME="TYPE", TYPE=KMI_CR_TYPE, ACCESS="RW")
+        SEPARATOR(TEXTNAME=" REIN="),
+        FIELD[4] (NAME="RIEN", TYPE=KMI_CR_EIN, ACCESS="RW"),
+        SEPARATOR(TEXTNAME=" TIEN="),
+        FIELD[3] (NAME="TIEN", TYPE=KMI_CR_EIN, ACCESS="RW"),
+        SEPARATOR(TEXTNAME=" KMIEN"),
+        FIELD[2] (NAME="KMEIN", TYPE=KMI_CR_EIN, ACCESS="RW"),
+        SEPARATOR(TEXTNAME=" FKMID="),
+        FIELD[1] (NAME="FKMID", TYPE=KMI_CR_FK, ACCESS="RW"),
+        SEPARATOR(TEXTNAME=" FKMIC="),
+        FIELD[0] (NAME="FKMIC", TYPE=KMI_CR_FK, ACCESS="RW")
+}
+
+        </definition>
+</displaytype>
+
+<displaytype>
+        <name>KMI_STAT</name>
+        <definition>
+
+TYPEDEF KMI_STAT_EMPTY ENUM(WIDTH=1, DEFAULT="?")
+{
+        "FULL"          = 0,
+        "EMPTY"         = 1
+}
+
+TYPEDEF KMI_STAT_BUSY ENUM(WIDTH=1, DEFAULT="?")
+{
+        "IDLE"          = 0,
+        "BUSY"          = 1
+}
+
+TYPEDEF KMI_STAT (NAME="KMI_STAT", CLASS="Integrator") COMPOSITE(WIDTH=8)
+{
+        SEPARATOR(TEXTNAME="TX="),
+        FIELD[6] (NAME="TXEMPTY", TYPE=KMI_STAT_EMPTY, ACCESS="R"),
+        SEPARATOR(TEXTNAME=","),
+        FIELD[5] (NAME="TXBUSY", TYPE=KMI_STAT_BUSY, ACCESS="R"),
+        SEPARATOR(TEXTNAME=" RX="),
+        FIELD[4] (NAME="RXEMPTY", TYPE=KMI_STAT_EMPTY, ACCESS="R"),
+        SEPARATOR(TEXTNAME=","),
+        FIELD[2] (NAME="RXBUSY", TYPE=KMI_STAT_BUSY, ACCESS="R")
+}
+
+        </definition>
+</displaytype>
+
+<displaytype>
+        <name>KMI_IR</name>
+        <definition>
+
+TYPEDEF KMI_IR_INTR ENUM(WIDTH=1, DEFAULT="?")
+{
+        "1"                     = 1,
+        "0"                     = 0
+}
+
+TYPEDEF KMI_IR (NAME="KMI_IR", CLASS="Integrator") COMPOSITE(WIDTH=8)
+{
+        SEPARATOR(TEXTNAME="TXINTR="),
+        FIELD[1] (NAME="TXINTR", TYPE=KMI_IR_INTR, ACCESS="R"),
+        SEPARATOR(TEXTNAME=" RCINTR="),
+        FIELD[0] (NAME="RCINTR", TYPE=KMI_IR_INTR, ACCESS="R")
+}
+
+        </definition>
+</displaytype>
+
+<displaytype>
+        <name>TIMERx_CTRL</name>
+        <definition>
+
+TYPEDEF TIMERx_CTRL_ENA ENUM(WIDTH=1, DEFAULT="?")
+{
+        "DIS"                   = 0,
+        "ENA"                   = 1
+}
+
+TYPEDEF TIMERx_CTRL_MODE ENUM(WIDTH=1, DEFAULT="?")
+{
+        "Free"                  = 0,
+        "Periodic"              = 1
+}
+
+TYPEDEF TIMERx_CTRL_PRESCALE ENUM(WIDTH=2, DEFAULT="?")
+{
+                "NONE"          = 0,
+                "/16"           = 1,
+                "/256"          = 2,
+                "Undefined"     = 3
+}
+
+TYPEDEF TIMERx_CTRL (NAME="TIMERx", CLASS="Integrator") COMPOSITE(WIDTH=16)
+{
+        SEPARATOR(TEXTNAME="Timer="),
+        FIELD[7] (NAME="TIMER", TYPE=TIMERx_CTRL_ENA, ACCESS="RW"),
+        SEPARATOR(TEXTNAME=" Mode="),
+        FIELD[6] (NAME="MODE", TYPE=TIMERx_CTRL_MODE, ACCESS="RW"),
+        SEPARATOR(TEXTNAME=" PS="),
+        FIELD[3:2] (NAME="PRESCALE", TYPE=TIMERx_CTRL_PRESCALE, ACCESS="RW")
+}
+
+        </definition>
+</displaytype>
+
+<displaytype>
+        <name>SC_ID</name>
+        <definition>
+
+TYPEDEF SC_ID_MAN ENUM(WIDTH=8, DEFAULT="?")
+{
+        "ARM"           = 0x41
+}
+
+TYPEDEF SC_ID_ARCH ENUM(WIDTH=8, DEFAULT="?")
+{
+        "ASB"           = 0x00,
+        "AHB"           = 0x01
+}
+
+TYPEDEF SC_ID_FPGA ENUM(WIDTH=4, DEFAULT="?")
+{
+        "XC4062"        = 1,
+        "XC4085"        = 2
+}
+
+TYPEDEF SC_ID_REV ENUM(WIDTH=4, DEFAULT="?")
+{
+        "A"                     = 0,
+        "B"                     = 1
+}
+
+TYPEDEF SC_ID (NAME="SC_ID", CLASS="Integrator") COMPOSITE(WIDTH=32)
+{
+        FIELD[31:24] (NAME="Manufacture", TYPE=SC_ID_MAN, ACCESS="R"),
+        SEPARATOR(TEXTNAME=" "),
+        FIELD[23:16] (NAME="Architecture", TYPE=SC_ID_ARCH, ACCESS="R"),
+        SEPARATOR(TEXTNAME=" Rev"),
+        FIELD[3:0] (NAME="Version", TYPE=SC_ID_REV, ACCESS="R"),
+        SEPARATOR(TEXTNAME=" FPGA="),
+        FIELD[15:12] (NAME="FPGA", TYPE=SC_ID_FPGA, ACCESS="R")
+}
+
+        </definition>
+</displaytype>
+
+<displaytype>
+        <name>SC_CTRL</name>
+        <definition>
+
+TYPEDEF SC_CTRL_UART ENUM(WIDTH=1, DEFAULT="?")
+{
+        "HIGH"          =0,
+        "LOW"           =1
+}
+
+TYPEDEF SC_CTRL_FLASH ENUM(WIDTH=1, DEFAULT="?")
+{
+        "R"                     = 0,
+        "RW"            = 1
+}
+
+TYPEDEF SC_CTRL_FLASHVPP ENUM(WIDTH=1, DEFAULT="?")
+{
+        "DIS"           = 0,
+        "ENA"           = 1
+}
+
+TYPEDEF SC_CTRL_SRESET ENUM(WIDTH=1, DEFAULT="?")
+{
+        "YES"           = 1,
+        "NO"            = 0
+}
+
+TYPEDEF SC_CTRL (NAME="SC_CTRL", CLASS="Integrator") COMPOSITE(WIDTH=8)
+{
+        SEPARATOR(TEXTNAME="ORTS="),
+        FIELD[7] (NAME="UART0RTS", TYPE=SC_CTRL_UART, ACCESS="RW"),
+        SEPARATOR(TEXTNAME=" ODTR="),
+        FIELD[6] (NAME="UART0DTR", TYPE=SC_CTRL_UART, ACCESS="RW"),
+        SEPARATOR(TEXTNAME=" 1RTS="),
+        FIELD[5] (NAME="UART1RTS", TYPE=SC_CTRL_UART, ACCESS="RW"),
+        SEPARATOR(TEXTNAME=" 1DTR="),
+        FIELD[4] (NAME="UART1DTR", TYPE=SC_CTRL_UART, ACCESS="RW"),
+        SEPARATOR(TEXTNAME=" Flash="),
+        FIELD[2] (NAME="FLASHWP", TYPE=SC_CTRL_FLASH, ACCESS="RW"),
+        SEPARATOR(TEXTNAME=" FlashVPP="),
+        FIELD[1] (NAME="FLASHVPP", TYPE=SC_CTRL_FLASHVPP, ACCESS="RW"),
+        SEPARATOR(TEXTNAME=" SRESET="),
+        FIELD[0] (NAME="SOFTRESET", TYPE=SC_CTRL_SRESET, ACCESS="RW")
+}
+
+        </definition>
+</displaytype>
+
+<displaytype>
+        <name>SC_OSC</name>
+        <definition>
+
+TYPEDEF SC_OSC_DIVXY ENUM(WIDTH=1, DEFAULT="?")
+{
+        "25MHz"         = 1,
+        "33MHz"         = 0
+}
+
+TYPEDEF SC_OSC (NAME="SC_OSC", CLASS="Integrator") COMPOSITE(WIDTH=9)
+{
+        SEPARATOR(TEXTNAME="DIVXY="),
+        FIELD[8] (NAME="DIVXY", TYPE=SC_OSC_DIVXY, ACCESS="RW")
+}
+
+        </definition>
+</displaytype>
+
+<displaytype>
+        <name>SC_DEC</name>
+        <definition>
+
+TYPEDEF SC_DEC_MOD ENUM(WIDTH=4, DEFAULT="?")
+{
+        "None"          = 0,
+        "0"                     = 1,
+        "0,1"           = 3,
+        "0,1,2"         = 9,
+        "0,1,2,3"       = 15
+}
+
+TYPEDEF SC_DEC (NAME="Decoder", CLASS="Integrator") COMPOSITE(WIDTH=8)
+{
+        SEPARATOR(TEXTNAME="EXP="),
+        FIELD[7:4] (NAME="EXP", TYPE=SC_DEC_MOD, ACCESS="R"),
+        SEPARATOR(TEXTNAME=" HDR="),
+        FIELD[3:0] (NAME="HDR", TYPE=SC_DEC_MOD, ACCESS="R")
+}
+
+        </definition>
+</displaytype>
+
+<displaytype>
+        <name>SC_PCI</name>
+        <definition>
+        
+TYPEDEF SC_PCI_PCIEN ENUM(WIDTH=1, DEFAULT="?")
+{
+        "Disabled"      = 0,
+        "Enabled"       = 1
+}
+
+TYPEDEF SC_PCI (NAME="SC_PCI", CLASS="Integrator") COMPOSITE(WIDTH=8)
+{
+        SEPARATOR(TEXTNAME="PCI="),
+        FIELD[1] (NAME="PCI", TYPE=SC_PCI_PCIEN, ACCESS="RW")
+}
+
+        </definition>
+</displaytype>
+
+<displaytype>
+        <name>SC_LOCK</name>
+        <definition>
+
+TYPEDEF SC_LOCK_LCK ENUM(WIDTH=1, DEFAULT="?")
+{
+        "Locked"        = 1,
+        "Unlocked"      = 0
+}
+
+TYPEDEF SC_LOCK (NAME="LOCK", CLASS="Integrator") COMPOSITE(WIDTH=17)
+{
+        FIELD[16] (NAME="LOCK", TYPE=SC_LOCK_LCK, ACCESS="RW")
+}
+
+        </definition>
+</displaytype>
+
+<displaytype>
+        <name>SC_LBFCODE</name>
+        <definition>
+
+TYPEDEF SC_LBFCODE_MASTER ENUM(WIDTH=2, DEFAULT="?")
+{
+        "PCI write to AMBA"     = 0,
+        "AMBA write to PCI"     = 1,
+        "PCI read AMAB"         = 2,
+        "AMBA read PCI"         = 3
+}
+
+TYPEDEF SC_LBFCODE (NAME="LBFCODE", CLASS="Integrator") COMPOSITE(WIDTH=8)
+{
+        FIELD[2:1] (NAME="DATA", TYPE=SC_LBFCODE_MASTER, ACCESS="R")
+}
+        
+        </definition>
+</displaytype>
+
+<displaytype>
+        <name>EBI</name>
+        <definition>
+
+TYPEDEF EBI_WAIT ENUM(WIDTH=4, DEFAULT="16 Cycles")
+{
+        "3 Cycles"                                      = 0x0,
+        "4 Cycles"                                      = 0x1,
+        "5 Cycles"                                      = 0x2,
+        "6 Cycles"                                      = 0x3,
+        "7 Cycles"                                      = 0x4,
+        "8 Cycles"                                      = 0x5,
+        "9 Cycles"                                      = 0x6,
+        "10 Cycles"                                     = 0x7,
+        "11 Cycles"                                     = 0x8,
+        "12 Cycles"                                     = 0x9,
+        "13 Cycles"                                     = 0xA,
+        "14 Cycles"                                     = 0xB,
+        "15 Cycles"                                     = 0xC
+}
+
+TYPEDEF EBI_SSRAM ENUM(WIDTH=1, DEFAULT="?")
+{
+        "async"                                 = 1,
+        "sync"                                  = 0
+}
+
+TYPEDEF EBI_WREN ENUM(WIDTH=1, DEFAULT="")
+{
+        "Writes = Yes"                  = 1,
+        "Writes = No"                   = 0
+}
+
+TYPEDEF EBI_MEMSIZE ENUM(WIDTH=2, DEFAULT="?")
+{
+        "MemSize=8bit"                  = 0,
+        "MemSize=16bit"                 = 1,
+        "MemSize=32bit"                 = 2
+}
+
+TYPEDEF EBI (NAME="EBI Configuration Registry", CLASS="Integrator") COMPOSITE(WIDTH=8)
+{
+        FIELD[7:4] (NAME="WAIT", TYPE=EBI_WAIT, ACCESS="RW"),
+        SEPARATOR(TEXTNAME=" "),
+        FIELD[3] (NAME="SSRAM", TYPE=EBI_SSRAM, ACCESS="RW"),
+        SEPARATOR(TEXTNAME=" "),
+        FIELD[2] (NAME="WREN", TYPE=EBI_WREN, ACCESS="RW"),
+        SEPARATOR(TEXTNAME=" "),
+        FIELD[1:0] (NAME="MEMSIZE", TYPE=EBI_MEMSIZE, ACCESS="RW")
+}
+        </definition>
+</displaytype>
+
+<displaytype>
+       <name>LED_ALPHA</name>
+       <definition>
+
+TYPEDEF LED_ALPHA_STATUS ENUM(WIDTH=1, DEFAULT="?")
+{
+        "IDLE"                  = 0,
+        "BUSY"                  = 1
+}
+
+TYPEDEF LED_ALPHA (NAME="LED_ALPHA", CLASS="Integrator") COMPOSITE(WIDTH=32)
+{
+        SEPARATOR(TEXTNAME="Status="),
+        FIELD[0] (NAME="STATUS", TYPE=LED_ALPHA_STATUS, ACCESS="RW")
+}
+
+        </definition>
+</displaytype>
+
+<displaytype>
+        <name>LED_LIGHTS</name>
+        <definition>
+
+TYPEDEF LED_LIGHTS_STATUS ENUM(WIDTH=1, DEFAULT="?")
+{
+        "ON"                    = 1,
+        "OFF"                   = 0
+}
+
+TYPEDEF LED_LIGHTS (NAME="LIGHTS", CLASS="Integrator") COMPOSITE(WIDTH=4)
+{
+        SEPARATOR(TEXTNAME="3="),
+        FIELD[3] (NAME="LED3", TYPE=LED_LIGHTS_STATUS, ACCESS="RW"),
+        SEPARATOR(TEXTNAME=" 2="),
+        FIELD[2] (NAME="LED2", TYPE=LED_LIGHTS_STATUS, ACCESS="RW"),
+        SEPARATOR(TEXTNAME=" 1="),
+        FIELD[1] (NAME="LED1", TYPE=LED_LIGHTS_STATUS, ACCESS="RW"),
+        SEPARATOR(TEXTNAME=" 0="),
+        FIELD[0] (NAME="LED0", TYPE=LED_LIGHTS_STATUS, ACCESS="RW")
+}
+        </definition>
+</displaytype>
+
+<displaytype>
+        <name>LED_SWITCH</name>
+        <definition>
+
+TYPEDEF LED_SWITCH_STATUS ENUM(WIDTH=1, DEFAULT="?")
+{
+        "ON"                    = 1,
+        "OFF"                   = 0
+}
+
+TYPEDEF LED_SWITCH (NAME="SWITCHES", CLASS="Integrator") COMPOSITE(WIDTH=4)
+{
+        SEPARATOR(TEXTNAME="4="),
+        FIELD[3] (NAME="S1-4", TYPE=LED_SWITCH_STATUS, ACCESS="RW"),
+        SEPARATOR(TEXTNAME=" 3="),
+        FIELD[2] (NAME="S1-3", TYPE=LED_SWITCH_STATUS, ACCESS="RW"),
+        SEPARATOR(TEXTNAME=" 2="),
+        FIELD[1] (NAME="S1-2", TYPE=LED_SWITCH_STATUS, ACCESS="RW"),
+        SEPARATOR(TEXTNAME=" 1="),
+        FIELD[0] (NAME="S1-1", TYPE=LED_SWITCH_STATUS, ACCESS="RW")
+}
+        </definition>
+</displaytype>
+
+<displaytype>
+        <name>CM_IRQ_RAW</name>
+        <definition>
+
+TYPEDEF CM_IRQ_RAW_ST ENUM(WIDTH=1, DEFAULT="?")
+{
+        "YES"           =1,
+        "NO"            =0
+}
+
+TYPEDEF CM_IRQ_RAW (NAME="CM_IRQ_RAW", CLASS="Board") COMPOSITE(WIDTH=32)
+{
+        SEPARATOR(TEXTNAME="Soft="),
+        FIELD[0] (NAME="Soft Interrupt", TYPE=CM_IRQ_RAW_ST, ACCESS="R"),
+        SEPARATOR(TEXTNAME=" Rx="),
+        FIELD[1] (NAME="CommRx Interrupt", TYPE=CM_IRQ_RAW_ST, ACCESS="R"),
+        SEPARATOR(TEXTNAME=" Tx="),
+        FIELD[2] (NAME="CommTx Interrupt", TYPE=CM_IRQ_RAW_ST, ACCESS="R"),
+        SEPARATOR(TEXTNAME=" ")
+}
+        </definition>
+</displaytype>
+
+<displaytype>
+        <name>CM_FIQ_ENC</name>
+        <definition>
+
+TYPEDEF CM_FIQ_ENC_ST ENUM(WIDTH=1, DEFAULT="?")
+{
+        "Clear"         = 1,
+        "No Change"     = 0
+}
+
+TYPEDEF CM_FIQ_ENC (NAME="CM_FIQ_ENC", CLASS="Board") COMPOSITE(WIDTH=32)
+{
+        SEPARATOR(TEXTNAME="Soft="),
+        FIELD[0] (NAME="Soft Interrupt IRQ", TYPE=CM_FIQ_ENC_ST, ACCESS="W"),
+        SEPARATOR(TEXTNAME=" Rx="),
+        FIELD[1] (NAME="CommRx Interrupt IRQ", TYPE=CM_FIQ_ENC_ST, ACCESS="W"),
+        SEPARATOR(TEXTNAME=" Tx="),
+        FIELD[2] (NAME="CommTx Interrupt IRQ", TYPE=CM_FIQ_ENC_ST, ACCESS="W"),
+        SEPARATOR(TEXTNAME=" ")
+}
+        </definition>
+</displaytype>
+
+<displaytype>
+        <name>CM_FIQ_ENS</name>
+        <definition>
+
+TYPEDEF CM_FIQ_ENS_ST ENUM(WIDTH=1, DEFAULT="?")
+{
+        "Set"           = 1,
+        "No Change"     = 0
+}
+
+TYPEDEF CM_FIQ_ENS (NAME="CM_FIQ_ENS", CLASS="Board") COMPOSITE(WIDTH=32)
+{
+        SEPARATOR(TEXTNAME="Soft="),
+        FIELD[0] (NAME="Soft Interrupt IRQ", TYPE=CM_FIQ_ENS_ST, ACCESS="W"),
+        SEPARATOR(TEXTNAME=" Rx="),
+        FIELD[1] (NAME="CommRx Interrupt IRQ", TYPE=CM_FIQ_ENS_ST, ACCESS="W"),
+        SEPARATOR(TEXTNAME=" Tx="),
+        FIELD[2] (NAME="CommTx Interrupt IRQ", TYPE=CM_FIQ_ENS_ST, ACCESS="W"),
+        SEPARATOR(TEXTNAME=" ")
+}
+        </definition>
+</displaytype>
+
+<displaytype>
+        <name>CM_FIQ_EN</name>
+        <definition>
+
+TYPEDEF CM_FIQ_EN_ST ENUM(WIDTH=1, DEFAULT="?")
+{
+        "Ena"   = 1,
+        "Dis"   = 0
+}
+
+TYPEDEF CM_FIQ_EN (NAME="CM_FIQ_EN", CLASS="Board") COMPOSITE(WIDTH=32)
+{
+        SEPARATOR(TEXTNAME="Soft="),
+        FIELD[0] (NAME="Soft Interrupt IRQ", TYPE=CM_FIQ_EN_ST, ACCESS="R"),
+        SEPARATOR(TEXTNAME=" Rx="),
+        FIELD[1] (NAME="CommRx Interrupt IRQ", TYPE=CM_FIQ_EN_ST, ACCESS="R"),
+        SEPARATOR(TEXTNAME=" Tx="),
+        FIELD[2] (NAME="CommTx Interrupt IRQ", TYPE=CM_FIQ_EN_ST, ACCESS="R"),
+        SEPARATOR(TEXTNAME=" ")
+}
+        </definition>
+</displaytype>
+
+<displaytype>
+        <name>CM_FIQ_RAW</name>
+        <definition>
+
+TYPEDEF CM_FIQ_ST ENUM(WIDTH=1, DEFAULT="?")
+{
+        "YES"           =1,
+        "NO"            =0
+}
+
+TYPEDEF CM_FIQ_RAW (NAME="CM_FIQ_RAW", CLASS="Board") COMPOSITE(WIDTH=32)
+{
+        SEPARATOR(TEXTNAME="Soft="),
+        FIELD[0] (NAME="Soft Interrupt Source", TYPE=CM_FIQ_ST, ACCESS="R"),
+        SEPARATOR(TEXTNAME=" Rx="),
+        FIELD[1] (NAME="CommRx Interrupt Source", TYPE=CM_FIQ_ST, ACCESS="R"),
+        SEPARATOR(TEXTNAME=" Tx="),
+        FIELD[2] (NAME="CommTx Interrupt Source", TYPE=CM_FIQ_ST, ACCESS="R"),
+        SEPARATOR(TEXTNAME=" ")
+}
+        </definition>
+</displaytype>
+
+<displaytype>
+        <name>CM_FIQ</name>
+        <definition>
+
+TYPEDEF CM_FIQ_ST ENUM(WIDTH=1, DEFAULT="?")
+{
+        "Enabled and Asserted"          =1,
+        "Not Enabled and Asserted"      =0
+}
+
+TYPEDEF CM_FIQ (NAME="CM_FIQ", CLASS="Board") COMPOSITE(WIDTH=32)
+{
+        SEPARATOR(TEXTNAME="Soft="),
+        FIELD[0] (NAME="Soft Interrupt Source", TYPE=CM_FIQ_ST, ACCESS="R"),
+        SEPARATOR(TEXTNAME=" Rx="),
+        FIELD[1] (NAME="CommRx Interrupt Source", TYPE=CM_FIQ_ST, ACCESS="R"),
+        SEPARATOR(TEXTNAME=" Tx="),
+        FIELD[2] (NAME="CommTx Interrupt Source", TYPE=CM_FIQ_ST, ACCESS="R"),
+        SEPARATOR(TEXTNAME=" ")
+}
+        </definition>
+</displaytype>
+
+<displaytype>
+        <name>CM_SOFT_INTC</name>
+        <definition>
+
+TYPEDEF CM_SOFT_INTC_SET ENUM(WIDTH=1, DEFAULT="?")
+{
+        "Clear"         = 1,
+        "No Change"     = 0
+}
+
+TYPEDEF CM_SOFT_INT (NAME="CM_SOFT_INTC", CLASS="Board") COMPOSITE(WIDTH=32)
+{
+        FIELD[0] (NAME="Soft Interrupt", TYPE=CM_SOFT_INTC_SET, ACCESS="W"),
+        SEPARATOR(TEXTNAME=" ")
+}
+        </definition>
+</displaytype>
+
+<displaytype>
+        <name>CM_SOFT_INTS</name>
+        <definition>
+
+TYPEDEF CM_SOFT_INTS_SET ENUM(WIDTH=1, DEFAULT="?")
+{
+        "Set"           = 1,
+        "No Chnage"     = 0
+}
+
+TYPEDEF CM_SOFT_INTS (NAME="CM_SOFT_INTS", CLASS="Board") COMPOSITE(WIDTH=32)
+{
+        FIELD[0] (NAME="Soft Interrupt", TYPE=CM_SOFT_INTS_SET, ACCESS="W"),
+        SEPARATOR(TEXTNAME=" ")
+}
+        
+        </definition>
+</displaytype>
+
+<displaytype>
+        <name>CM_SOFT_INT</name>
+        <definition>
+
+TYPEDEF CM_SOFT_INT_SET ENUM(WIDTH=1, DEFAULT="?")
+{
+        "Set"           = 1,
+        "Clear"         = 0
+}
+
+TYPEDEF CM_SOFT_INT (NAME="CM_SOFT_INIT", CLASS="Board") COMPOSITE(WIDTH=32)
+{
+        FIELD[0] (NAME="Soft Interrupt", TYPE=CM_SOFT_INT_SET, ACCESS="R"),
+        SEPARATOR(TEXTNAME=" ")
+}
+        </definition>
+</displaytype>
+
+<displaytype>
+        <name>CM_IRQ_ENC</name>
+        <definition>
+
+TYPEDEF CM_IRQ_ENC_ST ENUM(WIDTH=1, DEFAULT="?")
+{
+        "Set"           = 1,
+        "No Change"     = 0
+}
+
+TYPEDEF CM_IRQ_ENC (NAME="CM_IRQ_ENC", CLASS="Board") COMPOSITE(WIDTH=32)
+{
+        SEPARATOR(TEXTNAME="Soft="),
+        FIELD[0] (NAME="Soft Interrupt IRQ", TYPE=CM_IRQ_ENC_ST, ACCESS="W"),
+        SEPARATOR(TEXTNAME=" Rx="),
+        FIELD[1] (NAME="CommRx Interrupt IRQ", TYPE=CM_IRQ_ENC_ST, ACCESS="W"),
+        SEPARATOR(TEXTNAME=" Tx="),
+        FIELD[2] (NAME="CommTx Interrupt IRQ", TYPE=CM_IRQ_ENC_ST, ACCESS="W"),
+        SEPARATOR(TEXTNAME=" ")
+}
+        </definition>
+</displaytype>
+
+<displaytype>
+        <name>CM_IRQ_ENS</name>
+        <definition>
+
+TYPEDEF CM_IRQ_ENS_ST ENUM(WIDTH=1, DEFAULT="?")
+{
+        "Set"           = 1,
+        "No Change"     = 0
+}
+
+TYPEDEF CM_IRQ_ENS (NAME="CM_IRQ_ENS", CLASS="Board") COMPOSITE(WIDTH=32)
+{
+        SEPARATOR(TEXTNAME="Soft="),
+        FIELD[0] (NAME="Soft Interrupt IRQ", TYPE=CM_IRQ_ENS_ST, ACCESS="W"),
+        SEPARATOR(TEXTNAME=" Rx="),
+        FIELD[1] (NAME="CommRx Interrupt IRQ", TYPE=CM_IRQ_ENS_ST, ACCESS="W"),
+        SEPARATOR(TEXTNAME=" Tx="),
+        FIELD[2] (NAME="CommTx Interrupt IRQ", TYPE=CM_IRQ_ENS_ST, ACCESS="W"),
+        SEPARATOR(TEXTNAME=" ")
+}
+        </definition>
+</displaytype>
+
+<displaytype>
+        <name>CM_IRQ_ENA</name>
+        <definition>
+
+TYPEDEF CM_IRQ_ENA_ST ENUM(WIDTH=1, DEFAULT="?")
+{
+        "Ena"   = 1,
+        "Dis"   = 0
+}
+
+TYPEDEF CM_IRQ_ENA (NAME="CM_IRQ_ENA", CLASS="Board") COMPOSITE(WIDTH=32)
+{
+        SEPARATOR(TEXTNAME="Soft="),
+        FIELD[0] (NAME="Soft Interrupt IRQ", TYPE=CM_IRQ_ENA_ST, ACCESS="R"),
+        SEPARATOR(TEXTNAME=" Rx="),
+        FIELD[1] (NAME="CommRx Interrupt IRQ", TYPE=CM_IRQ_ENA_ST, ACCESS="R"),
+        SEPARATOR(TEXTNAME=" Tx="),
+        FIELD[2] (NAME="CommTx Interrupt IRQ", TYPE=CM_IRQ_ENA_ST, ACCESS="R"),
+        SEPARATOR(TEXTNAME=" ")
+}
+        </definition>
+</displaytype>
+
+<displaytype>
+        <name>CM_IRQ</name>
+        <definition>
+
+TYPEDEF CM_IRQ_ST ENUM(WIDTH=1, DEFAULT="?")
+{
+        "YES"           = 1,
+        "NO"            = 0
+}
+
+TYPEDEF CM_IRQ (NAME="CM_IRQ", CLASS="Board") COMPOSITE(WIDTH=32)
+{
+        SEPARATOR(TEXTNAME="Soft="),
+        FIELD[0] (NAME="Soft Interrupt", TYPE=CM_IRQ_ST, ACCESS="R"),
+        SEPARATOR(TEXTNAME=" Rx="),
+        FIELD[1] (NAME="CommRx Interrupt", TYPE=CM_IRQ_ST, ACCESS="R"),
+        SEPARATOR(TEXTNAME=" Tx="),
+        FIELD[2] (NAME="CommTx Interrupt", TYPE=CM_IRQ_ST, ACCESS="R"),
+        SEPARATOR(TEXTNAME=" ")
+}
+        </definition>
+</displaytype>
+
+<displaytype>
+        <name>CM1020_ID</name>
+        <requires></requires>
+        <definition>
+
+TYPEDEF CM1020_ID_REVISION ENUM(WIDTH=4, DEFAULT="?")
+{
+        "A"             = 0x00,
+        "B"             = 0x01,
+        "C"             = 0x02,
+        "D"             = 0x03
+}
+
+TYPEDEF CM1020_ID_ARCH ENUM(WIDTH=8, DEFAULT="?")
+{
+        "AHB"           = 0x1A
+}
+
+TYPEDEF CM1020_ID_MAN ENUM(WIDTH=8, DEFAULT="?")
+{
+        "ARM"           = 0x41,
+        "DEC"           = 0x44,
+        "Intel"         = 0x69
+}
+
+TYPEDEF CM1020_ID_FPGA ENUM(WIDTH=4, DEFAULT="?")
+{
+        "XCV600"        = 3
+}
+
+TYPEDEF CM1020_ID (NAME="CM1020_ID", CLASS="Board") COMPOSITE(WIDTH=32)
+{
+        FIELD[31:24] (NAME="Manufacture", TYPE=CM1020_ID_MAN, ACCESS="R"),
+        SEPARATOR(TEXTNAME=" "),
+        FIELD[23:16] (NAME="Architecture", TYPE=CM1020_ID_ARCH, ACCESS="R"),
+        SEPARATOR(TEXTNAME=" Rev"),
+        FIELD[3:0] (Name="Revision", TYPE=CM1020_ID_REVISION, ACCESS="R"),
+        SEPARATOR(TEXTNAME=" FPGA="),
+        FIELD[15:12] (NAME="FPGA Type", TYPE=CM1020_ID_FPGA, ACCESS="R")
+}
+
+        </definition>
+</displaytype>
+
+<displaytype>
+        <name>CM1020_CTRL</name>
+        <definition>
+
+TYPEDEF CM1020_CTRL_LED ENUM(WIDTH=1, DEFAULT="OFF")
+{
+        "OFF"           = 0,
+        "ON"            = 1
+}
+
+TYPEDEF CM1020_CTRL_MB ENUM(WIDTH=1, DEFAULT="?")
+{
+        "YES"           = 0,
+        "NO"            = 1
+}
+
+TYPEDEF CM1020_CTRL_REMAP ENUM(WIDTH=1, DEFAULT="?")
+{
+        "ROM"           = 0,
+        "RAM"           = 1
+}
+
+TYPEDEF CM1020_CTRL_RESET ENUM(WIDTH=1, DEFAULT="NO")
+{
+        "YES"           = 1,
+        "NO"            = 0
+}
+
+TYPEDEF CM1020_CTRL (NAME="CM1020_CTRL", CLASS="Board") COMPOSITE(WIDTH=32)
+{
+        SEPARATOR(TEXTNAME="LED="),
+        FIELD[0] (NAME="LED", TYPE=CM1020_CTRL_LED, ACCESS="RW"),
+        SEPARATOR(TEXTNAME=" MB="),
+        FIELD[1] (NAME="Motherboard", TYPE=CM1020_CTRL_MB, ACCESS="RW"),
+        SEPARATOR(TEXTNAME=" Remap="),
+        FIELD[2] (NAME="REMAP", TYPE=CM1020_CTRL_REMAP, ACCESS="RW"),
+        SEPARATOR(TEXTNAME=" SR="),
+        FIELD[3] (NAME="Soft Reset", TYPE=CM1020_CTRL_RESET, ACCESS="RW"),
+        SEPARATOR(TEXTNAME=" ") 
+}
+        </definition>
+</displaytype>
+
+<displaytype>
+        <name>CM10206_STAT</name>
+        <definition>
+
+TYPEDEF CM1020_STAT_SSRAM ENUM(WIDTH=8, DEFAULT="?")
+{
+        "Unknown"               = 0x00,
+        "256Kb"                 = 0x04,
+        "1Mb"                   = 0x10,
+        "2Mb"                   = 0x20
+        
+}
+
+TYPEDEF CM1020_STAT_CARD ENUM(WIDTH=8, DEFAULT="Invalid")
+{
+        "Core Module 0" = 0x00,
+        "Core Module 1" = 0x01,
+        "Core Module 2" = 0x02,
+        "Core Module 3" = 0x03,
+        "Invalid"               = 0xff
+}
+
+TYPEDEF CM10206_STAT (NAME="CM1020_STAT", CLASS="Board") COMPOSITE(WIDTH=32)
+{
+        SEPARATOR(TEXTNAME="SSRAM="),
+        FIELD[23:16] (NAME="SSRAM", TYPE=CM1020_STAT_SSRAM, ACCESS="R"),
+        SEPARATOR(TEXTNAME=" Stack="),
+        FIELD[7:0] (NAME="CARD STACK", TYPE=CM1020_STAT_CARD, ACCESS="R"),
+        SEPARATOR(TEXTNAME=" ")
+}
+        </definition>
+</displaytype>
+
+<displaytype>
+        <name>CM1020_LOCK</name>
+        <definition>
+
+TYPEDEF CM1020_LOCK_LB ENUM(WIDTH=1, DEFAULT="?")
+{
+        "Locked"        = 1,
+        "Unlocked"      = 0
+}
+
+TYPEDEF CM1020_LOCK (NAME="CM1020_LOCK", CLASS="Board") COMPOSITE(WIDTH=32)
+{
+        FIELD[0:0] (NAME="Lock Bit", TYPE=CM1020_LOCK_LB, ACCESS="R"),
+        SEPARATOR(TEXTNAME=" ")
+}
+        </definition>
+</displaytype>
+
+<displaytype>
+        <name>CM1020_AUXOSC</name>
+        <definition>
+
+TYPEDEF CM1020_AUXOSC_OD ENUM(WIDTH=3, DEFAULT="6") 
+{
+        "10"                    = 0,            
+        "2"                             = 1,
+        "8"                             = 2,
+        "4"                             = 3,
+        "5"                             = 4,
+        "7"                             = 5,
+        "9"                             = 6,
+        "6"                             = 7
+}
+
+TYPEDEF CM1020_AUXOSC_VDW ENUM(WIDTH=9, DEFAULT="?")
+{
+        "255"                   = 255
+}
+
+TYPEDEF CM1020_AUXOSC_RDW ENUM(WIDTH=7, DEFAULT="?")
+{
+        "63"                    = 63
+}
+
+TYPEDEF CM1020_AUXOSC (NAME="CM1020_AUXOSC", CLASS="Board") COMPOSITE(WIDTH=32)
+{
+        SEPARATOR(TEXTNAME="RDW="),
+        FIELD[15:9] (NAME="RDW", TYPE=CM1020_AUXOSC_RDW, ACCESS="RW"),
+        SEPARATOR(TEXTNAME=" VDW="),
+        FIELD[8:0] (NAME="VDW", TYPE=CM1020_AUXOSC_VDW, ACCESS="RW"),
+        SEPARATOR(TEXTNAME=" OD="),
+        FIELD[18:16] (NAME="OD", TYPE=CM1020_AUXOSC_OD, ACCESS="RW"),
+        SEPARATOR(TEXTNAME=" ")
+}
+        </definition>
+</displaytype>
+
+<displaytype>
+        <name>CM1020_SDRAM</name>
+        <definition>
+        
+TYPEDEF CM1020_SDRAM_CAS ENUM(WIDTH=2, DEFAULT="?")
+{
+        "2"                             = 2,
+        "3"                             = 3
+}
+
+TYPEDEF CM1020_SDRAM_MEM ENUM(WIDTH=3, DEFAULT="?")
+{
+        "16MB"                  = 0,
+        "32MB"                  = 1,
+        "64MB"                  = 2,
+        "128MB"                 = 3,
+        "256MB"                 = 4,
+        "Reserved"              = 5,
+        "Reserved"              = 6,
+        "Reserved"              = 7
+}
+
+TYPEDEF CM1020_SDRAM_SPD ENUM(WIDTH=1, DEFAULT="?")
+{
+        "Loaded"                = 1,
+        "Not Loaded"    = 0
+}
+
+TYPEDEF CM1020_SDRAM (NAME="CM1020_SDRAM", CLASS="Board") COMPOSITE(WIDTH=32)
+{
+        SEPARATOR(TEXTNAME="CAS="),
+        FIELD[1:0] (NAME="CAS", TYPE=CM1020_SDRAM_CAS, ACCESS="RW"),
+        SEPARATOR(TEXTNAME=" MEM="),
+        FIELD[4:2] (NAME="MEM SIZE", TYPE=CM1020_SDRAM_MEM, ACCESS="RW"),
+        SEPARATOR(TEXTNAME=" SPD="),
+        FIELD[5] (NAME="SPD", TYPE=CM1020_SDRAM_SPD, ACCESS="RW")
+}
+        </definition>
+</displaytype>
+
+<displaytype>
+        <name>CM1020_INIT</name>
+        <definition>
+
+TYPEDEF CM1020_INIT_PLLBYPASS ENUM(WIDTH=1, DEFAULT="ON")
+{
+        "ON"                            = 1,
+        "OFF"                           = 0
+}
+
+TYPEDEF CM1020_INIT_VINITHI ENUM(WIDTH=1, DEFAULT="0")
+{
+        "0"                                     = 0,
+        "0xffff0000"            = 1
+}
+
+TYPEDEF CM1020_INIT_HBUSSEL ENUM(WIDTH=2, DEFAULT="?")
+{
+        "HCLK/2"                        = 0,
+        "HCLK/3"                        = 1,
+        "HCLK/4"                        = 2
+}
+
+TYPEDEF CM1020_INIT_PLLCLKTST ENUM(WIDTH=4, DEFAULT="?")
+{
+        "BYPASS"                        = 3,
+        "PLL+DIVIDERS"  = 0
+}
+
+TYPEDEF CM1020_INIT_VFPTST ENUM(WIDTH=2, DEFAULT="?")
+{
+        "Ena"                           = 00,
+        "Dis"                           = 01
+}
+
+TYPEDEF CM1020_INIT (NAME="CM1020_INIT", CLASS="Board") COMPOSITE(WIDTH=32)
+{
+        SEPARATOR(TEXTNAME="PLLBYPASS="),
+        FIELD[0] (NAME="PLLBYPASS", TYPE=CM1020_INIT_PLLBYPASS, ACCESS="R"),
+        SEPARATOR(TEXTNAME=" Vec@="),
+        FIELD[2] (NAME="VINITHI", TYPE=CM1020_INIT_VINITHI, ACCESS="RW"),
+        SEPARATOR(TEXTNAME=" HCLKX="),
+        FIELD[5:4] (NAME="HBUSSEL", TYPE=CM1020_INIT_HBUSSEL, ACCESS="RW"),
+        SEPARATOR(TEXTNAME=" PLLCLKTST="),
+        FIELD[11:8] (NAME="PLLCLKTST", TYPE=CM1020_INIT_PLLCLKTST, ACCESS="RW"),
+        SEPARATOR(TEXTNAME=" VFPTST="),
+        FIELD[13:12] (NAME="VFPTST", TYPE=CM1020_INIT_VFPTST, ACCESS="RW")
+}
+        </definition>
+</displaytype>
+
+
+<displaytype>
+        <name>CM96ES_ID</name>
+        <requires></requires>
+        <definition>
+
+TYPEDEF CM96ES_ID_REVISION ENUM(WIDTH=4, DEFAULT="?")
+{
+        "A"             = 0x00,
+        "B"             = 0x01,
+        "C"             = 0x02,
+        "D"             = 0x03
+}
+
+TYPEDEF CM96ES_ID_ARCH ENUM(WIDTH=8, DEFAULT="?")
+{
+        "AHB"           = 0x1A
+}
+
+TYPEDEF CM96ES_ID_MAN ENUM(WIDTH=8, DEFAULT="?")
+{
+        "ARM"           = 0x41,
+        "DEC"           = 0x44,
+        "Intel"         = 0x69
+}
+
+TYPEDEF CM96ES_ID_FPGA ENUM(WIDTH=4, DEFAULT="?")
+{
+        "XCV600"        = 3
+}
+
+TYPEDEF CM96ES_ID (NAME="CM96ES_ID", CLASS="Board") COMPOSITE(WIDTH=32)
+{
+        FIELD[31:24] (NAME="Manufacture", TYPE=CM96ES_ID_MAN, ACCESS="R"),
+        SEPARATOR(TEXTNAME=" "),
+        FIELD[23:16] (NAME="Architecture", TYPE=CM96ES_ID_ARCH, ACCESS="R"),
+        SEPARATOR(TEXTNAME=" Rev"),
+        FIELD[3:0] (Name="Revision", TYPE=CM96ES_ID_REVISION, ACCESS="R"),
+        SEPARATOR(TEXTNAME=" FPGA="),
+        FIELD[15:12] (NAME="FPGA Type", TYPE=CM96ES_ID_FPGA, ACCESS="R")
+}
+
+        </definition>
+</displaytype>
+
+<displaytype>
+        <name>CM96ES_CTRL</name>
+        <definition>
+
+TYPEDEF CM96ES_CTRL_LED ENUM(WIDTH=1, DEFAULT="OFF")
+{
+        "OFF"           = 0,
+        "ON"            = 1
+}
+
+TYPEDEF CM96ES_CTRL_MB ENUM(WIDTH=1, DEFAULT="?")
+{
+        "YES"           = 0,
+        "NO"            = 1
+}
+
+TYPEDEF CM96ES_CTRL_REMAP ENUM(WIDTH=1, DEFAULT="None")
+{
+        "ROM"           = 0,
+        "RAM"           = 1
+}
+
+TYPEDEF CM96ES_CTRL_RESET ENUM(WIDTH=1, DEFAULT="NO")
+{
+        "YES"           = 1,
+        "NO"            = 0
+}
+
+TYPEDEF CM96ES_CTRL (NAME="CM96ES_CTRL", CLASS="Board") COMPOSITE(WIDTH=32)
+{
+        SEPARATOR(TEXTNAME="LED="),
+        FIELD[0] (NAME="LED", TYPE=CM96ES_CTRL_LED, ACCESS="RW"),
+        SEPARATOR(TEXTNAME=" MB="),
+        FIELD[1] (NAME="Motherboard", TYPE=CM96ES_CTRL_MB, ACCESS="RW"),
+        SEPARATOR(TEXTNAME=" Remap="),
+        FIELD[2] (NAME="REMAP", TYPE=CM96ES_CTRL_REMAP, ACCESS="RW"),
+        SEPARATOR(TEXTNAME=" SR="),
+        FIELD[3] (NAME="Soft Reset", TYPE=CM96ES_CTRL_RESET, ACCESS="RW"),
+        SEPARATOR(TEXTNAME=" ") 
+}
+        </definition>
+</displaytype>
+
+<displaytype>
+        <name>CM96ES_STAT</name>
+        <definition>
+
+TYPEDEF CM96ES_STAT_SSRAM ENUM(WIDTH=8, DEFAULT="?")
+{
+        "Unknown"               = 0x00,
+        "SSRAM = 256Kb" = 0x01,
+        "SSRAM = 1Mb"   = 0x02,
+        "SSRAM = 2Mb"   = 0x03
+        
+}
+
+TYPEDEF CM96ES_STAT_CARD ENUM(WIDTH=8, DEFAULT="Invalid")
+{
+        "Core Module 0" = 0x00,
+        "Core Module 1" = 0x01,
+        "Core Module 2" = 0x02,
+        "Core Module 3" = 0x03,
+        "Invalid"               = 0xff
+}
+
+TYPEDEF CM96ES6_STAT (NAME="CM96ES_STAT", CLASS="Board") COMPOSITE(WIDTH=32)
+{
+        SEPARATOR(TEXTNAME="SSRAM="),
+        FIELD[23:16] (NAME="SSRAM", TYPE=CM96ES_STAT_SSRAM, ACCESS="R"),
+        SEPARATOR(TEXTNAME=" Stack="),
+        FIELD[7:0] (NAME="CARD STACK", TYPE=CM96ES_STAT_CARD, ACCESS="R"),
+        SEPARATOR(TEXTNAME=" ")
+}
+        </definition>
+</displaytype>
+
+<displaytype>
+        <name>CM96ES_LOCK</name>
+        <definition>
+
+TYPEDEF CM96ES_LOCK_LB ENUM(WIDTH=1, DEFAULT="?")
+{
+        "Locked"        = 1,
+        "Unlocked"      = 0
+}
+
+TYPEDEF CM96ES_LOCK (NAME="CM96ES_LOCK", CLASS="Board") COMPOSITE(WIDTH=32)
+{
+        FIELD[0] (NAME="Lock Bit", TYPE=CM96ES_LOCK_LB, ACCESS="RW"),
+        SEPARATOR(TEXTNAME=" ")
+}
+        </definition>
+</displaytype>
+
+<displaytype>
+        <name>CM96ES_AUXOSC</name>
+        <definition>
+
+TYPEDEF CM96ES_AUXOSC_OD ENUM(WIDTH=3, DEFAULT="6") 
+{
+        "10"            = 0,            
+        "2"                     = 1,
+        "8"                     = 2,
+        "4"                     = 3,
+        "5"                     = 4,
+        "7"                     = 5,
+        "9"                     = 6,
+        "6"                     = 7
+}
+
+TYPEDEF CM96ES_AUXOSC (NAME="CM96ES_AUXOSC", CLASS="Board") COMPOSITE(WIDTH=32)
+{
+        SEPARATOR(TEXTNAME="OD="),
+        FIELD[18:16] (NAME="OD", TYPE=CM96ES_AUXOSC_OD, ACCESS="RW"),
+        SEPARATOR(TEXTNAME=" ")
+}
+        </definition>
+</displaytype>
+
+<displaytype>
+        <name>CM96ES_SDRAM</name>
+        <definition>
+        
+TYPEDEF CM96ES_SDRAM_CAS ENUM(WIDTH=2, DEFAULT="?")
+{
+        "2"                             = 2,
+        "3"                             = 3
+}
+
+TYPEDEF CM96ES_SDRAM_MEM ENUM(WIDTH=3, DEFAULT="?")
+{
+        "16MB"                  = 0x00,
+        "32MB"                  = 0x01,
+        "64MB"                  = 0x02,
+        "128MB"                 = 0x03,
+        "256MB"                 = 0x04,
+        "Reserved"              = 0x05,
+        "Reserved"              = 0x06,
+        "Reserved"              = 0x07
+}
+
+TYPEDEF CM96ES_SDRAM_SPD ENUM(WIDTH=1, DEFAULT="?")
+{
+        "Loaded"                = 1,
+        "Not Loaded"    = 0
+}
+
+TYPEDEF CM96ES_SDRAM (NAME="CM96ES_SDRAM", CLASS="Board") COMPOSITE(WIDTH=32)
+{
+        SEPARATOR(TEXTNAME="CAS="),
+        FIELD[1:0] (NAME="CAS", TYPE=CM96ES_SDRAM_CAS, ACCESS="RW"),
+        SEPARATOR(TEXTNAME=" MEM="),
+        FIELD[4:2] (NAME="MEM SIZE", TYPE=CM96ES_SDRAM_MEM, ACCESS="RW"),
+        SEPARATOR(TEXTNAME=" SPD="),
+        FIELD[5] (NAME="SPD", TYPE=CM96ES_SDRAM_SPD, ACCESS="RW")
+}
+        </definition>
+</displaytype>
+
+<displaytype>
+        <name>CM96ES_INIT</name>
+        <definition>
+
+TYPEDEF CM96ES_INIT_PLLBYPASS ENUM(WIDTH=1, DEFAULT="ON")
+{
+        "ON"            = 1,
+        "OFF"           = 0
+}
+
+TYPEDEF CM96ES_INIT_VINITHI ENUM(WIDTH=1, DEFAULT="0")
+{
+        "0"                      = 0,
+        "0xffff0000" = 1
+}
+
+TYPEDEF CM96ES_INIT_RAM ENUM(WIDTH=1, DEFAULT="DISABLED")
+{
+        "DIS"   = 0,
+        "EN"    = 1
+}
+
+TYPEDEF CM96ES_INIT (NAME="CM96ES_INIT", CLASS="Board") COMPOSITE(WIDTH=32)
+{
+        SEPARATOR(TEXTNAME="PLLBYPASS="),
+        FIELD[0] (NAME="PLLBYPASS", TYPE=CM96ES_INIT_PLLBYPASS, ACCESS="RW"),
+        SEPARATOR(TEXTNAME=" Vec@="),
+        FIELD [2] (NAME="VINITHI", TYPE=CM96ES_INIT_VINITHI, ACCESS="RW"),
+        SEPARATOR(TEXTNAME=" IRAM="),
+        FIELD[16] (NAME="INTERNAL RAM", TYPE=CM96ES_INIT_RAM, ACCESS="RW"),
+        SEPARATOR(TEXTNAME=" 996RAM="),
+        FIELD[17] (NAME="966RAM EMULATION", TYPE=CM96ES_INIT_RAM, ACCESS="RW"),
+        SEPARATOR(TEXTNAME=" ")
+}
+        </definition>
+</displaytype>
+
+<displaytype>
+        <name>CM7TDMI_ID</name>
+        <requires></requires>
+        <definition>
+
+TYPEDEF CM7TDMI_ID_REVISION ENUM(WIDTH=4, DEFAULT="?")
+{
+        "A"                     = 0x00,
+        "B"                     = 0x01
+}
+
+TYPEDEF CM7TDMI_ID_ARCH ENUM(WIDTH=8, DEFAULT="?")
+{
+        "ARM7TDMI"      = 0x01
+}
+
+TYPEDEF CM7TDMI_ID_MAN ENUM(WIDTH=8, DEFAULT="?")
+{
+        "ARM"           = 0x41,
+        "DEC"           = 0x44,
+        "Intel"         = 0x69
+}
+
+TYPEDEF CM7TDMI_ID_FPGA ENUM(WIDTH=4, DEFAULT="?")
+{
+        "XCV4062"       = 0x01
+}
+
+TYPEDEF CM7TDMI_ID (NAME="CM7TDMI_ID", CLASS="Board") COMPOSITE(WIDTH=32)
+{
+        FIELD[31:24] (NAME="Manufacture", TYPE=CM7TDMI_ID_MAN, ACCESS="R"),
+        SEPARATOR(TEXTNAME=" "),
+        FIELD[23:16] (NAME="Architecture", TYPE=CM7TDMI_ID_ARCH, ACCESS="R"),
+        SEPARATOR(TEXTNAME=" Rev"),
+        FIELD[3:0] (Name="Revision", TYPE=CM7TDMI_ID_REVISION, ACCESS="R"),
+        SEPARATOR(TEXTNAME=" FPGA="),
+        FIELD[15:12] (NAME="FPGA Type", TYPE=CM7TDMI_ID_FPGA, ACCESS="R")
+}
+
+        </definition>
+</displaytype>
+
+<displaytype>
+        <name>CM7TDMI_CTRL</name>
+        <definition>
+
+TYPEDEF CM7TDMI_CTRL_LED ENUM(WIDTH=1, DEFAULT="OFF")
+{
+        "OFF"           = 0,
+        "ON"            = 1
+}
+
+TYPEDEF CM7TDMI_CTRL_MB ENUM(WIDTH=1, DEFAULT="?")
+{
+        "YES"           = 0,
+        "NO"            = 1
+}
+
+TYPEDEF CM7TDMI_CTRL_REMAP ENUM(WIDTH=1, DEFAULT="?")
+{
+        "YES"           = 0,
+        "NO"            = 1
+}
+
+TYPEDEF CM7TDMI_CTRL_RESET ENUM(WIDTH=1, DEFAULT="NO")
+{
+        "YES"           = 1,
+        "NO"            = 0
+}
+
+TYPEDEF CM7TDMI_CTRL (NAME="CM7TDMI_CTRL", CLASS="Board") COMPOSITE(WIDTH=32)
+{
+        SEPARATOR(TEXTNAME="LED="),
+        FIELD[0] (NAME="LED", TYPE=CM7TDMI_CTRL_LED, ACCESS="RW"),
+        SEPARATOR(TEXTNAME=" MB="),
+        FIELD[1] (NAME="Motherboard", TYPE=CM7TDMI_CTRL_MB, ACCESS="RW"),
+        SEPARATOR(TEXTNAME=" Remap="),
+        FIELD[2] (NAME="REMAP", TYPE=CM7TDMI_CTRL_REMAP, ACCESS="RW"),
+        SEPARATOR(TEXTNAME=" SR="),
+        FIELD[3] (NAME="Soft Reset", TYPE=CM7TDMI_CTRL_RESET, ACCESS="RW"),
+        SEPARATOR(TEXTNAME=" ") 
+}
+        </definition>
+</displaytype>
+
+<displaytype>
+        <name>CM7TDMI_STAT</name>
+        <definition>
+
+TYPEDEF CM7TDMI_STAT_CARD ENUM(WIDTH=8, DEFAULT="Invalid")
+{
+        "Core Module 0" = 0x00,
+        "Core Module 1" = 0x01,
+        "Core Module 2" = 0x02,
+        "Core Module 3" = 0x03,
+        "Invalid"               = 0xff
+}
+
+TYPEDEF CM7TDMI_STAT (NAME="CM7TDMI_STAT", CLASS="Board") COMPOSITE(WIDTH=32)
+{
+        SEPARATOR(TEXTNAME="Stack="),
+        FIELD[7:0] (NAME="CARD STACK", TYPE=CM7TDMI_STAT_CARD, ACCESS="R")
+}
+        </definition>
+</displaytype>
+
+<displaytype>
+        <name>CM7TDMI_LOCK</name>
+        <definition>
+
+TYPEDEF CM7TDMI_LOCK_LB ENUM(WIDTH=1, DEFAULT="?")
+{
+        "Locked"        = 1,
+        "Unlocked"      = 0
+}
+
+TYPEDEF CM7TDMI_LOCK (NAME="CM7TDMI_LOCK", CLASS="Board") COMPOSITE(WIDTH=32)
+{
+        FIELD[16] (NAME="Lock Bit", TYPE=CM7TDMI_LOCK_LB, ACCESS="R"),
+        SEPARATOR(TEXTNAME=" ")
+}
+        </definition>
+</displaytype>
+
+<displaytype>
+        <name>CM7TDMI_SDRAM</name>
+        <definition>
+        
+TYPEDEF CM7TDMI_SDRAM_CAS ENUM(WIDTH=2, DEFAULT="?")
+{
+        "2"                             = 2,
+        "3"                             = 3
+}
+
+TYPEDEF CM7TDMI_SDRAM_MEM ENUM(WIDTH=3, DEFAULT="?")
+{
+        "16MB"                  = 0,
+        "32MB"                  = 1,
+        "64MB"                  = 2,
+        "128MB"                 = 3,
+        "256MB"                 = 4,
+        "Reserved"              = 5,
+        "Reserved"              = 6,
+        "Reserved"              = 7
+}
+
+TYPEDEF CM7TDMI_SDRAM_SPD ENUM(WIDTH=1, DEFAULT="?")
+{
+        "Loaded"                = 1,
+        "Not Loaded"    = 0
+}
+
+TYPEDEF CM7TDMI_SDRAM (NAME="CM7TDMI_SDRAM", CLASS="Board") COMPOSITE(WIDTH=32)
+{
+        SEPARATOR(TEXTNAME="CAS="),
+        FIELD[1:0] (NAME="CAS", TYPE=CM7TDMI_SDRAM_CAS, ACCESS="RW"),
+        SEPARATOR(TEXTNAME=" MEM="),
+        FIELD[4:2] (NAME="MEM SIZE", TYPE=CM7TDMI_SDRAM_MEM, ACCESS="RW"),
+        SEPARATOR(TEXTNAME=" SPD="),
+        FIELD[5] (NAME="SPD", TYPE=CM7TDMI_SDRAM_SPD, ACCESS="RW")
+}
+        </definition>
+</displaytype>
+
+<displaytype>
+  <name>UART2</name>
+  <requires></requires>
+  <definition>
+TYPEDEF UART2_FREQ ENUM(WIDTH=9, DEFAULT="?")
+{
+                "OFF"           =   0,
+                "XCLK"          =       1,
+                "XCLK/2"        =       2,
+                "XCLK/4"        =       4,
+                "XCLK/8"        =       8,
+                "XCLK/16"       =       16,
+                "XCLK/32"       =       32,
+                "XCLK/64"       =       64,
+                "XCLK/128"      =       128,
+                "XCLK/256"      =       256
+}
+
+
+TYPEDEF UART2(NAME="UART2", CLASS="Board") COMPOSITE(WIDTH=9)
+{
+        SEPARATOR(TEXTNAME="FREQ "),
+        FIELD[8:0](NAME="UART2_FREQ", TYPE=UART2_FREQ, ACCESS="R")
+}
+</definition>   
+</displaytype>
+<displaytype>
+  <name>CT0CCR</name>
+  <requires></requires>
+  <definition>
+TYPEDEF CT0CCR_FREQ ENUM(WIDTH=9, DEFAULT="?")
+{
+                "OFF"           =   0,
+                "XCLK"          =       1,
+                "XCLK/2"        =       2,
+                "XCLK/4"        =       4,
+                "XCLK/8"        =       8,
+                "XCLK/16"       =       16,
+                "XCLK/32"       =       32,
+                "XCLK/64"       =       64,
+                "XCLK/128"      =       128,
+                "XCLK/256"      =       256
+}
+
+
+TYPEDEF CT0CCR(NAME="CT0CCR", CLASS="Board") COMPOSITE(WIDTH=9)
+{
+        SEPARATOR(TEXTNAME="FREQ "),
+        FIELD[8:0](NAME="CT0CCR_FREQ", TYPE=CT0CCR_FREQ, ACCESS="R")
+}
+</definition>   
+</displaytype>
+
+<displaytype>
+  <name>CT1CCR</name>
+  <requires></requires>
+  <definition>
+TYPEDEF CT1CCR_FREQ ENUM(WIDTH=9, DEFAULT="?")
+{
+                "OFF"           =   0,
+                "XCLK"          =       1,
+                "XCLK/2"        =       2,
+                "XCLK/4"        =       4,
+                "XCLK/8"        =       8,
+                "XCLK/16"       =       16,
+                "XCLK/32"       =       32,
+                "XCLK/64"       =       64,
+                "XCLK/128"      =       128,
+                "XCLK/256"      =       256
+}
+
+
+TYPEDEF CT1CCR(NAME="CT1CCR", CLASS="Board") COMPOSITE(WIDTH=9)
+{
+        SEPARATOR(TEXTNAME="FREQ "),
+        FIELD[8:0](NAME="CT1CCR_FREQ", TYPE=CT1CCR_FREQ, ACCESS="R")
+}
+</definition>   
+</displaytype>
+
+<displaytype>
+  <name>CT2CCR</name>
+  <requires></requires>
+  <definition>
+TYPEDEF CT2CCR_FREQ ENUM(WIDTH=9, DEFAULT="?")
+{
+                "OFF"           =   0,
+                "XCLK"          =       1,
+                "XCLK/2"        =       2,
+                "XCLK/4"        =       4,
+                "XCLK/8"        =       8,
+                "XCLK/16"       =       16,
+                "XCLK/32"       =       32,
+                "XCLK/64"       =       64,
+                "XCLK/128"      =       128,
+                "XCLK/256"      =       256
+}
+
+
+TYPEDEF CT2CCR(NAME="CT2CCR", CLASS="Board") COMPOSITE(WIDTH=9)
+{
+        SEPARATOR(TEXTNAME="FREQ "),
+        FIELD[8:0](NAME="CT2CCR_FREQ", TYPE=CT2CCR_FREQ, ACCESS="R")
+}
+</definition>   
+</displaytype>
+
+<displaytype>
+  <name>CCCR</name>
+  <requires></requires>
+  <definition>
+TYPEDEF CCCR_FREQ ENUM(WIDTH=9, DEFAULT="?")
+{
+                "OFF"           =   0,
+                "XCLK"          =       1,
+                "XCLK/2"        =       2,
+                "XCLK/4"        =       4,
+                "XCLK/8"        =       8,
+                "XCLK/16"       =       16,
+                "XCLK/32"       =       32,
+                "XCLK/64"       =       64,
+                "XCLK/128"      =       128,
+                "XCLK/256"      =       256
+}
+
+
+TYPEDEF CCCR(NAME="CCCR", CLASS="Board") COMPOSITE(WIDTH=9)
+{
+        SEPARATOR(TEXTNAME="FREQ "),
+        FIELD[8:0](NAME="CCCR_FREQ", TYPE=CCCR_FREQ, ACCESS="R")
+}
+</definition>   
+</displaytype>
+
+
+<displaytype>
+  <name>COUNTER_ELEMENTS</name>
+  <requires></requires>
+  <definition>
+TYPEDEF CNT_ELEMENT ENUM(WIDTH=1, DEFAULT="?")
+{
+                "UNSELECTED"            =       0,
+                "SELECTED"                      =       1
+}
+
+
+TYPEDEF COUNTER_ELEMENTS(NAME=" COUNTER_ELEMENTS", CLASS="Board") COMPOSITE(WIDTH=1)
+{
+        SEPARATOR(TEXTNAME=""),
+        FIELD[0](NAME="ELEMENTS", TYPE=CNT_ELEMENT, ACCESS="R")
+}
+</definition>   
+</displaytype>
+
+<displaytype>
+  <name>CONFIGURATION_0</name>
+  <requires></requires>
+<definition>
+TYPEDEF ICR0 ENUM(WIDTH=16, DEFAULT="?")
+{
+                "H/L_0"                 =       0,
+                "E/L_0"                 =       1,
+                "H/L_1"                 =       2,
+                "E/L_1"                 =       3,
+                "H/L_2"                 =       4,
+                "E/L_2"                 =       5,
+                "H/L_3"                 =       6,
+                "E/L_3"                 =       7,
+                "H/L_4"                 =       8,
+                "E/L_4"                 =       9,
+                "H/L_5"                 =       10,
+                "E/L_5"                 =       11,
+                "RESERVED"              =       12,
+                "RESERVED"              =       13,
+                "RESERVED"              =       14,
+                "RESERVED"              =       15              
+}
+
+
+TYPEDEF CONFIGURATION_0(NAME="ICR0", CLASS="Board") COMPOSITE(WIDTH=16)
+{
+        SEPARATOR(TEXTNAME=""),
+        FIELD[15:0](NAME="ICR0", TYPE=ICR0, ACCESS="R")
+}
+</definition>   
+</displaytype>
+
+<displaytype>
+  <name>CONFIGURATION_1</name>
+  <requires></requires>
+<definition>
+TYPEDEF ICR1 ENUM(WIDTH=8, DEFAULT="?")
+{
+                "H/L_0"                 =       0,
+                "H/L_1"                 =       1,
+                "H/L_2"                 =       2,
+                "RESERVED"              =       3,
+                "RESERVED"              =       4,
+                "RESERVED"              =       5,
+                "RESERVED"              =       6,
+                "RESERVED"              =       7
+                
+}
+
+
+TYPEDEF CONFIGURATION_1(NAME="ICR1", CLASS="Board") COMPOSITE(WIDTH=8)
+{
+        SEPARATOR(TEXTNAME=""),
+        FIELD[7:0](NAME="ICR1", TYPE=ICR1, ACCESS="R")
+}
+</definition>   
+</displaytype>
+
+<displaytype>
+  <name>ICLR</name>
+  <requires></requires>
+<definition>
+TYPEDEF CLR ENUM(WIDTH=16, DEFAULT="?")
+{
+                "CH0"           =       0,
+                "CH1"           =       1,
+                "CH2"           =       2,
+                "CH3"           =       3,
+                "CH4"           =       4,
+                "CH5"           =       5,
+                "CH6"           =       6,
+                "CH7"           =       7,
+                "CH8"           =       8,
+                "CH12"          =       9,
+                "RESERVED"      =       10,
+                "RESERVED"      =       11,
+                "RESERVED"      =       12,
+                "RESERVED"      =       13,
+                "RESERVED"      =       14,
+                "RESERVED"      =       15
+                
+                
+}
+
+
+TYPEDEF CLEAR(NAME="CLR", CLASS="Board") COMPOSITE(WIDTH=16)
+{
+        SEPARATOR(TEXTNAME=""),
+        FIELD[15:0](NAME="CLR", TYPE=CLR, ACCESS="R")
+}
+</definition>   
+</displaytype>
+
+<displaytype>
+  <name>QER</name>
+  <requires></requires>
+<definition>
+TYPEDEF RQ ENUM(WIDTH=16, DEFAULT="?")
+{
+                "CH 0"          =       0,
+                "CH 1"          =       1,
+                "CH 2"          =       2,
+                "CH 3"          =       3,
+                "CH 4"          =       4,
+                "CH 5"          =       5,
+                "CH 6"          =       6,
+                "CH 7"          =       7,
+                "CH 8"          =       8,
+                "CH 9"          =       9,
+                "CH 10"         =       10,
+                "CH 11"         =       11,
+                "RESERVED"      =       12,
+                "RESERVED"      =       13,
+                "RESERVED"      =       14,
+                "RESERVED"      =       15
+                
+                
+}
+
+
+TYPEDEF QER(NAME="QER", CLASS="Board") COMPOSITE(WIDTH=16)
+{
+        SEPARATOR(TEXTNAME=""),
+        FIELD[15:0](NAME="RQ", TYPE=RQ, ACCESS="R")
+}
+</definition>   
+</displaytype>
+
+
+<displaytype>
+  <name>FIQ</name>
+  <requires></requires>
+<definition>
+TYPEDEF FIQSR ENUM(WIDTH=16, DEFAULT="?")
+{
+                "CH 0"          =       0,
+                "CH 1"          =       1,
+                "CH 2"          =       2,
+                "CH 3"          =       3,
+                "CH 4"          =       4,
+                "CH 5"          =       5,
+                "CH 6"          =       6,
+                "CH 7"          =       7,
+                "CH 8"          =       8,
+                "CH 9"          =       9,
+                "CH 10"         =       10,
+                "CH 11"         =       11,
+                "CH 12"         =       12,
+                "RESERVED"      =       13,
+                "RESERVED"      =       14,
+                "RESERVED"      =       15
+                
+                
+}
+
+
+TYPEDEF FIQ(NAME="FIQ", CLASS="Board") COMPOSITE(WIDTH=16)
+{
+        SEPARATOR(TEXTNAME=""),
+        FIELD[15:0](NAME="FIQSR", TYPE=FIQSR, ACCESS="R")
+}
+</definition>   
+</displaytype>
+
+<displaytype>
+  <name>PORT_A</name>
+  <requires></requires>
+<definition>
+TYPEDEF PORT ENUM(WIDTH=8, DEFAULT="UNDEF")
+{
+                "INPUT/MODE 0"  =       0
+}
+TYPEDEF PORT_A(NAME="PORT_A", CLASS="Board") COMPOSITE(WIDTH=8)
+{
+        SEPARATOR(TEXTNAME=""),
+        FIELD[7:0](NAME="PORT_A", TYPE=PORT, ACCESS="R/W")
+}
+</definition>   
+</displaytype>
+
+<displaytype>
+  <name>PORT_B</name>
+  <requires></requires>
+<definition>
+TYPEDEF PORT ENUM(WIDTH=8, DEFAULT="UNDEF")
+{
+                "INPUT/MODE 0"  =       4
+                
+}
+TYPEDEF PORT_B(NAME="PORT_B", CLASS="Board") COMPOSITE(WIDTH=8)
+{
+        SEPARATOR(TEXTNAME=""),
+        FIELD[7:0](NAME="PORT_B", TYPE=PORT, ACCESS="R/W")
+}
+</definition>   
+</displaytype>
+
+<displaytype>
+  <name>PORT_C</name>
+  <requires></requires>
+<definition>
+TYPEDEF PORT ENUM(WIDTH=8, DEFAULT="UNDEF")
+{
+                "INPUT/MODE 0"  =       8
+                
+}
+TYPEDEF PORT_C(NAME="PORT_C", CLASS="Board") COMPOSITE(WIDTH=8)
+{
+        SEPARATOR(TEXTNAME=""),
+        FIELD[7:0](NAME="PORT_C", TYPE=PORT, ACCESS="R/W")
+}
+</definition>   
+</displaytype>
+
+
+<displaytype>
+  <name>PPI_CTLR</name>
+  <requires></requires>
+<definition>
+TYPEDEF BIT[7] ENUM(WIDTH=8, DEFAULT="?")
+{
+        "MODE SELECTION"        =       1,
+        "BIT SET/RESET"         =       0
+
+}
+
+TYPEDEF PPI_CTLR(NAME="PPI_CTLR", CLASS="Board") COMPOSITE(WIDTH=8)
+{
+        SEPARATOR(TEXTNAME="FUNCTION"),
+        FIELD[7](NAME="BIT[7]", TYPE=BIT[7], ACCESS="W")
+}
+
+</definition>   
+</displaytype>
+
+<displaytype>
+  <name>PWMTC</name>
+  <requires></requires>
+  <definition>
+TYPEDEF PWMTCESET ENUM(WIDTH=8,DEFAULT="UNDEF")
+{
+"RESET" = 0
+}
+
+TYPEDEF PWMTC(NAME="PWMTC", CLASS="Board") COMPOSITE(WIDTH=8)
+{
+  SEPARATOR(TEXTNAME=""),
+  FIELD[7:0] (NAME="PWMTCESET", TYPE=PWMTCESET,ACCESS="W")
+}
+
+</definition>   
+</displaytype>
+<displaytype>
+  <name>PWMTC2</name>
+  <requires></requires>
+  <definition>
+TYPEDEF PWMTC2ESET ENUM(WIDTH=16,DEFAULT="UNDEF")
+{
+"RESET" = 0
+}
+
+TYPEDEF PWMTC2(NAME="PWMTC2", CLASS="Board") COMPOSITE(WIDTH=16)
+{
+  SEPARATOR(TEXTNAME=""),
+  FIELD[15:0] (NAME="PWMTC2ESET", TYPE=PWMTC2ESET,ACCESS="W")
+}
+
+</definition>   
+</displaytype>
+
+<displaytype>
+  <name>RESET</name>
+  <requires></requires>
+  <definition>
+TYPEDEF RESETESET ENUM(WIDTH=1,DEFAULT="UNDEF")
+{
+"RESET" = 0
+}
+
+TYPEDEF RESET(NAME="RESET", CLASS="Board") COMPOSITE(WIDTH=1)
+{
+  SEPARATOR(TEXTNAME=""),
+  FIELD[0] (NAME="RESETESET", TYPE=RESETESET,ACCESS="W")
+}
+
+</definition>   
+</displaytype>
+
+<displaytype>
+  <name>WDCR</name>
+  <requires></requires>
+  <definition>
+TYPEDEF WDCRESET ENUM(WIDTH=32,DEFAULT="UNDEF")
+{
+"RESET" = 0
+}
+
+TYPEDEF WDCR(NAME="WDCR", CLASS="Board") COMPOSITE(WIDTH=32)
+{
+  SEPARATOR(TEXTNAME=""),
+  FIELD[31:0] (NAME="WDCRESET", TYPE=WDCRESET,ACCESS="W")
+}
+
+</definition>   
+</displaytype>
+
+
+<displaytype>
+   <name>WDCTLR</name>
+  <requires></requires>
+  <definition>
+TYPEDEF WDCTL ENUM(WIDTH=8,DEFAULT="UNDEF")
+{
+"RESET" = 0
+}
+
+TYPEDEF WDCTLR(NAME="WDCTLR", CLASS="Board") COMPOSITE(WIDTH=8)
+{
+  SEPARATOR(TEXTNAME=""),
+  FIELD[7:0] (NAME="WDCTL", TYPE=WDCTL,ACCESS="W")
+}
+
+</definition>   
+</displaytype>
+
+<displaytype>
+  <name>RESET</name>
+  <requires></requires>
+  <definition>
+TYPEDEF SWRST ENUM(WIDTH=1,DEFAULT="UNDEF")
+{
+"RESET" = 0
+
+}
+
+TYPEDEF RESET(NAME="RESET", CLASS="Board") COMPOSITE(WIDTH=1)
+{
+  SEPARATOR(TEXTNAME=""),
+  FIELD[0] (NAME="SWRST", TYPE=SWRST,ACCESS="W")
+  }
+
+  </definition>
+</displaytype>
+<displaytype>
+  <name>SIR_CTLR</name>
+  <requires></requires>
+  <definition>
+TYPEDEF RESET ENUM(WIDTH=8,DEFAULT="UNDEF")
+{
+"RESET" = 0
+}
+TYPEDEF SIR_CTLR(NAME="SIR_CTLR", CLASS="Board") COMPOSITE(WIDTH=8)
+{
+  SEPARATOR(TEXTNAME=""),  
+  FIELD[0] (NAME="RESET", TYPE=RESET,ACCESS="R")
+}
+
+  </definition>
+</displaytype>
+
+<displaytype>
+  <name>UART_IE</name>
+  <requires></requires>
+<definition>
+TYPEDEF IER ENUM(WIDTH=8, DEFAULT="?")
+{
+        "DISABLE INTERRUPT"                                     =       00000000,
+        "GEN INTERRUPT(RBR CONTAINS DATA)"      =       00000001,
+        "GEN INTERRUPT(THR()orLSR(5)=1)"        =       00000010,
+        "GEN INTERRUPT(LSR1,2,3or4=1)"          =       00000100,
+        "GEN INTERRUPT(MSR1,2,3or4=1)"          =       00001000
+        
+}
+TYPEDEF UART_IE(NAME="UART_IE", CLASS="Board") COMPOSITE(WIDTH=8)
+{
+        SEPARATOR(TEXTNAME=""),
+        FIELD[7:0](NAME="UART_IE", TYPE=IER, ACCESS="R")
+}
+</definition>   
+</displaytype>
+<displaytype>
+  <name>IIR</name>
+  <requires></requires>
+<definition>
+TYPEDEF IIR_bitdef ENUM(WIDTH=8, DEFAULT="?")
+{
+        "NO INTERRUPT"                          =       00000001,
+        "READING IIR"                           =       00000010,
+        "READING LSR"                           =       00000110,
+        "READING RBR"                           =       00000100,
+        "READING MSR"                           =       00000000
+        
+}
+TYPEDEF IIR(NAME="IIR", CLASS="Board") COMPOSITE(WIDTH=8)
+{
+        SEPARATOR(TEXTNAME=""),
+        FIELD[7:0](NAME="IIR", TYPE=IIR_bitdef, ACCESS="R/W")
+}
+</definition>   
+</displaytype>
+
+<displaytype>
+  <name>LCR</name>
+  <requires></requires>
+<definition>
+TYPEDEF LCR_BITDEF0 ENUM(WIDTH=2, DEFAULT="?")
+{
+        "5 BITS TRANS-"                         =       00,
+        "6 BITS TRANS-"                         =       10,
+        "7 BITS TRANS-"                         =       01,
+        "8 BITS TRANS-"                         =       11
+}       
+
+TYPEDEF LCR_BITDEF2 ENUM(WIDTH=1, DEFAULT="?")
+{
+        "1 STOP BIT-"                           =       0,
+        "1.5 STOP BITS-"                                =       1
+}
+TYPEDEF LCR_BITDEF3 ENUM(WIDTH=1, DEFAULT="?")
+{
+        "NO PRT-"                               =       0,
+        "PARITY-"                               =       1
+}
+TYPEDEF LCR_BITDEF4_5 ENUM(WIDTH=2, DEFAULT="?")
+{
+        " ODD-"                 =       00,
+        " EVEN-"                =       01,
+        " F1-"                  =       10,
+        " F2-"                  =       11
+}
+TYPEDEF LCR_BITDEF6 ENUM(WIDTH=1, DEFAULT="?")
+{
+        "NORMAL OP-"    =       0,
+        "TXD=0 "                                =       1
+}
+TYPEDEF LCR_BITDEF7 ENUM(WIDTH=1, DEFAULT="?")
+{
+        "WRT THR"                       =       0,
+        "WRT DVSR"                      =       1
+}
+TYPEDEF LCR(NAME="LCR", CLASS="BOARD") COMPOSITE(WIDTH=8)
+{
+        SEPARATOR(TEXTNAME=""),
+        FIELD[1:0](NAME="LCR_BITDEF0", TYPE=LCR_BITDEF0, ACCESS="R"),
+        SEPARATOR(TEXTNAME=""),
+        FIELD[2](NAME=" LCR_BITDEF2", TYPE=LCR_BITDEF2, ACCESS="R"),
+        SEPARATOR(TEXTNAME=""),
+        FIELD[3](NAME=" LCR_BITDEF3", TYPE=LCR_BITDEF3, ACCESS="R"),
+        SEPARATOR(TEXTNAME=""),
+        FIELD[5:4](NAME=" LCR_BITDEF4_5", TYPE=LCR_BITDEF4_5, ACCESS="RW"),
+        SEPARATOR(TEXTNAME=""),
+        FIELD[6](NAME=" LCR_BITDEF6", TYPE=LCR_BITDEF6, ACCESS="R"),
+        SEPARATOR(TEXTNAME=""),
+        FIELD[7](NAME=" LCR_BITDEF7", TYPE=LCR_BITDEF7, ACCESS="R")
+}
+</definition>   
+</displaytype>
+
+<displaytype>
+  <name>MCR</name>
+  <requires></requires>
+<definition>
+TYPEDEF MCR0 ENUM(WIDTH=1, DEFAULT="?")
+{
+                "DTR1"  =       0,
+                "DTR0"  =       1
+}
+TYPEDEF MCR1 ENUM(WIDTH=1, DEFAULT="?")
+{
+                " RTS1" =       0,
+                " RTS0" =       1
+}
+TYPEDEF MCR2 ENUM(WIDTH=1, DEFAULT="?")
+{
+                " OUT1=1"       =       0,
+                " OUT1=0"       =       1
+}
+TYPEDEF MCR3 ENUM(WIDTH=1, DEFAULT="?")
+{
+                " OUT2=1"       =       0,
+                " OUT2=0"       =       1
+}
+TYPEDEF MCR4 ENUM(WIDTH=1, DEFAULT="?")
+{
+                " NORM OP"      =       0,
+                " LOOP BK"      =       1
+}
+TYPEDEF MCR5 ENUM(WIDTH=3, DEFAULT="?")
+{
+                ""      =       000,
+                ""      =       001,
+                ""      =       010,
+                ""      =       011,
+                ""      =       100
+}
+
+TYPEDEF MCR(NAME="MCR", CLASS="Board") COMPOSITE(WIDTH=8)
+{
+        SEPARATOR(TEXTNAME=""),
+        FIELD[0](NAME="MCR0", TYPE=MCR0, ACCESS="R/W"),
+        SEPARATOR(TEXTNAME=""),
+        FIELD[1](NAME="MCR1", TYPE=MCR1, ACCESS="R/W"),
+        SEPARATOR(TEXTNAME=""),
+        FIELD[2](NAME="MCR2", TYPE=MCR2, ACCESS="R/W"),
+        SEPARATOR(TEXTNAME=""),
+        FIELD[3](NAME="MCR3", TYPE=MCR3, ACCESS="R/W"),
+        SEPARATOR(TEXTNAME=""),
+        FIELD[4](NAME="MCR4", TYPE=MCR4, ACCESS="R/W"),
+        SEPARATOR(TEXTNAME=""), 
+        FIELD[7:5](NAME="MCR5", TYPE=MCR5, ACCESS="R/W")
+}
+</definition>   
+</displaytype>
+
+<displaytype>
+  <name>LSR</name>
+  <requires></requires>
+<definition>
+TYPEDEF LSR_DR ENUM(WIDTH=1, DEFAULT="?")
+{
+        "CLR"                           =       0,
+        "FULL"                          =       1
+}
+TYPEDEF LSR_OE ENUM(WIDTH=1, DEFAULT="?")
+{
+        "CLR"                           =       0,
+        "FULL"                          =       1
+}
+TYPEDEF LSR_PE ENUM(WIDTH=1, DEFAULT="?")
+{
+        "CLR"                           =       0,
+        "FULL"                          =       1
+}
+TYPEDEF LSR_FE ENUM(WIDTH=1, DEFAULT="?")
+{
+        "CLR"                           =       0,
+        "FULL"                          =       1
+}
+TYPEDEF LSR_BI ENUM(WIDTH=1, DEFAULT="?")
+{
+        "CLR"                           =       0,
+        "FULL"                          =       1
+}
+TYPEDEF LSR_THRE ENUM(WIDTH=1, DEFAULT="?")
+{
+        "CLR"                           =       0,
+        "FULL"                          =       1
+}
+TYPEDEF LSR_TEMT ENUM(WIDTH=1, DEFAULT="?")
+{
+        "CLR"                           =       0,
+        "FULL"                          =       1
+}
+TYPEDEF LSR_7 ENUM(WIDTH=1, DEFAULT="?")
+{
+        "UNDEF"                         =       0
+}
+TYPEDEF LSR(NAME="LSR", CLASS="Board") COMPOSITE(WIDTH=32)
+{
+        SEPARATOR(TEXTNAME="BITS0-7:"),
+        FIELD[0](NAME="LSR_DR", TYPE=LSR_DR, ACCESS="R"),
+        SEPARATOR(TEXTNAME=""),
+        FIELD[1](NAME="LSR_OE", TYPE=LSR_DR, ACCESS="R"),
+        SEPARATOR(TEXTNAME=""),
+        FIELD[2](NAME="LSR_PE", TYPE=LSR_DR, ACCESS="R"),
+        SEPARATOR(TEXTNAME=""),
+        FIELD[3](NAME="LSR_FE", TYPE=LSR_DR, ACCESS="R"),
+        SEPARATOR(TEXTNAME=""),
+        FIELD[4](NAME="LSR_BI", TYPE=LSR_DR, ACCESS="R"),
+        SEPARATOR(TEXTNAME=""),
+        FIELD[5](NAME="LSR_THRE", TYPE=LSR_DR, ACCESS="R"),
+        SEPARATOR(TEXTNAME=""),
+        FIELD[6](NAME="LSR_TEMT", TYPE=LSR_DR, ACCESS="R"),
+        SEPARATOR(TEXTNAME=""),
+        FIELD[7](NAME="LSR_7", TYPE=LSR_DR, ACCESS="R")
+}
+</definition>   
+</displaytype>
+<displaytype>
+  <name>MSR</name>
+  <requires></requires>
+  <definition>
+TYPEDEF MSR_DCTS ENUM(WIDTH=1, DEFAULT="?")
+{
+        ""=0,
+        "CTS ALT"       =1
+}
+
+TYPEDEF MSR_DDSR ENUM(WIDTH=1, DEFAULT="?")
+{
+        ""=0,
+        " DSR ALT"      =1
+}
+  
+TYPEDEF MSR_TERI ENUM(WIDTH=1, DEFAULT="?")
+{
+        ""=0,
+        " RI ALT"       =1
+}
+
+TYPEDEF MSR_DDCD ENUM(WIDTH=1, DEFAULT="?")
+{
+        ""=0,
+        " DSR ALT"      =1
+}
+
+TYPEDEF MSR_CTS ENUM(WIDTH=1, DEFAULT="?")
+{
+        " CTS_COMP"     =0,
+        " RTS"  =1
+}
+
+TYPEDEF MSR_DSR ENUM(WIDTH=1, DEFAULT="?")
+{
+        " DSR_COMP"     =0,
+        " DTR"  =1
+}
+
+TYPEDEF MSR_RI ENUM(WIDTH=1, DEFAULT="?")
+{
+        " RI_COMP"      =0,
+        " OUT1" =1
+}
+TYPEDEF MSR_DCD ENUM(WIDTH=1, DEFAULT="?")
+{
+        " DCD COMP"     =0,
+        " OUT2" =1
+}
+
+TYPEDEF MSR(NAME="MSR", CLASS="Board") COMPOSITE(WIDTH=8)
+{
+        SEPARATOR(TEXTNAME=""),
+        FIELD[0](NAME="MSR_DCT", TYPE=MSR_DCTS, ACCESS="R"),
+        SEPARATOR(TEXTNAME=""),
+        FIELD[1](NAME="MSR_DDSR", TYPE=MSR_DDSR, ACCESS="R"),
+        SEPARATOR(TEXTNAME=""),
+        FIELD[2](NAME="MSR_TERI", TYPE=MSR_TERI, ACCESS="R"),
+        SEPARATOR(TEXTNAME=""),
+        FIELD[3](NAME="MSR_DDCD", TYPE=MSR_DDCD, ACCESS="R"),
+        SEPARATOR(TEXTNAME=""),
+        FIELD[4](NAME="MSR_CTS", TYPE=MSR_CTS, ACCESS="R"),
+        SEPARATOR(TEXTNAME=""),
+        FIELD[5](NAME="MSR_DSR", TYPE=MSR_DSR, ACCESS="R"),
+        SEPARATOR(TEXTNAME=""),
+        FIELD[6](NAME="MSR_RI", TYPE=MSR_RI, ACCESS="R"),
+        SEPARATOR(TEXTNAME=""),
+        FIELD[7](NAME="MSR_DCD", TYPE=MSR_DCD, ACCESS="R")      
+}
+</definition>   
+</displaytype>
+
+<displaytype>
+  <name>CT_CWR</name>
+  <requires></requires>
+  <definition>
+TYPEDEF CWR ENUM(WIDTH=8,DEFAULT="UNDEF")
+{
+"UNDEF" = 0
+
+}
+
+TYPEDEF CT_CWR(NAME="CT_CWR", CLASS="Board") COMPOSITE(WIDTH=8)
+{
+  SEPARATOR(TEXTNAME=""),
+  FIELD[7:0] (NAME="CWR", TYPE=CWR,ACCESS="W")
+}
+
+</definition>   
+</displaytype>
+
+<displaytype>
+  <name>IOCR</name>
+  <requires></requires>
+  <definition>
+TYPEDEF IOC ENUM(WIDTH=16,DEFAULT="UNDEF")
+{
+"UNDEF" = 0
+
+}
+
+TYPEDEF IOCR(NAME="IOCR", CLASS="Board") COMPOSITE(WIDTH=16)
+{
+  SEPARATOR(TEXTNAME=""),
+  FIELD[15:0] (NAME="IOC", TYPE=IOC,ACCESS="W")
+}
+</definition>   
+</displaytype>
+
+<displaytype>
+  <name>LCD_GREY</name>
+  <requires></requires>
+  <definition>
+TYPEDEF LCD ENUM(WIDTH=2,DEFAULT="UNDEF")
+{
+"OFF"           =       00,
+"GREY SHADE"    =       01,
+"GREY SHADE"    =       10,
+"ON"            =       11
+}
+
+TYPEDEF LCD_GREY(NAME="LCD_GREY", CLASS="Board") COMPOSITE(WIDTH=8)
+{
+  SEPARATOR(TEXTNAME="DISPLAY"),
+  FIELD[7:6] (NAME="LCD", TYPE=LCD,ACCESS="R"),
+SEPARATOR(TEXTNAME=""),
+  FIELD[5:4] (NAME="LCD", TYPE=LCD,ACCESS="R"),
+SEPARATOR(TEXTNAME=""),
+  FIELD[3:2] (NAME="LCD", TYPE=LCD,ACCESS="R"),
+SEPARATOR(TEXTNAME=""),
+  FIELD[1:0] (NAME="LCD", TYPE=LCD,ACCESS="R")
+}
+</definition>   
+</displaytype>
+<displaytype>
+  <name>LSCR</name>
+  <requires></requires>
+  <definition>
+TYPEDEF LSCRESET ENUM(WIDTH=8,DEFAULT="UNDEF")
+{
+"RESET" = 0X02
+
+}
+
+TYPEDEF LSCR(NAME="LSCR", CLASS="Board") COMPOSITE(WIDTH=8)
+{
+  SEPARATOR(TEXTNAME=""),
+  FIELD[7:0] (NAME="LSCRESET", TYPE=LSCRESET,ACCESS="R/W")
+}
+
+</definition>   
+</displaytype>
+
+<displaytype>
+  <name>SEGMENT</name>
+  <requires></requires>
+  <definition>
+TYPEDEF SEGMENTESET ENUM(WIDTH=32,DEFAULT="UNDEF")
+{
+"RESET" = 0
+}
+
+TYPEDEF SEGMENT(NAME="SEGMENT", CLASS="Board") COMPOSITE(WIDTH=32)
+{
+  SEPARATOR(TEXTNAME=""),
+  FIELD[31:0] (NAME="SEGMENTESET", TYPE=SEGMENTESET,ACCESS="R/W")
+}
+
+</definition>   
+</displaytype>
+<displaytype>
+  <name>SEGMENTDESCRIPTOR</name>
+  <requires></requires>
+  <definition>
+TYPEDEF SEGMENTDESCRIPTORESET ENUM(WIDTH=16,DEFAULT="UNDEF")
+{
+"RESET" = 0
+}
+
+TYPEDEF SEGMENTDESCRIPTOR(NAME="SEGMENTDESCRIPTOR", CLASS="Board") COMPOSITE(WIDTH=16)
+{
+  SEPARATOR(TEXTNAME=""),
+  FIELD[15:0] (NAME="SEGMENTDESCRIPTORESET", TYPE=SEGMENTDESCRIPTORESET,ACCESS="R/W")
+}
+
+</definition>   
+</displaytype>
+
+<displaytype>
+  <name>BCRPN</name>
+  <requires></requires>
+  <definition>
+TYPEDEF BCRPNESET ENUM(WIDTH=16,DEFAULT="UNDEF")
+{
+"RESET" = 0
+}
+
+TYPEDEF BCRPN(NAME="BCRPN", CLASS="Board") COMPOSITE(WIDTH=16)
+{
+  SEPARATOR(TEXTNAME=""),
+  FIELD[15:0] (NAME="BCRPNESET", TYPE=BCRPNESET,ACCESS="R/W")
+}
+
+</definition>   
+</displaytype>
+
+<displaytype>
+  <name>BCR7</name>
+  <requires></requires>
+  <definition>
+TYPEDEF BCR7ESET ENUM(WIDTH=8,DEFAULT="UNDEF")
+{
+"RESET" = 0
+}
+
+TYPEDEF BCR7(NAME="BCR7", CLASS="Board") COMPOSITE(WIDTH=8)
+{
+  SEPARATOR(TEXTNAME=""),
+  FIELD[7:0] (NAME="BCR7ESET", TYPE=BCR7ESET,ACCESS="R/W")
+}
+
+</definition>   
+</displaytype>
+
+<displaytype>
+  <name>BCR0</name>
+  <requires></requires>
+  <definition>
+TYPEDEF BCR0ESET ENUM(WIDTH=8,DEFAULT="UNDEF")
+{
+"8BIT BOOT" = 0,
+"16BIT BOOT" = 0
+}
+
+TYPEDEF BCR0(NAME="BCR0", CLASS="Board") COMPOSITE(WIDTH=8)
+{
+  SEPARATOR(TEXTNAME=""),
+  FIELD[7:0] (NAME="BCR0ESET", TYPE=BCR0ESET,ACCESS="R/W")
+}
+
+</definition>   
+</displaytype>
+
+<module>
+  <type>AEB_Cache</type>
+  <register>
+    <name>Cache Control</name>
+    <memory base="$base" width="byte" offset="0x00"></memory>
+    <access>RW</access>
+    <width>8</width>
+  </register>
+</module>
+
+
+<module>
+  <type>AEB_Clock_Power_Management</type>
+  <register>
+    <name>Peripheral Clock Select</name>
+    <memory base="$base" width="word" offset="0x04"></memory>
+    <access>RW</access>
+    <width>9</width>
+    <display>PCSR</display>
+  </register>
+  <register>
+    <name>UART0 Clock Control</name>
+    <memory base="$base" width="word" offset="0x08"></memory>
+    <access>RW</access>
+    <width>9</width>
+    <display>UART0</display>
+  </register>
+  <register>
+    <name>UART1 Clock Control</name>
+    <memory base="$base" width="word" offset="0x0C"></memory>
+    <access>RW</access>
+    <width>9</width>
+    <display>UART1</display>
+  </register>
+  <register>
+    <name>UART2 Clock Control</name>
+    <memory base="$base" width="word" offset="0x10"></memory>
+    <access>RW</access>
+    <width>9</width>
+    <display>UART2</display>
+  </register>
+  <register>
+    <name>Counter/Timer0 Clock Control</name>
+    <memory base="$base" width="word" offset="0x18"></memory>
+    <access>RW</access>
+    <width>9</width>
+    <display>CT0CCR</display>
+   </register>
+  <register>
+    <name>Counter/Timer1 Clock Control</name>
+    <memory base="$base" width="word" offset="0x1C"></memory>
+    <access>RW</access>
+    <width>9</width>
+    <display>CT1CCR</display>
+  </register>
+  <register>
+    <name>Counter/Timer2 Clock Control</name>
+    <memory base="$base" width="word" offset="0x20"></memory>
+    <access>RW</access>
+    <width>9</width>
+    <display>CT2CCR</display>
+  </register>
+  <register>
+    <name>CPU Clock Control</name>
+    <memory base="$base" width="byte" offset="0x28"></memory>
+    <access>RW</access>
+    <width>8</width>
+    <display>CCCR</display>
+  </register>
+</module>
+
+
+<module>
+  <type>AEB_Counter_Timers</type>
+  <register>
+    <name>Counting Element 0</name>
+    <memory base="$base" width="byte" offset="0x00"></memory>
+    <access>RW</access>
+    <width>8</width>
+    <display>COUNTER_ELEMENTS</display>
+  </register>
+  <register>
+    <name>Counting Element 1</name>
+    <memory base="$base" width="byte" offset="0x04"></memory>
+    <access>RW</access>
+    <width>8</width>
+    <display>COUNTER_ELEMENTS</display>
+  </register>
+  <register>
+    <name>Counting Element 2</name>
+    <memory base="$base" width="byte" offset="0x08"></memory>
+    <access>RW</access>
+    <width>8</width>
+    <display>COUNTER_ELEMENTS</display>
+  </register>
+  <register>
+    <name>Counter/Timers Control</name>
+    <memory base="$base" width="byte" offset="0x0C"></memory>
+    <access>W</access>
+    <width>8</width>
+    <display>CT_CWR</display>
+  </register>
+</module>
+
+
+<module>
+  <type>AEB_Interrupt_Controller</type>
+  <register>
+    <name>Configuration 0</name>
+    <memory base="$base" width="word" offset="0x00"></memory>
+    <access>RW</access>
+    <width>16</width>
+    <display>CONFIGURATION_0</display>
+  </register>
+  <register>
+    <name>Configuration 1</name>
+    <memory base="$base" width="byte" offset="0x04"></memory>
+    <access>RW</access>
+    <width>8</width>
+    <display>CONFIGURATION_1</display>
+  </register>
+  <register>
+    <name>Clear</name>
+    <memory base="$base" width="word" offset="0x08"></memory>
+    <access>W</access>
+    <width>16</width>
+    <display>ICLR</display>
+  </register>
+  <register>
+    <name>IRQ Enable</name>
+    <memory base="$base" width="word" offset="0x0C"></memory>
+    <access>RW</access>
+    <width>16</width>
+    <display>QER</display>
+  </register>
+  <register>
+    <name>FIQ Enable</name>
+    <memory base="$base" width="word" offset="0x10"></memory>
+    <access>RW</access>
+    <width>16</width>
+    <display>QER</display>
+  </register>
+  <register>
+    <name>IRQ Status</name>
+    <memory base="$base" width="word" offset="0x14"></memory>
+    <access>R</access>
+    <width>16</width>
+    <display>QER</display>
+  </register>
+  <register>
+    <name>FIQ Status</name>
+    <memory base="$base" width="word" offset="0x18"></memory>
+    <access>R</access>
+    <width>16</width>
+    <display>FIQ</display>
+  </register>
+  <register>
+    <name>Polling</name>
+    <memory base="$base" width="word" offset="0x1C"></memory>
+    <access>R</access>
+    <width>16</width>
+    <display>FIQ</display>
+  </register>
+</module>
+
+
+<module>
+  <type>AEB_IO_Configuration</type>
+  <register>
+    <name>IO Configuration</name>
+    <memory base="$base" width="word" offset="0x00"></memory>
+    <access>RW</access>
+    <width>16</width>
+    <display>IOCR</display>
+  </register>
+</module>
+
+
+<module>
+  <type>AEB_LCD_Controller</type>
+  <register>
+    <name>Operation Mode</name>
+    <memory base="$base" width="byte" offset="0x00"></memory>
+    <access>W</access>
+    <width>8</width>
+  </register>
+  <register>
+    <name>Line Display Byte Count</name>
+    <memory base="$base" width="byte" offset="0x04"></memory>
+    <access>W</access>
+    <width>8</width>
+    <display>LCD_BC</display>
+  </register>
+  <register>
+    <name>Line Pulse Width</name>
+    <memory base="$base" width="byte" offset="0x08"></memory>
+    <access>W</access>
+    <width>8</width>
+  </register>
+  <register>
+    <name>Duty Cycle 0</name>
+    <memory base="$base" width="byte" offset="0x0C"></memory>
+    <access>W</access>
+    <width>8</width>
+  </register>
+  <register>
+    <name>Duty Cycle 1</name>
+    <memory base="$base" width="byte" offset="0x10"></memory>
+    <access>W</access>
+    <width>8</width>
+  </register>
+  <register>
+    <name>Screen 1 Frame Buffer Start Address 0</name>
+    <memory base="$base" width="byte" offset="0x14"></memory>
+    <access>W</access>
+    <width>8</width>
+  </register>
+  <register>
+    <name>Screen 1 Frame Buffer Start Address 1</name>
+    <memory base="$base" width="byte" offset="0x18"></memory>
+    <access>W</access>
+    <width>8</width>
+  </register>
+  <register>
+    <name>Screen 1 Frame Buffer Start Address 2</name>
+    <memory base="$base" width="byte" offset="0x1C"></memory>
+    <access>W</access>
+    <width>8</width>
+  </register>
+  <register>
+    <name>Screen 1 Frame Buffer Start Address 3</name>
+    <memory base="$base" width="byte" offset="0x20"></memory>
+    <access>W</access>
+    <width>8</width>
+  </register>
+  <register>
+    <name>Screen 2 Frame Buffer Start Address 0</name>
+    <memory base="$base" width="byte" offset="0x24"></memory>
+    <access>W</access>
+    <width>8</width>
+  </register>
+  <register>
+    <name>Screen 2 Frame Buffer Start Address 1</name>
+    <memory base="$base" width="byte" offset="0x28"></memory>
+    <access>W</access>
+    <width>8</width>
+  </register>
+  <register>
+    <name>Screen 2 Frame Buffer Start Address 2</name>
+    <memory base="$base" width="byte" offset="0x2C"></memory>
+    <access>W</access>
+    <width>8</width>
+  </register>
+  <register>
+    <name>Screen 2 Frame Buffer Start Address 3</name>
+    <memory base="$base" width="byte" offset="0x30"></memory>
+    <access>W</access>
+    <width>8</width>
+  </register>
+  <register>
+    <name>Screen 1 Vertical Line Count 0</name>
+    <memory base="$base" width="byte" offset="0x34"></memory>
+    <access>W</access>
+    <width>8</width>
+  </register>
+  <register>
+    <name>Screen 1 Vertical Line Count 1</name>
+    <memory base="$base" width="byte" offset="0x38"></memory>
+    <access>W</access>
+    <width>8</width>
+  </register>
+  <register>
+    <name>Virtual Display Delta</name>
+    <memory base="$base" width="byte" offset="0x3C"></memory>
+    <access>W</access>
+    <width>8</width>
+  </register>
+  <register>
+    <name>Gray Shade 1</name>
+    <memory base="$base" width="byte" offset="0x40"></memory>
+    <access>W</access>
+    <width>8</width>
+    <display>LCD_GREY</display>
+  </register>
+  <register>
+    <name>Gray Shade 2</name>
+    <memory base="$base" width="byte" offset="0x44"></memory>
+    <access>W</access>
+    <width>8</width>
+    <display>LCD_GREY</display>
+  </register>
+  <register>
+    <name>Clock Divider</name>
+    <memory base="$base" width="byte" offset="0x48"></memory>
+    <access>W</access>
+    <width>8</width>
+  </register>
+  <register>
+    <name>MCLK Width 0</name>
+    <memory base="$base" width="byte" offset="0x4C"></memory>
+    <access>W</access>
+    <width>8</width>
+  </register>
+  <register>
+    <name>MCLK Width 1</name>
+    <memory base="$base" width="byte" offset="0x50"></memory>
+    <access>W</access>
+    <width>8</width>
+  </register>
+  <register>
+    <name>LCD Bit</name>
+    <memory base="$base" width="byte" offset="0x9014"></memory>
+    <access>RW</access>
+    <width>8</width>
+  </register>
+</module>
+
+
+<module>
+  <type>AEB_Local_SRAM</type>
+  <register>
+    <name>Local SRAM Control</name>
+    <memory base="$base" width="byte" offset="0x00"></memory>
+    <access>RW</access>
+    <width>8</width>
+    <display>LSCR</display>
+  </register>
+</module>
+
+
+<module>
+  <type>AEB_Memory_Peripherals</type>
+  <register>
+    <name>Segment 0 Start</name>
+    <memory base="$base" width="word" offset="0x00"></memory>
+    <access>RW</access>
+    <width>32</width>
+    <display>SEGMENT</display>
+  </register>
+  <register>
+    <name>Segment 1 Start</name>
+    <memory base="$base" width="word" offset="0x04"></memory>
+    <access>RW</access>
+    <width>32</width>
+    <display>SEGMENT</display>
+  </register>
+  <register>
+    <name>Segment 2 Start</name>
+    <memory base="$base" width="word" offset="0x08"></memory>
+    <access>RW</access>
+    <width>32</width>
+    <display>SEGMENT</display>
+  </register>
+  <register>
+    <name>Segment 3 Start</name>
+    <memory base="$base" width="word" offset="0x0C"></memory>
+    <access>RW</access>
+    <width>32</width>
+    <display>SEGMENT</display>
+  </register>
+  <register>
+    <name>Segment 4 Start</name>
+    <memory base="$base" width="word" offset="0x10"></memory>
+    <access>RW</access>
+    <width>32</width>
+    <display>SEGMENT</display>
+  </register>
+  <register>
+    <name>Segment 5 Start</name>
+    <memory base="$base" width="word" offset="0x14"></memory>
+    <access>RW</access>
+    <width>32</width>
+    <display>SEGMENT</display>
+  </register>
+  <register>
+    <name>Segment 6 Start</name>
+    <memory base="$base" width="word" offset="0x18"></memory>
+    <access>RW</access>
+    <width>32</width>
+    <display>SEGMENT</display>
+  </register>
+  <register>
+    <name>Segment 7 Start</name>
+    <memory base="$base" width="word" offset="0x1C"></memory>
+    <access>RW</access>
+    <width>32</width>
+    <display>SEGMENT</display>
+  </register>
+  <register>
+    <name>Segment 0 Stop</name>
+    <memory base="$base" width="word" offset="0x20"></memory>
+    <access>RW</access>
+    <width>32</width>
+    <display>SEGMENT</display>
+  </register>
+  <register>
+    <name>Segment 1 Stop</name>
+    <memory base="$base" width="word" offset="0x24"></memory>
+    <access>RW</access>
+    <width>32</width>
+    <display>SEGMENT</display>
+  </register>
+  <register>
+    <name>Segment 2 Stop</name>
+    <memory base="$base" width="word" offset="0x28"></memory>
+    <access>RW</access>
+    <width>32</width>
+    <display>SEGMENT</display>
+  </register>
+  <register>
+    <name>Segment 3 Stop</name>
+    <memory base="$base" width="word" offset="0x2C"></memory>
+    <access>RW</access>
+    <width>32</width>
+    <display>SEGMENT</display>
+  </register>
+  <register>
+    <name>Segment 4 Stop</name>
+    <memory base="$base" width="word" offset="0x30"></memory>
+    <access>RW</access>
+    <width>32</width>
+    <display>SEGMENT</display>
+  </register>
+  <register>
+    <name>Segment 5 Stop</name>
+    <memory base="$base" width="word" offset="0x34"></memory>
+    <access>RW</access>
+    <width>32</width>
+    <display>SEGMENT</display>
+  </register>
+  <register>
+    <name>Segment 6 Stop</name>
+    <memory base="$base" width="word" offset="0x38"></memory>
+    <access>RW</access>
+    <width>32</width>
+    <display>SEGMENT</display>
+  </register>
+  <register>
+    <name>Segment 7 Stop</name>
+    <memory base="$base" width="word" offset="0x3C"></memory>
+    <access>RW</access>
+    <width>32</width>
+    <display>SEGMENT</display>
+  </register>
+  <register>
+    <name>Segment 0 Descriptor</name>
+    <memory base="$base" width="word" offset="0x40"></memory>
+    <access>RW</access>
+    <width>16</width>
+    <display>SEGMENTDESCRIPTOR</display>
+  </register>
+  <register>
+    <name>Segment 1 Descriptor</name>
+    <memory base="$base" width="word" offset="0x44"></memory>
+    <access>RW</access>
+    <width>16</width>
+    <display>SEGMENTDESCRIPTOR</display>
+  </register>
+  <register>
+    <name>Segment 2 Descriptor</name>
+    <memory base="$base" width="word" offset="0x48"></memory>
+    <access>RW</access>
+    <width>16</width>
+    <display>SEGMENTDESCRIPTOR</display>
+  </register>
+  <register>
+    <name>Segment 3 Descriptor</name>
+    <memory base="$base" width="word" offset="0x4C"></memory>
+    <access>RW</access>
+    <width>16</width>
+    <display>SEGMENTDESCRIPTOR</display>
+  </register>
+  <register>
+    <name>Segment 4 Descriptor</name>
+    <memory base="$base" width="word" offset="0x50"></memory>
+    <access>RW</access>
+    <width>16</width>
+    <display>SEGMENTDESCRIPTOR</display>
+  </register>
+  <register>
+    <name>Segment 5 Descriptor</name>
+    <memory base="$base" width="word" offset="0x54"></memory>
+    <access>RW</access>
+    <width>16</width>
+    <display>SEGMENTDESCRIPTOR</display>
+  </register>
+  <register>
+    <name>Segment 6 Descriptor</name>
+    <memory base="$base" width="word" offset="0x58"></memory>
+    <access>RW</access>
+    <width>16</width>
+    <display>SEGMENTDESCRIPTOR</display>
+  </register>
+  <register>
+    <name>Segment 7 Descriptor</name>
+    <memory base="$base" width="word" offset="0x5C"></memory>
+    <access>RW</access>
+    <width>16</width>
+    <display>SEGMENTDESCRIPTOR</display>
+  </register>
+  <register>
+    <name>Segment 8 Descriptor</name>
+    <memory base="$base" width="word" offset="0x60"></memory>
+    <access>RW</access>
+    <width>16</width>
+    <display>SEGMENTDESCRIPTOR</display>
+  </register>
+  <register>
+    <name>Bank Control 0 (SRAM)</name>
+    <memory base="$base" width="word" offset="0x100"></memory>
+    <access>RW</access>
+    <width>16</width>
+    <display>BCR0</display>
+  </register>
+  <register>
+    <name>Bank Control 1 (SRAM)</name>
+    <memory base="$base" width="word" offset="0x104"></memory>
+    <access>RW</access>
+    <width>16</width>
+    <display>BCRPN</display>
+  </register>
+  <register>
+    <name>Bank Control 2 (SRAM)</name>
+    <memory base="$base" width="word" offset="0x108"></memory>
+    <access>RW</access>
+    <width>16</width>
+     <display>BCRPN</display>
+  </register>
+  <register>
+    <name>Bank Control 3 (SRAM)</name>
+    <memory base="$base" width="word" offset="0x10C"></memory>
+    <access>RW</access>
+    <width>16</width>
+     <display>BCRPN</display>
+  </register>
+  <register>
+    <name>Bank Control 4 (SRAM)</name>
+    <memory base="$base" width="word" offset="0x110"></memory>
+    <access>RW</access>
+    <width>16</width>
+     <display>BCRPN</display>
+  </register>
+  <register>
+    <name>Bank Control 5 (SRAM)</name>
+    <memory base="$base" width="word" offset="0x114"></memory>
+    <access>RW</access>
+    <width>16</width>
+     <display>BCRPN</display>
+  </register>
+  <register>
+    <name>Bank Control 6a (DRAM)</name>
+    <memory base="$base" width="word" offset="0x118"></memory>
+    <access>RW</access>
+    <width>16</width>
+     <display>BCRPN</display>
+  </register>
+  <register>
+    <name>Bank Control 7a (DRAM)</name>
+    <memory base="$base" width="word" offset="0x11C"></memory>
+    <access>RW</access>
+    <width>16</width>
+     <display>BCRPN</display>
+  </register>
+  <register>
+    <name>Bank Control 6b (DRAM)</name>
+    <memory base="$base" width="word" offset="0x120"></memory>
+    <access>RW</access>
+    <width>16</width>
+     <display>BCRPN</display>
+  </register>
+  <register>
+    <name>Bank Control 7b (DRAM)</name>
+    <memory base="$base" width="byte" offset="0x124"></memory>
+    <access>RW</access>
+    <width>8</width>
+    <display>BCR7</display>
+  </register>
+  <register>
+    <name>DRAM Refresh</name>
+    <memory base="$base" width="word" offset="0x128"></memory>
+    <access>RW</access>
+    <width>16</width>
+     <display>BCRPN</display>
+  </register>
+</module>
+
+
+<module>
+  <type>AEB_PPI</type>
+  <register>
+    <name>Port A</name>
+    <memory base="$base" width="byte" offset="0x00"></memory>
+    <access>RW</access>
+    <width>8</width>
+    <display>PORT_A</display>
+  </register>
+  <register>
+    <name>Port B</name>
+    <memory base="$base" width="byte" offset="0x04"></memory>
+    <access>RW</access>
+    <width>8</width>
+    <display>PORT_B</display>
+  </register>
+  <register>
+    <name>Port C</name>
+    <memory base="$base" width="byte" offset="0x08"></memory>
+    <access>RW</access>
+    <width>8</width>
+    <display>PORT_C</display>
+  </register>
+  <register>
+    <name>PPI Control</name>
+    <memory base="$base" width="byte" offset="0x0C"></memory>
+    <access>W</access>
+    <width>8</width>
+    <display>PPI_CTRL</display>
+  </register>
+</module>
+
+
+<module>
+  <type>AEB_PWM</type>
+  <register>
+    <name>PWM0 Terminal Count</name>
+    <memory base="$base" width="byte" offset="0x00"></memory>
+    <access>W</access>
+    <width>8</width>
+    <display>PWMTC</display>
+  </register>
+  <register>
+    <name>PWM0 Duty Cycle</name>
+    <memory base="$base" width="byte" offset="0x04"></memory>
+    <access>W</access>
+    <width>8</width>
+    <display>PWMTC</display>
+  </register>
+  <register>
+    <name>PWM0 Enable</name>
+    <memory base="$base" width="byte" offset="0x08"></memory>
+    <access>W</access>
+    <width>8</width>
+    <display>PWMTC</display>
+  </register>
+  <register>
+    <name>PWM0 Divide Value</name>
+    <memory base="$base" width="byte" offset="0x0C"></memory>
+    <access>W</access>
+    <width>8</width>
+    <display>PWMTC</display>
+  </register>
+  <register>
+    <name>PWM0 Synchronous</name>
+    <memory base="$base" width="byte" offset="0x10"></memory>
+    <access>W</access>
+    <width>8</width>
+    <display>PWMTC</display>
+  </register>
+  <register>
+    <name>PWM0 Invert</name>
+    <memory base="$base" width="byte" offset="0x14"></memory>
+    <access>W</access>
+    <width>8</width>
+    <display>PWMTC</display>
+  </register>
+  <register>
+    <name>PWM1 Terminal Count</name>
+    <memory base="$base" width="byte" offset="0x20"></memory>
+    <access>W</access>
+    <width>8</width>
+    <display>PWMTC</display>
+  </register>
+  <register>
+    <name>PWM1 Duty Cycle</name>
+    <memory base="$base" width="byte" offset="0x24"></memory>
+    <access>W</access>
+    <width>8</width>
+    <display>PWMTC</display>
+  </register>
+  <register>
+    <name>PWM1 Enable</name>
+    <memory base="$base" width="byte" offset="0x28"></memory>
+    <access>W</access>
+    <width>8</width>
+    <display>PWMTC</display>
+  </register>
+  <register>
+    <name>PWM1 Divide Count</name>
+    <memory base="$base" width="byte" offset="0x2C"></memory>
+    <access>W</access>
+    <width>8</width>
+    <display>PWMTC</display>
+  </register>
+  <register>
+    <name>PWM1 Synchronous</name>
+    <memory base="$base" width="byte" offset="0x30"></memory>
+    <access>W</access>
+    <width>8</width>
+    <display>PWMTC</display>
+  </register>
+  <register>
+    <name>PWM1 Invert</name>
+    <memory base="$base" width="byte" offset="0x34"></memory>
+    <access>W</access>
+    <width>8</width>
+    <display>PWMTC</display>
+  </register>
+  <register>
+    <name>PWM2 Terminal Count</name>
+    <memory base="$base" width="word" offset="0x40"></memory>
+    <access>W</access>
+    <width>16</width>
+    <display>PWMTC2</display>
+  </register>
+  <register>
+    <name>PWM2 Duty Cycle</name>
+    <memory base="$base" width="word" offset="0x44"></memory>
+    <access>W</access>
+    <width>16</width>
+    <display>PWMTC2</display>
+  </register>
+  <register>
+    <name>PWM2 Enable</name>
+    <memory base="$base" width="byte" offset="0x48"></memory>
+    <access>W</access>
+    <width>8</width>
+    <display>PWMTC</display>
+  </register>
+  <register>
+    <name>PWM2 Divide Value</name>
+    <memory base="$base" width="byte" offset="0x4C"></memory>
+    <access>W</access>
+    <width>8</width>
+    <display>PWMTC</display>
+  </register>
+  <register>
+    <name>PWM2 Synchronous</name>
+    <memory base="$base" width="byte" offset="0x50"></memory>
+    <access>W</access>
+    <width>8</width>
+    <display>PWMTC</display>
+  </register>
+  <register>
+    <name>PWM2 Invert</name>
+    <memory base="$base" width="byte" offset="0x54"></memory>
+    <access>W</access>
+    <width>8</width>
+    <display>PWMTC</display>
+  </register>
+  <register>
+    <name>All PWMs Terminal Count</name>
+    <memory base="$base" width="word" offset="0x60"></memory>
+    <access>W</access>
+    <width>16</width>
+    <display>PWMTC2</display>
+  </register>
+  <register>
+    <name>All PWMs Duty Cycle</name>
+    <memory base="$base" width="word" offset="0x64"></memory>
+    <access>W</access>
+    <width>16</width>
+    <display>PWMTC2</display>
+  </register>
+  <register>
+    <name>All PWMs Enable</name>
+    <memory base="$base" width="byte" offset="0x68"></memory>
+    <access>W</access>
+    <width>8</width>
+    <display>PWMTC</display>
+  </register>
+  <register>
+    <name>All PWMs Divide Value</name>
+    <memory base="$base" width="byte" offset="0x6C"></memory>
+    <access>W</access>
+    <width>8</width>
+    <display>PWMTC</display>
+  </register>
+  <register>
+    <name>All PWMs Synchronous</name>
+    <memory base="$base" width="byte" offset="0x70"></memory>
+    <access>W</access>
+    <width>8</width>
+    <display>PWMTC</display>
+  </register>
+  <register>
+    <name>All PWMs Invert</name>
+    <memory base="$base" width="byte" offset="0x74"></memory>
+    <access>W</access>
+    <width>8</width>
+    <display>PWMTC</display>
+  </register>
+</module>
+
+
+<module>
+  <type>AEB_Reset</type>
+  <register>
+    <name>Software Reset</name>
+    <memory base="$base" width="byte" offset="0x00"></memory>
+    <access>W</access>
+    <width>1</width>
+     <display>RESET</display>
+  </register>
+</module>
+
+
+<module>
+  <type>AEB_SIR</type>
+  <register>
+    <name>SIR Control</name>
+    <memory base="$base" width="byte" offset="0x00"></memory>
+    <access>RW</access>
+    <width>8</width>
+    <display>SIR_CTLR</display>
+  </register>
+</module>
+
+
+<module>
+  <type>AEB_UART</type>
+  <register>
+    <name>Transmitter Holding</name>
+    <memory base="$base" width="byte" offset="0x00"></memory>
+    <access>W</access>
+    <width>8</width>
+  </register>
+  <register>
+    <name>Interrupt Enable</name>
+    <memory base="$base" width="byte" offset="0x04"></memory>
+    <access>RW</access>
+    <width>8</width>
+    <display>UART_IE</display>
+  </register>
+  <register>
+    <name>Divisor Latch MSB</name>
+    <memory base="$base" width="byte" offset="0x04"></memory>
+    <access>RW</access>
+    <width>8</width>
+  </register>
+  <register>
+    <name>Interrupt Identification</name>
+    <memory base="$base" width="byte" offset="0x08"></memory>
+    <access>R</access>
+    <width>8</width>
+    <display>IIR</display>
+  </register>
+  <register>
+    <name>Line Control</name>
+    <memory base="$base" width="byte" offset="0x0C"></memory>
+    <access>RW</access>
+    <width>8</width>
+    <display>LCR</display>
+  </register>
+  <register>
+    <name>Modem Control</name>
+    <memory base="$base" width="byte" offset="0x10"></memory>
+    <access>RW</access>
+    <width>8</width>
+    <display>MCR</display>
+  </register>
+  <register>
+    <name>Line Status</name>
+    <memory base="$base" width="byte" offset="0x14"></memory>
+    <access>R</access>
+    <width>8</width>
+    <display>LSR</display>
+  </register>
+  <register>
+    <name>Modem Status</name>
+    <memory base="$base" width="byte" offset="0x18"></memory>
+    <access>RW</access>
+    <width>8</width>
+    <display>MSR</display>
+  </register>
+  <register>
+    <name>Scratch Pad</name>
+    <memory base="$base" width="byte" offset="0x1C"></memory>
+    <access>RW</access>
+    <width>8</width>
+  </register>
+</module>
+
+
+<module>
+  <type>AEB_Watchdog_Timer</type>
+  <register>
+    <name>WDT Control</name>
+    <memory base="$base" width="byte" offset="0x00"></memory>
+    <access>RW</access>
+    <width>8</width>
+    <display>WDCTLR</display>
+  </register>
+  <register>
+    <name>WDT Counter</name>
+    <memory base="$base" width="word" offset="0x04"></memory>
+    <access>W</access>
+    <width>32</width>
+    <display>WDCR</display>
+  </register>
+</module>
+
+
+<module>
+  <!-- The following data was obtained from reference [1]. -->
+  <type>CM7TDMI_Generic</type>
+  <register>
+     <name>Id</name>
+     <memory base="$base" width="word" offset="0x00"></memory>
+     <access>RO</access>
+     <width>32</width>
+     <display>CM7TDMI_ID</display>
+  </register>
+  <register>
+     <name>Processor Id</name>
+     <memory base="$base" width="word" offset="0x04"></memory>
+     <access>RO</access>
+     <width>32</width>
+  </register>
+  <register>
+     <name>Oscillator</name>
+     <memory base="$base" width="word" offset="0x08"></memory>
+     <access>RW</access>
+     <width>32</width>
+  </register>
+  <register>
+     <name>Control</name>
+     <memory base="$base" width="word" offset="0x0c"></memory>
+     <access>RW</access>
+     <width>32</width>
+     <display>CM7TDMI_CTRL</display>
+  </register>
+  <register>
+     <name>Status</name>
+     <memory base="$base" width="word" offset="0x10"></memory>
+     <access>RO</access>
+     <width>32</width>
+     <display>CM7TDMI_STAT</display>
+  </register>
+  <register>
+     <name>Lock</name>
+     <memory base="$base" width="word" offset="0x14"></memory>
+     <access>RW</access>
+     <width>32</width>
+     <display>CM7TDMI_LOCK</display>
+  </register>
+  <register>
+     <name>SDRAM Control</name>
+     <memory base="$base" width="word" offset="0x20"></memory>
+     <access>RW</access>
+     <width>32</width>
+     <display>CM7TDMI_SDRAM</display>
+  </register>
+</module>
+
+
+<module>
+  <!-- The following data was obtained from reference [2]. -->
+  <type>CM9x6E-S_Flags</type>
+  <register>
+     <name>FlagsStatus</name>
+     <memory base="$base" width="word" offset="0x30"></memory>
+     <access>RO</access>
+     <width>32</width>
+  </register>
+  <register>
+     <name>FlagsSet</name>
+     <memory base="$base" width="word" offset="0x30"></memory>
+     <access>WO</access>
+     <width>32</width>
+  </register>
+  <register>
+     <name>FlagsClear</name>
+     <memory base="$base" width="word" offset="0x34"></memory>
+     <access>WO</access>
+     <width>32</width>
+  </register>
+  <register>
+     <name>NVFlagsStatus</name>
+     <memory base="$base" width="word" offset="0x38"></memory>
+     <access>RO</access>
+     <width>32</width>
+  </register>
+  <register>
+     <name>NVFlagsSet</name>
+     <memory base="$base" width="word" offset="0x38"></memory>
+     <access>WO</access>
+     <width>32</width>
+  </register>
+  <register>
+     <name>NVFlagsClear</name>
+     <memory base="$base" width="word" offset="0x3C"></memory>
+     <access>WO</access>
+     <width>32</width>
+  </register>
+</module>
+
+<module>
+  <!-- The following data was obtained from reference [2]. -->
+  <type>CM9x6E-S_Generic</type>
+  <register>
+     <name>Id</name>
+     <memory base="$base" width="word" offset="0x00"></memory>
+     <access>RO</access>
+     <width>32</width>
+     <display>CM96ES_ID</display>
+  </register>
+  <register>
+     <name>Processor Id</name>
+     <memory base="$base" width="word" offset="0x04"></memory>
+     <access>RO</access>
+     <width>32</width>
+  </register>
+  <register>
+     <name>Oscillator</name>
+     <memory base="$base" width="word" offset="0x08"></memory>
+     <access>RW</access>
+     <width>32</width>
+     
+  </register>
+  <register>
+     <name>Control</name>
+     <memory base="$base" width="word" offset="0x0c"></memory>
+     <access>RW</access>
+     <width>32</width>
+     <display>CM96ES_CTRL</display>
+  </register>
+  <register>
+     <name>Status</name>
+     <memory base="$base" width="word" offset="0x10"></memory>
+     <access>RO</access>
+     <width>32</width>
+     <display>CM96ES_STAT</display>
+  </register>
+  <register>
+     <name>Lock</name>
+     <memory base="$base" width="word" offset="0x14"></memory>
+     <access>RW</access>
+     <width>32</width>
+     <display>CM96ES_LOCK</display>
+  </register>
+  <register>
+     <name>Local Memory Bus Count</name>
+     <memory base="$base" width="word" offset="0x18"></memory>
+     <access>RO</access>
+     <width>32</width>
+  </register>
+  <register>
+     <name>Auxiliary Oscillator</name>
+     <memory base="$base" width="word" offset="0x1c"></memory>
+     <access>RW</access>
+     <width>32</width>
+     <display>CM96ES_AUXOSC</display>
+  </register>
+  <register>
+     <name>SDRAM Control</name>
+     <memory base="$base" width="word" offset="0x20"></memory>
+     <access>RW</access>
+     <width>32</width>
+     <display>CM96ES_SDRAM</display>
+  </register>
+  <register>
+     <name>Initialisation</name>
+     <memory base="$base" width="word" offset="0x24"></memory>
+     <access>RW</access>
+     <width>32</width>
+     <display>CM96ES_INIT</display>
+  </register>
+  <register>
+     <name>Reference Count</name>
+     <memory base="$base" width="word" offset="0x28"></memory>
+     <access>RO</access>
+     <width>32</width>
+  </register>
+</module>
+
+
+<module>
+  <!-- The following data was obtained from reference [3]. -->
+  <type>CM10200_Flags</type>
+  <register>
+     <name>FlagsStatus</name>
+     <memory base="$base" width="word" offset="0x30"></memory>
+     <access>RO</access>
+     <width>32</width>
+  </register>
+  <register>
+     <name>FlagsSet</name>
+     <memory base="$base" width="word" offset="0x30"></memory>
+     <access>WO</access>
+     <width>32</width>
+  </register>
+  <register>
+     <name>FlagsClear</name>
+     <memory base="$base" width="word" offset="0x34"></memory>
+     <access>WO</access>
+     <width>32</width>
+  </register>
+  <register>
+     <name>NVFlagsStatus</name>
+     <memory base="$base" width="word" offset="0x38"></memory>
+     <access>RO</access>
+     <width>32</width>
+  </register>
+  <register>
+     <name>NVFlagsSet</name>
+     <memory base="$base" width="word" offset="0x38"></memory>
+     <access>WO</access>
+     <width>32</width>
+  </register>
+  <register>
+     <name>NVFlagsClear</name>
+     <memory base="$base" width="word" offset="0x3C"></memory>
+     <access>WO</access>
+     <width>32</width>
+  </register>
+</module>
+
+
+<module>
+  <!-- The following data was obtained from reference [3]. -->
+  <type>CM10200_Generic</type>
+  <register>
+     <name>Id</name>
+     <memory base="$base" width="word" offset="0x00"></memory>
+     <access>RO</access>
+     <width>32</width>
+     <display>CM1020_ID</display>
+  </register>
+  <register>
+     <name>Processor Id</name>
+     <memory base="$base" width="word" offset="0x04"></memory>
+     <access>RO</access>
+     <width>32</width>
+  </register>
+  <register>
+     <name>Oscillator</name>
+     <memory base="$base" width="word" offset="0x08"></memory>
+     <access>RW</access>
+     <width>32</width>
+  </register>
+  <register>
+     <name>Control</name>
+     <memory base="$base" width="word" offset="0x0c"></memory>
+     <access>RW</access>
+     <width>32</width>
+     <display>CM1020_CTRL</display>
+  </register>
+  <register>
+     <name>Status</name>
+     <memory base="$base" width="word" offset="0x10"></memory>
+     <access>RO</access>
+     <width>32</width>
+     <display>CM1020_STAT</display>
+  </register>
+  <register>
+     <name>Lock</name>
+     <memory base="$base" width="word" offset="0x14"></memory>
+     <access>RW</access>
+     <width>32</width>
+     <display>CM1020_LOCK</display>
+  </register>
+  <register>
+     <name>Local Memory Bus Count</name>
+     <memory base="$base" width="word" offset="0x18"></memory>
+     <access>RO</access>
+     <width>32</width>
+  </register>
+  <register>
+     <name>Auxiliary Oscillator</name>
+     <memory base="$base" width="word" offset="0x1c"></memory>
+     <access>RW</access>
+     <width>32</width>
+     <display>CM1020_AUXOSC</display>
+  </register>
+  <register>
+     <name>SDRAM Control</name>
+     <memory base="$base" width="word" offset="0x20"></memory>
+     <access>RW</access>
+     <width>32</width>
+     <display>CM1020_SDRAM</display>
+  </register>
+  <register>
+     <name>Initialisation</name>
+     <memory base="$base" width="word" offset="0x24"></memory>
+     <access>RW</access>
+     <width>32</width>
+     <display>CM1020_INIT</display>
+  </register>
+  <register>
+     <name>Reference Count</name>
+     <memory base="$base" width="word" offset="0x28"></memory>
+     <access>RO</access>
+     <width>32</width>
+  </register>
+</module>
+
+
+<module>
+   <!-- The following data was obtained from reference [4]. -->
+   <type>Integrator_GPIO</type>
+   <register>
+      <name>Data Input</name>
+      <memory base="$base" width="word" offset="0x0"></memory>
+      <access>RO</access>
+      <width>32</width>
+   </register>
+   <register>
+      <name>Data Output Set</name>
+      <memory base="$base" width="word" offset="0x0"></memory>
+      <access>WO</access>
+      <width>32</width>
+   </register>
+   <register>
+      <name>Data Output</name>
+      <memory base="$base" width="word" offset="0x4"></memory>
+      <access>RO</access>
+      <width>32</width>
+   </register>
+   <register>
+      <name>Data Output Clear</name>
+      <memory base="$base" width="word" offset="0x4"></memory>
+      <access>WO</access>
+      <width>32</width>
+   </register>
+   <register>
+      <name>Data Direction</name>
+      <memory base="$base" width="word" offset="0x8"></memory>
+      <access>RO</access>
+      <width>32</width>
+   </register>
+</module>
+
+<module>
+   <!-- The following data was obtained from reference [4]. -->
+   <type>Integrator_Interrupt_Controller</type>
+   <register>
+      <name>IRQStatus 0</name>
+      <memory base="$base" width="word" offset="0x00"></memory>
+      <access>RO</access>
+      <width>22</width>
+   </register>
+   <register>
+      <name>IRQRawStatus 0</name>
+      <memory base="$base" width="word" offset="0x04"></memory>
+      <access>RO</access>
+      <width>22</width>
+   </register>
+   <register>
+      <name>IRQEnable 0</name>
+      <memory base="$base" width="word" offset="0x08"></memory>
+      <access>RO</access>
+      <width>22</width>
+   </register>
+   <register>
+      <name>IRQEnableSet 0</name>
+      <memory base="$base" width="word" offset="0x08"></memory>
+      <access>WO</access>
+      <width>22</width>
+   </register>
+   <register>
+      <name>IRQEnableClear 0</name>
+      <memory base="$base" width="word" offset="0x0c"></memory>
+      <access>WO</access>
+      <width>22</width>
+   </register>
+   <register>
+      <name>SoftInt</name>
+      <memory base="$base" width="word" offset="0x10"></memory>
+      <access>RO</access>
+      <width>16</width>
+   </register>
+   <register>
+      <name>SoftIntSet</name>
+      <memory base="$base" width="word" offset="0x10"></memory>
+      <access>WO</access>
+      <width>16</width>
+   </register>
+   <register>
+      <name>SoftIntClear</name>
+      <memory base="$base" width="word" offset="0x14"></memory>
+      <access>WO</access>
+      <width>16</width>
+   </register>
+   <register>
+      <name>FIQStatus 0</name>
+      <memory base="$base" width="word" offset="0x20"></memory>
+      <access>RO</access>
+      <width>22</width>
+   </register>
+   <register>
+      <name>FIQRawStatus 0</name>
+      <memory base="$base" width="word" offset="0x24"></memory>
+      <access>RO</access>
+      <width>22</width>
+   </register>
+   <register>
+      <name>FIQEnable 0</name>
+      <memory base="$base" width="word" offset="0x28"></memory>
+      <access>RO</access>
+      <width>22</width>
+   </register>
+   <register>
+      <name>FIQEnableSet 0</name>
+      <memory base="$base" width="word" offset="0x28"></memory>
+      <access>WO</access>
+      <width>22</width>
+   </register>
+   <register>
+      <name>FIQEnableClear 0</name>
+      <memory base="$base" width="word" offset="0x2c"></memory>
+      <access>WO</access>
+      <width>22</width>
+   </register>
+   <register>
+      <name>IRQStatus 1</name>
+      <memory base="$base" width="word" offset="0x40"></memory>
+      <access>RO</access>
+      <width>22</width>
+   </register>
+   <register>
+      <name>IRQRawStatus 1</name>
+      <memory base="$base" width="word" offset="0x44"></memory>
+      <access>RO</access>
+      <width>22</width>
+   </register>
+   <register>
+      <name>IRQEnable 1</name>
+      <memory base="$base" width="word" offset="0x48"></memory>
+      <access>RO</access>
+      <width>22</width>
+   </register>
+   <register>
+      <name>IRQEnableSet 1</name>
+      <memory base="$base" width="word" offset="0x48"></memory>
+      <access>WO</access>
+      <width>22</width>
+   </register>
+   <register>
+      <name>IRQEnableClear 1</name>
+      <memory base="$base" width="word" offset="0x4c"></memory>
+      <access>WO</access>
+      <width>22</width>
+   </register>
+   <register>
+      <name>FIQStatus 1</name>
+      <memory base="$base" width="word" offset="0x60"></memory>
+      <access>RO</access>
+      <width>22</width>
+   </register>
+   <register>
+      <name>FIQRawStatus 1</name>
+      <memory base="$base" width="word" offset="0x64"></memory>
+      <access>RO</access>
+      <width>22</width>
+   </register>
+   <register>
+      <name>FIQEnable 1</name>
+      <memory base="$base" width="word" offset="0x68"></memory>
+      <access>RO</access>
+      <width>22</width>
+   </register>
+   <register>
+      <name>FIQEnableSet 1</name>
+      <memory base="$base" width="word" offset="0x68"></memory>
+      <access>WO</access>
+      <width>22</width>
+   </register>
+   <register>
+      <name>FIQEnableClear 1</name>
+      <memory base="$base" width="word" offset="0x6c"></memory>
+      <access>WO</access>
+      <width>22</width>
+   </register>
+   <register>
+      <name>IRQStatus 2</name>
+      <memory base="$base" width="word" offset="0x80"></memory>
+      <access>RO</access>
+      <width>22</width>
+   </register>
+   <register>
+      <name>IRQRawStatus 2</name>
+      <memory base="$base" width="word" offset="0x84"></memory>
+      <access>RO</access>
+      <width>22</width>
+   </register>
+   <register>
+      <name>IRQEnable 2</name>
+      <memory base="$base" width="word" offset="0x88"></memory>
+      <access>RO</access>
+      <width>22</width>
+   </register>
+   <register>
+      <name>IRQEnableSet 2</name>
+      <memory base="$base" width="word" offset="0x88"></memory>
+      <access>WO</access>
+      <width>22</width>
+   </register>
+   <register>
+      <name>IRQEnableClear 2</name>
+      <memory base="$base" width="word" offset="0x8c"></memory>
+      <access>WO</access>
+      <width>22</width>
+   </register>
+   <register>
+      <name>FIQStatus 2</name>
+      <memory base="$base" width="word" offset="0xa0"></memory>
+      <access>RO</access>
+      <width>22</width>
+   </register>
+   <register>
+      <name>FIQRawStatus 2</name>
+      <memory base="$base" width="word" offset="0xa4"></memory>
+      <access>RO</access>
+      <width>22</width>
+   </register>
+   <register>
+      <name>FIQEnable 2</name>
+      <memory base="$base" width="word" offset="0xa8"></memory>
+      <access>RO</access>
+      <width>22</width>
+   </register>
+   <register>
+      <name>FIQEnableSet 2</name>
+      <memory base="$base" width="word" offset="0xa8"></memory>
+      <access>WO</access>
+      <width>22</width>
+   </register>
+   <register>
+      <name>FIQEnableClear 2</name>
+      <memory base="$base" width="word" offset="0xac"></memory>
+      <access>WO</access>
+      <width>22</width>
+   </register>
+   <register>
+      <name>IRQStatus 3</name>
+      <memory base="$base" width="word" offset="0xc0"></memory>
+      <access>RO</access>
+      <width>22</width>
+   </register>
+   <register>
+      <name>IRQRawStatus 3</name>
+      <memory base="$base" width="word" offset="0xc4"></memory>
+      <access>RO</access>
+      <width>22</width>
+   </register>
+   <register>
+      <name>IRQEnable 3</name>
+      <memory base="$base" width="word" offset="0xc8"></memory>
+      <access>RO</access>
+      <width>22</width>
+   </register>
+   <register>
+      <name>IRQEnableSet 3</name>
+      <memory base="$base" width="word" offset="0xc8"></memory>
+      <access>WO</access>
+      <width>22</width>
+   </register>
+   <register>
+      <name>IRQEnableClear 3</name>
+      <memory base="$base" width="word" offset="0xcc"></memory>
+      <access>WO</access>
+      <width>22</width>
+   </register>
+   <register>
+      <name>FIQStatus 3</name>
+      <memory base="$base" width="word" offset="0xe0"></memory>
+      <access>RO</access>
+      <width>22</width>
+   </register>
+   <register>
+      <name>FIQRawStatus 3</name>
+      <memory base="$base" width="word" offset="0xe4"></memory>
+      <access>RO</access>
+      <width>22</width>
+   </register>
+   <register>
+      <name>FIQEnable 3</name>
+      <memory base="$base" width="word" offset="0xe8"></memory>
+      <access>RO</access>
+      <width>22</width>
+   </register>
+   <register>
+      <name>FIQEnableSet 3</name>
+      <memory base="$base" width="word" offset="0xe8"></memory>
+      <access>WO</access>
+      <width>22</width>
+   </register>
+   <register>
+      <name>FIQEnableClear 3</name>
+      <memory base="$base" width="word" offset="0xec"></memory>
+      <access>WO</access>
+      <width>22</width>
+   </register>
+</module>
+
+<module>
+   <!-- The following data was obtained from reference [4]. -->
+   <type>Integrator_KMI</type>
+   <register>
+      <name>Control</name>
+      <memory base="$base" width="byte" offset="0x00"></memory>
+      <access>RW</access>
+      <width>8</width>
+      <display>KMI_STAT</display>
+   </register>
+   <register>
+      <name>Status</name>
+      <memory base="$base" width="byte" offset="0x04"></memory>
+      <access>RO</access>
+      <width>8</width>
+      <display>KMI_IR</display>
+   </register>
+   <register>
+      <name>Clock Divisor</name>
+      <memory base="$base" width="byte" offset="0x0C"></memory>
+      <access>RW</access>
+      <width>8</width>
+   </register>
+   <register>
+      <name>Interrupt Status</name>
+      <memory base="$base" width="byte" offset="0x10"></memory>
+      <access>RO</access>
+      <width>8</width>
+      <display>KMI_IR</display>
+   </register>
+</module>
+
+<module>
+        <!-- The following data was obtained from reference [4]. -->
+        <type>Integrator_EBI</type>
+        <register>
+                <name>EBI_CSR0</name>
+                <memory base="$base" width="word" offset="0x0"></memory>
+                <access>RW</access>
+                <width>8</width>
+                <display>EBI</display>
+        </register>
+        <register>
+                <name>EBI_CSR1</name>
+                <memory base="$base" width="word" offset="0x4"></memory>
+                <access>RW</access>
+                <width>8</width>
+                <display>EBI</display>
+        </register>
+        <register>
+                <name>EBI_CSR2</name>
+                <memory base="$base" width="word" offset="0x8"></memory>
+                <access>RW</access>
+                <width>8</width>
+                <display>EBI</display>
+        </register>
+        <register>
+                <name>EBI_CSR3</name>
+                <memory base="$base" width="word" offset="0xc"></memory>
+                <access>RW</access>
+                <width>8</width>
+                <display>EBI</display>
+        </register>
+</module>
+
+<module>
+  <!-- The following data was obtained from reference [4]. -->
+  <type>Integrator_LEDs</type>
+  <register>
+     <name>Alpha</name>
+     <memory base="$base" width="word" offset="0x0"></memory>
+     <access>RW</access>
+     <width>32</width>
+     <display>LED_ALPHA</display>
+  </register>
+  <register>
+     <name>Lights</name>
+     <memory base="$base" width="word" offset="0x4"></memory>
+     <access>RW</access>
+     <width>4</width>
+     <display>LED_LIGHTS</display>
+  </register>
+  <register>
+     <name>Switches</name>
+     <memory base="$base" width="word" offset="0x8"></memory>
+     <access>RO</access>
+     <width>4</width>
+     <display>LED_SWITCH</display>
+  </register>
+</module>
+
+<module>
+   <!-- The following data was obtained from reference [4]. -->
+   <type>Integrator_RTC</type>
+   <register>
+      <name>Data</name>
+      <memory base="$base" width="word" offset="0x00"></memory>
+      <access>RO</access>
+      <width>32</width>
+   </register>
+   <register>
+      <name>Match</name>
+      <memory base="$base" width="word" offset="0x04"></memory>
+      <access>RW</access>
+      <width>32</width>
+   </register>
+   <register>
+      <name>Interrupt Status</name>
+      <memory base="$base" width="word" offset="0x08"></memory>
+      <access>RO</access>
+      <width>1</width>
+   </register>
+   <register>
+      <name>Interrupt Clear</name>
+      <memory base="$base" width="word" offset="0x08"></memory>
+      <access>WO</access>
+      <width>0</width>
+   </register>
+   <register>
+      <name>Count Load</name>
+      <memory base="$base" width="word" offset="0xc"></memory>
+      <access>RW</access>
+      <width>32</width>
+   </register>
+   <register>
+      <name>Control</name>
+      <memory base="$base" width="word" offset="0x10"></memory>
+      <access>RW</access>
+      <width>1</width>
+   </register>
+</module>
+
+<module>
+   <!-- The following data was obtained from reference [4]. -->
+   <type>Integrator_System_Controller</type>
+   <register>
+      <name>Id</name>
+      <memory base="$base" width="word" offset="0x00"></memory>
+      <access>RO</access>
+      <width>32</width>
+      <display>SC_ID</display>
+   </register>
+   <register>
+      <name>Oscillator</name>
+      <memory base="$base" width="word" offset="0x04"></memory>
+      <access>RW</access>
+      <width>9</width>
+      <display>SC_OSC</display>
+   </register>
+   <register>
+      <name>ControlSet</name>
+      <memory base="$base" width="word" offset="0x08"></memory>
+      <access>RW</access>
+      <width>8</width>
+      <display>SC_CTRL</display>
+   </register>
+   <register>
+      <name>ControlClear</name>
+      <memory base="$base" width="word" offset="0x0c"></memory>
+      <access>RW</access>
+      <width>8</width>
+      <display>SC_CTRL</display>
+   </register>
+   <register>
+      <name>DecoderStatus</name>
+      <memory base="$base" width="word" offset="0x10"></memory>
+      <access>RO</access>
+      <width>8</width>
+      <display>SC_DEC</display>
+   </register>
+   <register>
+      <name>ArbiterCounts</name>
+      <memory base="$base" width="word" offset="0x14"></memory>
+      <access>RW</access>
+      <width>8</width>
+   </register>
+   <register>
+      <name>PCIControl</name>
+      <memory base="$base" width="word" offset="0x18"></memory>
+      <access>RW</access>
+      <width>8</width>
+      <display>SC_PCI</display>
+   </register>
+   <register>
+      <name>Lock</name>
+      <memory base="$base" width="word" offset="0x1C"></memory>
+      <access>RW</access>
+      <width>17</width>
+      <display>SC_LOCK</display>
+   </register>
+   <register>
+      <name>PCIFaultAddress</name>
+      <memory base="$base" width="word" offset="0x20"></memory>
+      <access>RO</access>
+      <width>32</width>
+   </register>
+   <register>
+      <name>PCIFaultCode</name>
+      <memory base="$base" width="word" offset="0x24"></memory>
+      <access>RO</access>
+      <width>8</width>
+      <display>SC_LBFCODE</display>
+   </register>
+</module>
+
+<module>
+   <!-- The following data was obtained from reference [4]. -->
+   <type>Integrator_Timer</type>
+   <register>
+      <name>Timer 0 Load</name>
+      <memory base="$base" width="word" offset="0x00"></memory>
+      <access>RW</access>
+      <width>16</width>
+   </register>
+   <register>
+      <name>Timer 0 Value</name>
+      <memory base="$base" width="word" offset="0x04"></memory>
+      <access>RO</access>
+      <width>16</width>
+   </register>
+   <register>
+      <name>Timer 0 Control</name>
+      <memory base="$base" width="word" offset="0x08"></memory>
+      <access>RW</access>
+      <width>16</width>
+      <display>TIMERx_CTRL</display>
+   </register>
+   <register>
+      <name>Timer 0 Clear</name>
+      <memory base="$base" width="word" offset="0x0c"></memory>
+      <access>WO</access>
+      <width>1</width>
+   </register>
+</module>
+
+<module>
+  <type>RPS_Interrupt_Controller</type>
+  <register>
+     <name>IRQStatus</name>
+     <memory base="$base" width="word" offset="0"></memory>
+     <access>RO</access>
+     <width>32</width>
+  </register>
+  <register>
+     <name>IRQRawStatus</name>
+     <memory base="$base" width="word" offset="4"></memory>
+     <access>RO</access>
+     <width>32</width>
+  </register>
+  <register>
+     <name>IRQEnable</name>
+     <memory base="$base" width="word" offset="8"></memory>
+     <access>RO</access>
+     <width>32</width>
+  </register>
+  <register>
+     <name>IRQEnableSet</name>
+     <memory base="$base" width="word" offset="8"></memory>
+     <access>WO</access>
+     <width>32</width>
+  </register>
+  <register>
+     <name>IRQEnableClear</name>
+     <memory base="$base" width="word" offset="0xc"></memory>
+     <access>WO</access>
+     <width>32</width>
+  </register>
+  <register>
+     <name>IRQSoft</name>
+     <memory base="$base" width="word" offset="0x10"></memory>
+     <access>WO</access>
+     <width>32</width>
+  </register>
+  <register>
+     <name>FIQStatus</name>
+     <memory base="$base" width="word" offset="0x100"></memory>
+     <access>RO</access>
+     <width>32</width>
+  </register>
+  <register>
+     <name>FIQRawStatus</name>
+     <memory base="$base" width="word" offset="0x104"></memory>
+     <access>RO</access>
+     <width>32</width>
+  </register>
+  <register>
+     <name>FIQEnable</name>
+     <memory base="$base" width="word" offset="0x108"></memory>
+     <access>RO</access>
+     <width>32</width>
+  </register>
+  <register>
+     <name>FIQEnableSet</name>
+     <memory base="$base" width="word" offset="0x108"></memory>
+     <access>WO</access>
+     <width>32</width>
+  </register>
+  <register>
+     <name>FIQEnableClear</name>
+     <memory base="$base" width="word" offset="0x10c"></memory>
+     <access>WO</access>
+     <width>32</width>
+  </register>
+</module>
+
+<module>
+   <!-- The following data was obtained from reference [4]. -->
+   <type>Integrator_UART</type>
+   <register>
+      <name>Data</name>
+      <memory base="$base" width="byte" offset="0x00"></memory>
+      <access>WO</access>
+      <width>8</width>
+   </register>
+   <register>
+      <name>Receive Status</name>
+      <memory base="$base" width="byte" offset="0x04"></memory>
+      <access>RO</access>
+      <width>8</width>
+      <display>UART_RSR</display>
+   </register>
+   <register>
+      <name>Error Clear</name>
+      <memory base="$base" width="byte" offset="0x04"></memory>
+      <access>WO</access>
+      <width>8</width>
+   </register>
+   <register>
+      <name>Line Control High</name>
+      <memory base="$base" width="byte" offset="0x08"></memory>
+      <access>RW</access>
+      <width>8</width>
+      <display>UART_LCRH</display>
+   </register>
+   <register>
+      <name>Line Control Middle</name>
+      <memory base="$base" width="byte" offset="0x0c"></memory>
+      <access>RW</access>
+      <width>8</width>
+   </register>
+   <register>
+      <name>Line Control Low</name>
+      <memory base="$base" width="byte" offset="0x10"></memory>
+      <access>RW</access>
+      <width>8</width>
+   </register>
+   <register>
+      <name>Control</name>
+      <memory base="$base" width="byte" offset="0x14"></memory>
+      <access>RW</access>
+      <width>8</width>
+      <display>UART_CR</display>
+   </register>
+   <register>
+      <name>Status Flags</name>
+      <memory base="$base" width="byte" offset="0x18"></memory>
+      <access>RO</access>
+      <width>8</width>
+      <display>UART_FR</display>
+   </register>
+   <register>
+      <name>Interrupt Status</name>
+      <memory base="$base" width="byte" offset="0x1c"></memory>
+      <access>RO</access>
+      <width>8</width>
+   </register>
+   <register>
+      <name>Interrupt Clear</name>
+      <memory base="$base" width="byte" offset="0x1c"></memory>
+      <access>WO</access>
+      <width>8</width>
+      <display>UART_IIR</display>
+   </register>
+</module>
+
+
+<module>
+  <type>RPS_Interrupt_Controller_CM</type>
+  <register>
+     <name>IRQStatus</name>
+     <memory base="$base" width="word" offset="0x40"></memory>
+     <access>RO</access>
+     <width>32</width>
+     <display>CM_IRQ</display>
+  </register>
+  <register>
+     <name>IRQRawStatus</name>
+     <memory base="$base" width="word" offset="0x44"></memory>
+     <access>RO</access>
+     <width>32</width>
+     <display>CM_IRQ_RAW</display>
+  </register>
+  <register>
+     <name>IRQEnable</name>
+     <memory base="$base" width="word" offset="0x48"></memory>
+     <access>RO</access>
+     <width>32</width>
+     <display>CM_IRQ_ENA</display>
+  </register>
+  <register>
+     <name>IRQEnableSet</name>
+     <memory base="$base" width="word" offset="0x48"></memory>
+     <access>WO</access>
+     <width>32</width>
+     <display>CM_IRQ_ENS</display>
+  </register>
+  <register>
+     <name>IRQEnableClear</name>
+     <memory base="$base" width="word" offset="0x4c"></memory>
+     <access>WO</access>
+     <width>32</width>
+     <display>CM_IRQ_ENC</display>
+  </register>
+  <register>
+     <name>IRQSoftStatus</name>
+     <memory base="$base" width="word" offset="0x50"></memory>
+     <access>RO</access>
+     <width>32</width>
+     <display>CM_SOFT_INT</display>
+  </register>
+  <register>
+     <name>IRQSoftSet</name>
+     <memory base="$base" width="word" offset="0x50"></memory>
+     <access>WO</access>
+     <width>32</width>
+     <display>CM_SOFT_INTS</display>
+  </register>
+  <register>
+     <name>IRQSoftClear</name>
+     <memory base="$base" width="word" offset="0x54"></memory>
+     <access>WO</access>
+     <width>32</width>
+     <display>CM_SOFT_INTC</display>
+  </register>
+  <register>
+     <name>FIQStatus</name>
+     <memory base="$base" width="word" offset="0x60"></memory>
+     <access>RO</access>
+     <width>32</width>
+     <display>CM_FIQ</display>
+  </register>
+  <register>
+     <name>FIQRawStatus</name>
+     <memory base="$base" width="word" offset="0x64"></memory>
+     <access>RO</access>
+     <width>32</width>
+     <display>CM_FIQ_RAW</display>
+  </register>
+  <register>
+     <name>FIQEnable</name>
+     <memory base="$base" width="word" offset="0x68"></memory>
+     <access>RO</access>
+     <width>32</width>
+     <display>CM_FIQ_EN</display>
+  </register>
+  <register>
+     <name>FIQEnableSet</name>
+     <memory base="$base" width="word" offset="0x68"></memory>
+     <access>WO</access>
+     <width>32</width>
+     <display>CM_FIQ_ENS</display>
+  </register>
+  <register>
+     <name>FIQEnableClear</name>
+     <memory base="$base" width="word" offset="0x6c"></memory>
+     <access>WO</access>
+     <width>32</width>
+     <display>CM_FIQ_ENC</display>
+  </register>
+</module>
+
+<module>
+  <type>RPS_Interrupt_Controller_PID</type>
+  <register>
+     <name>IRQStatus</name>
+     <memory base="$base" width="word" offset="0"></memory>
+     <access>RO</access>
+     <width>32</width>
+  </register>
+  <register>
+     <name>IRQRawStatus</name>
+     <memory base="$base" width="word" offset="4"></memory>
+     <access>RO</access>
+     <width>32</width>
+  </register>
+  <register>
+     <name>IRQEnable</name>
+     <memory base="$base" width="word" offset="8"></memory>
+     <access>RO</access>
+     <width>32</width>
+  </register>
+  <register>
+     <name>IRQEnableSet</name>
+     <memory base="$base" width="word" offset="8"></memory>
+     <access>WO</access>
+     <width>32</width>
+  </register>
+  <register>
+     <name>IRQEnableClear</name>
+     <memory base="$base" width="word" offset="0xc"></memory>
+     <access>WO</access>
+     <width>32</width>
+  </register>
+  <register>
+     <name>IRQSoft</name>
+     <memory base="$base" width="word" offset="0x10"></memory>
+     <access>WO</access>
+     <width>32</width>
+  </register>
+  <register>
+     <name>FIQStatus</name>
+     <memory base="$base" width="word" offset="0x100"></memory>
+     <access>RO</access>
+     <width>32</width>
+  </register>
+  <register>
+     <name>FIQRawStatus</name>
+     <memory base="$base" width="word" offset="0x104"></memory>
+     <access>RO</access>
+     <width>32</width>
+  </register>
+  <register>
+     <name>FIQEnable</name>
+     <memory base="$base" width="word" offset="0x108"></memory>
+     <access>RO</access>
+     <width>32</width>
+  </register>
+  <register>
+     <name>FIQEnableSet</name>
+     <memory base="$base" width="word" offset="0x108"></memory>
+     <access>WO</access>
+     <width>32</width>
+  </register>
+  <register>
+     <name>FIQEnableClear</name>
+     <memory base="$base" width="word" offset="0x10c"></memory>
+     <access>WO</access>
+     <width>32</width>
+  </register>
+  <register>
+     <name>FIQSource</name>
+     <memory base="$base" width="word" offset="0x114"></memory>
+     <access>RW</access>
+     <width>32</width>
+  </register>
+</module>
+
+<module>
+  <type>RPS_Timer</type>
+  <register>
+     <name>Load</name>
+     <bank>Timer 1</bank>
+     <memory base="$base" width="word" offset="0"></memory>
+     <access>RW</access>
+     <width>16</width>
+  </register>
+  <register>
+     <name>Value</name>
+     <bank>Timer 1</bank>
+     <memory base="$base" width="word" offset="0x4"></memory>
+     <access>RO</access>
+     <width>16</width>
+  </register>
+  <register>
+     <name>Control</name>
+     <bank>Timer 1</bank>
+     <memory base="$base" width="word" offset="0x8"></memory>
+     <access>RW</access>
+     <width>32</width>
+  </register>
+  <register>
+     <name>Clear</name>
+     <bank>Timer 1</bank>
+     <memory base="$base" width="word" offset="0xc"></memory>
+     <access>WO</access>
+     <width>32</width>
+  </register>
+  <register>
+     <name>Load</name>
+     <bank>Timer 2</bank>
+     <memory base="$base" width="word" offset="0x20"></memory>
+     <access>RW</access>
+     <width>16</width>
+  </register>
+  <register>
+     <name>Value</name>
+     <bank>Timer 2</bank>
+     <memory base="$base" width="word" offset="0x24"></memory>
+     <access>RO</access>
+     <width>16</width>
+  </register>
+  <register>
+     <name>Control</name>
+     <bank>Timer 2</bank>
+     <memory base="$base" width="word" offset="0x28"></memory>
+     <access>RW</access>
+     <width>32</width>
+  </register>
+  <register>
+     <name>Clear</name>
+     <bank>Timer 2</bank>
+     <memory base="$base" width="word" offset="0x2c"></memory>
+     <access>WO</access>
+     <width>32</width>
+  </register>
+</module>
+
+<module>
+  <type>RPS_Remap_and_Pause</type>
+  <register>
+     <name>Pause</name>
+     <memory base="$base" width="word" offset="0"></memory>
+     <access>WO</access>
+     <width>32</width>
+  </register>
+  <register>
+     <name>ID</name>
+     <memory base="$base" width="word" offset="0x10"></memory>
+     <access>RO</access>
+     <width>32</width>
+  </register>
+  <register>
+     <name>ClearResetMap</name>
+     <memory base="$base" width="word" offset="0x20"></memory>
+     <access>WO</access>
+     <width>32</width>
+  </register>
+  <register>
+     <name>ResetStatus</name>
+     <memory base="$base" width="word" offset="0x30"></memory>
+     <access>RO</access>
+     <width>32</width>
+  </register>
+  <register>
+     <name>ResetStatusSet</name>
+     <memory base="$base" width="word" offset="0x30"></memory>
+     <access>WO</access>
+     <width>32</width>
+  </register>
+  <register>
+     <name>ResetStatusClear</name>
+     <memory base="$base" width="word" offset="0x34"></memory>
+     <access>WO</access>
+     <width>32</width>
+  </register>
+</module>
+
+<module>
+  <type>VG-468_PCMCIA</type>
+  <register>
+     <name>Control</name>
+     <memory base="$base" width="word" offset="0"></memory>
+     <access>WO</access>
+     <width>8</width>
+  </register>
+  <register>
+     <name>Data read</name>
+     <memory base="$base" width="word" offset="1"></memory>
+     <access>RO</access>
+     <width>8</width>
+  </register>
+  <register>
+     <name>Data write</name>
+     <memory base="$base" width="word" offset="1"></memory>
+     <access>WO</access>
+     <width>8</width>
+  </register>
+</module>
+
+<module>
+  <type>ST16C552_SERIAL</type>
+  <!--
+  <register>
+     <name>Rx Holding</name>
+     <memory base="$base" width="word" offset="0"></memory>
+     <access>RO</access>
+     <width>32</width>
+  </register>
+  -->
+  <register>
+     <name>Tx Holding</name>
+     <memory base="$base" width="word" offset="0"></memory>
+     <access>WO</access>
+     <width>32</width>
+  </register>
+  <register>
+     <name>Interrupt Enable</name>
+     <memory base="$base" width="word" offset="4"></memory>
+     <access>WO</access>
+     <width>32</width>
+  </register>
+  <register>
+     <name>Interrupt Status</name>
+     <memory base="$base" width="word" offset="8"></memory>
+     <access>RO</access>
+     <width>32</width>
+  </register>
+  <register>
+     <name>FIFO Control</name>
+     <memory base="$base" width="word" offset="8"></memory>
+     <access>WO</access>
+     <width>32</width>
+  </register>
+  <register>
+     <name>Line Control</name>
+     <memory base="$base" width="word" offset="0xc"></memory>
+     <access>RO</access>
+     <width>32</width>
+  </register>
+  <register>
+     <name>Modem Control</name>
+     <memory base="$base" width="word" offset="0x10"></memory>
+     <access>WO</access>
+     <width>32</width>
+  </register>
+  <register>
+     <name>Line Status</name>
+     <memory base="$base" width="word" offset="0x14"></memory>
+     <access>RO</access>
+     <width>32</width>
+  </register>
+  <register>
+     <name>Modem Status</name>
+     <memory base="$base" width="word" offset="0x18"></memory>
+     <access>RO</access>
+     <width>32</width>
+  </register>
+  <register>
+     <name>Scratchpad</name>
+     <memory base="$base" width="word" offset="0x1c"></memory>
+     <access>RW</access>
+     <width>32</width>
+  </register>
+</module>
+
+<module>
+  <type>ST16C552_PARALLEL</type>
+   <register>
+     <name>Data</name>
+     <memory base="$base" width="word" offset="0x0"></memory>
+     <access>RW</access>
+     <width>32</width>
+  </register>
+  <register>
+     <name>Status</name>
+     <memory base="$base" width="word" offset="0x4"></memory>
+     <access>RO</access>
+     <width>32</width>
+  </register>
+  <register>
+     <name>I/O Select</name>
+     <memory base="$base" width="word" offset="0x4"></memory>
+     <access>WO</access>
+     <width>32</width>
+  </register>
+  <register>
+     <name>Command</name>
+     <memory base="$base" width="word" offset="0x8"></memory>
+     <access>RO</access>
+     <width>32</width>
+  </register>
+  <register>
+     <name>Control</name>
+     <memory base="$base" width="word" offset="0x8"></memory>
+     <access>WO</access>
+     <width>32</width>
+  </register>
+</module>
+
+<board>
+  <name>ARM Evaluation Board</name>
+  <component>
+    <name>Cache</name>
+    <type>AEB_Cache</type>
+    <base>0xFFFFA400</base>
+  </component>
+  <component>
+    <name>Clock Power Management</name>
+    <type>AEB_Clock_Power_Management</type>
+    <base>0xFFFFAC00</base>
+  </component>
+  <component>
+    <name>Counter / Timers</name>
+    <type>AEB_Counter_Timers</type>
+    <base>0xFFFF1800</base>
+  </component>
+  <component>
+    <name>Interrupt Controller</name>
+    <type>AEB_Interrupt_Controller</type>
+    <base>0xFFFFA800</base>
+  </component>
+  <component>
+    <name>I/O Configuration</name>
+    <type>AEB_IO_Configuration</type>
+    <base>0xFFFFA410</base>
+  </component>
+  <component>
+    <name>LCD Controller</name>
+    <type>AEB_LCD_Controller</type>
+    <base>0xFFFF1400</base>
+  </component>
+  <component>
+    <name>Local SRAM</name>
+    <type>AEB_Local_SRAM</type>
+    <base>0xFFFFA404</base>
+  </component>
+  <component>
+    <name>Memory and Peripherals</name>
+    <type>AEB_Memory_Peripherals</type>
+    <base>0xFFFFA000</base>
+  </component>
+  <component>
+    <name>PPI</name>
+    <type>AEB_PPI</type>
+    <base>0xFFFF1C00</base>
+  </component>
+  <component>
+    <name>PWM</name>
+    <type>AEB_PWM</type>
+    <base>0xFFFF1000</base>
+  </component>
+  <component>
+    <name>Reset</name>
+    <type>AEB_Reset</type>
+    <base>0xFFFFAC38</base>
+  </component>
+  <component>
+    <name>SIR</name>
+    <type>AEB_SIR</type>
+    <base>0xFFFF0C00</base>
+  </component>
+  <component>
+    <name>UART0</name>
+    <type>AEB_UART</type>
+    <base>0xFFFF0000</base>
+  </component>
+  <component>
+    <name>UART1</name>
+    <type>AEB_UART</type>
+    <base>0xFFFF0400</base>
+  </component>
+  <component>
+    <name>UART2</name>
+    <type>AEB_UART</type>
+    <base>0xFFFF0800</base>
+  </component>
+  <component>
+    <name>Watchdog Timer</name>
+    <type>AEB_Watchdog_Timer</type>
+    <base>0xFFFFAC30</base>
+  </component>
+</board>
+
+<board>
+  <!-- The following data was obtained from reference [1]. -->
+  <name>CM7TDMI</name>
+  <component>
+     <name>CM7TDMI Generic</name>
+     <type>CM7TDMI_Generic</type>
+     <base>0x10000000</base>
+  </component>
+  <component>
+     <name>CM7TDMI Interrupt Controller</name>
+     <type>RPS_Interrupt_Controller_CM</type>
+     <base>0x10000000</base>
+  </component>
+</board>
+
+<board>
+  <!-- The following data was obtained from reference [2]. -->
+  <name>CM946E-S</name>
+  <component>
+     <name>CM946E-S Generic</name>
+     <type>CM9x6E-S_Generic</type>
+     <base>0x10000000</base>
+  </component>
+  <component>
+     <name>CM946E-S Flags</name>
+     <type>CM9x6E-S_Flags</type>
+     <base>0x10000000</base>
+  </component>
+  <component>
+     <name>CM946E-S Interrupt Controller</name>
+     <type>RPS_Interrupt_Controller_CM</type>
+     <base>0x10000000</base>
+  </component>
+</board>
+
+<board>
+  <!-- The following data was obtained from references [2,4]. -->
+  <name>CM946E-S + Integrator</name>
+  <component>
+     <name>CM946E-S Generic</name>
+     <type>CM9x6E-S_Generic</type>
+     <base>0x10000000</base>
+  </component>
+  <component>
+     <name>CM946E-S Flags</name>
+     <type>CM9x6E-S_Flags</type>
+     <base>0x10000000</base>
+  </component>
+  <component>
+     <name>CM946E-S Interrupt Controller</name>
+     <type>RPS_Interrupt_Controller_CM</type>
+     <base>0x10000000</base>
+  </component>
+  <component>
+        <name>Integrator EBI</name>
+        <type>Integrator_EBI</type>
+        <base>0x12000000</base>
+  </component>
+  <component>
+     <name>Integrator GPIO</name>
+     <type>Integrator_GPIO</type>
+     <base>0x1B000000</base>
+  </component>
+  <component>
+     <name>Integrator Interrupt Controller</name>
+     <type>Integrator_Interrupt_Controller</type>
+     <base>0x14000000</base>
+  </component>
+  <component>
+     <name>Integrator Keyboard</name>
+     <type>Integrator_KMI</type>
+     <base>0x18000000</base>
+  </component>
+  <component>
+     <name>Integrator LEDs</name>
+     <type>Integrator_LEDs</type>
+     <base>0x1A000000</base>
+  </component>
+  <component>
+     <name>Integrator Mouse</name>
+     <type>Integrator_KMI</type>
+     <base>0x19000000</base>
+  </component>
+  <component>
+     <name>Integrator RTC</name>
+     <type>Integrator_RTC</type>
+     <base>0x15000000</base>
+  </component>
+  <component>
+     <name>Integrator System Controller</name>
+     <type>Integrator_System_Controller</type>
+     <base>0x11000000</base>
+  </component>
+  <component>
+     <name>Integrator Timer 0</name>
+     <type>Integrator_Timer</type>
+     <base>0x13000000</base>
+  </component>
+  <component>
+     <name>Integrator Timer 1</name>
+     <type>Integrator_Timer</type>
+     <base>0x13000100</base>
+  </component>
+  <component>
+     <name>Integrator Timer 2</name>
+     <type>Integrator_Timer</type>
+     <base>0x13000200</base>
+  </component>
+  <component>
+     <name>Integrator UART 0</name>
+     <type>Integrator_UART</type>
+     <base>0x16000000</base>
+  </component>
+  <component>
+     <name>Integrator UART 1</name>
+     <type>Integrator_UART</type>
+     <base>0x17000000</base>
+  </component>
+</board>
+
+<board>
+  <!-- The following data was obtained from reference [2]. -->
+  <name>CM966E-S</name>
+  <component>
+     <name>CM966E-S Generic</name>
+     <type>CM9x6E-S_Generic</type>
+     <base>0x10000000</base>
+  </component>
+  <component>
+     <name>CM966E-S Flags</name>
+     <type>CM9x6E-S_Flags</type>
+     <base>0x10000000</base>
+  </component>
+  <component>
+     <name>CM966E-S Interrupt Controller</name>
+     <type>RPS_Interrupt_Controller_CM</type>
+     <base>0x10000000</base>
+  </component>
+</board>
+
+<board>
+  <!-- The following data was obtained from references [2,4]. -->
+  <name>CM966E-S + Integrator</name>
+  <component>
+     <name>CM966E-S Generic</name>
+     <type>CM9x6E-S_Generic</type>
+     <base>0x10000000</base>
+  </component>
+  <component>
+     <name>CM966E-S Flags</name>
+     <type>CM9x6E-S_Flags</type>
+     <base>0x10000000</base>
+  </component>
+  <component>
+     <name>CM966E-S Interrupt Controller</name>
+     <type>RPS_Interrupt_Controller_CM</type>
+     <base>0x10000000</base>
+  </component>
+  <component>
+        <name>Integrator EBI</name>
+        <type>Integrator_EBI</type>
+        <base>0x12000000</base>
+  </component>
+  <component>
+     <name>Integrator GPIO</name>
+     <type>Integrator_GPIO</type>
+     <base>0x1B000000</base>
+  </component>
+  <component>
+     <name>Integrator Interrupt Controller</name>
+     <type>Integrator_Interrupt_Controller</type>
+     <base>0x14000000</base>
+  </component>
+  <component>
+     <name>Integrator Keyboard</name>
+     <type>Integrator_KMI</type>
+     <base>0x18000000</base>
+  </component>
+  <component>
+     <name>Integrator LEDs</name>
+     <type>Integrator_LEDs</type>
+     <base>0x1A000000</base>
+  </component>
+  <component>
+     <name>Integrator Mouse</name>
+     <type>Integrator_KMI</type>
+     <base>0x19000000</base>
+  </component>
+  <component>
+     <name>Integrator RTC</name>
+     <type>Integrator_RTC</type>
+     <base>0x15000000</base>
+  </component>
+  <component>
+     <name>Integrator System Controller</name>
+     <type>Integrator_System_Controller</type>
+     <base>0x11000000</base>
+  </component>
+  <component>
+     <name>Integrator Timer 0</name>
+     <type>Integrator_Timer</type>
+     <base>0x13000000</base>
+  </component>
+  <component>
+     <name>Integrator Timer 1</name>
+     <type>Integrator_Timer</type>
+     <base>0x13000100</base>
+  </component>
+  <component>
+     <name>Integrator Timer 2</name>
+     <type>Integrator_Timer</type>
+     <base>0x13000200</base>
+  </component>
+  <component>
+     <name>Integrator UART 0</name>
+     <type>Integrator_UART</type>
+     <base>0x16000000</base>
+  </component>
+  <component>
+     <name>Integrator UART 1</name>
+     <type>Integrator_UART</type>
+     <base>0x17000000</base>
+  </component>
+</board>
+
+<board>
+  <!-- The following data was obtained from reference [3]. -->
+  <name>CM1020T</name>
+  <component>
+     <name>CM10200 Generic</name>
+     <type>CM10200_Generic</type>
+     <base>0x10000000</base>
+  </component>
+  <component>
+     <name>CM10200 Flags</name>
+     <type>CM10200_Flags</type>
+     <base>0x10000000</base>
+  </component>
+  <component>
+     <name>CM10200 Interrupt Controller</name>
+     <type>RPS_Interrupt_Controller_CM</type>
+     <base>0x10000000</base>
+  </component>
+</board>
+
+<board>
+  <!-- The following data was obtained from references [3,4]. -->
+  <name>CM1020T + Integrator</name>
+  <component>
+     <name>CM10200 Generic</name>
+     <type>CM10200_Generic</type>
+     <base>0x10000000</base>
+  </component>
+  <component>
+     <name>CM10200 Flags</name>
+     <type>CM10200_Flags</type>
+     <base>0x10000000</base>
+  </component>
+  <component>
+     <name>CM10200 Interrupt Controller</name>
+     <type>RPS_Interrupt_Controller_CM</type>
+     <base>0x10000000</base>
+  </component>
+  <component>
+        <name>Integrator EBI</name>
+        <type>Integrator_EBI</type>
+        <base>0x12000000</base>
+  </component>
+  <component>
+     <name>Integrator GPIO</name>
+     <type>Integrator_GPIO</type>
+     <base>0x1B000000</base>
+  </component>
+  <component>
+     <name>Integrator Interrupt Controller</name>
+     <type>Integrator_Interrupt_Controller</type>
+     <base>0x14000000</base>
+  </component>
+  <component>
+     <name>Integrator Keyboard</name>
+     <type>Integrator_KMI</type>
+     <base>0x18000000</base>
+  </component>
+  <component>
+     <name>Integrator LEDs</name>
+     <type>Integrator_LEDs</type>
+     <base>0x1A000000</base>
+  </component>
+  <component>
+     <name>Integrator Mouse</name>
+     <type>Integrator_KMI</type>
+     <base>0x19000000</base>
+  </component>
+  <component>
+     <name>Integrator RTC</name>
+     <type>Integrator_RTC</type>
+     <base>0x15000000</base>
+  </component>
+  <component>
+     <name>Integrator System Controller</name>
+     <type>Integrator_System_Controller</type>
+     <base>0x11000000</base>
+  </component>
+  <component>
+     <name>Integrator Timer 0</name>
+     <type>Integrator_Timer</type>
+     <base>0x13000000</base>
+  </component>
+  <component>
+     <name>Integrator Timer 1</name>
+     <type>Integrator_Timer</type>
+     <base>0x13000100</base>
+  </component>
+  <component>
+     <name>Integrator Timer 2</name>
+     <type>Integrator_Timer</type>
+     <base>0x13000200</base>
+  </component>
+  <component>
+     <name>Integrator UART 0</name>
+     <type>Integrator_UART</type>
+     <base>0x16000000</base>
+  </component>
+  <component>
+     <name>Integrator UART 1</name>
+     <type>Integrator_UART</type>
+     <base>0x17000000</base>
+  </component>
+</board>
+
+<board>
+  <name>PID</name>
+  <component>
+     <name>PID Interrupt Controller</name>
+     <type>RPS_Interrupt_Controller_PID</type>
+     <base>0x0A000000</base>
+  </component>
+  <component>
+     <name>PID Timer</name>
+     <type>RPS_Timer</type>
+     <base>0x0A800000</base>
+  </component>
+  <component>
+     <name>PID Remap and Pause</name>
+     <type>RPS_Remap_and_Pause</type>
+     <base>0x0B000000</base>
+  </component>
+  <component>
+     <name>PID PCMCIA</name>
+     <type>VG-468_PCMCIA</type>
+     <base>0x0C0007C0</base>
+  </component>
+  <component>
+     <name>PID Serial Port A</name>
+     <type>ST16C552_SERIAL</type>
+     <base>0x0D800000</base>
+  </component>
+  <component>
+     <name>PID Serial Port B</name>
+     <type>ST16C552_SERIAL</type>
+     <base>0x0D800020</base>
+  </component>
+  <component>
+     <name>PID Parallel Port</name>
+     <type>ST16C552_PARALLEL</type>
+     <base>0x0D800040</base>
+  </component>
+</board>
+
+<peripheral>
+  <name>RPS_Timer</name>
+  <component>
+     <name>Timer</name>
+     <type>RPS_Timer</type>
+     <base>0x0A800000</base>
+  </component>
+</peripheral>
+
+<peripheral>
+  <name>RPS_Interrupt_Controller</name>
+  <component>
+     <name>Interrupt Controller</name>
+     <type>RPS_Interrupt_Controller</type>
+     <base>0x0A000000</base>
+  </component>
+</peripheral>
+
+</armperip>
