@@ -18,6 +18,14 @@ This package for Windows platform contains the following tools:
 
 Unpack archive and copy all files to `C:\ARM` directory, add `C:\ARM` to `%PATH%` environment variable.
 
+## Install via Git Bash
+
+```sh
+cd /c/
+git clone https://github.com/MotoFanRu/ELFKIT_EP1_Windows.git ARM --depth=1 -b master
+git clone git@github.com:MotoFanRu/ELFKIT_EP1_Windows.git ARM --depth=1 -b master
+```
+
 ## Usage SDK
 
 Set proper paths to ADS compiler, libraries and SDK headers in `make.cmd`, `make.bat`, `build.cmd`, and other build scripts.
