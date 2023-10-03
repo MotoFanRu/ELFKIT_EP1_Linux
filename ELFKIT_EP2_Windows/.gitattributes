@@ -1,0 +1,10 @@
+*.bat text eol=crlf
+*.cmd text eol=crlf
+*.run text eol=crlf
+*.cfg text eol=crlf
+*.fpa text eol=crlf
+*.ini text eol=crlf
+*.sym text eol=crlf
+*.cmp text eol=crlf
+*.pat text eol=crlf
+*.def text eol=crlf
