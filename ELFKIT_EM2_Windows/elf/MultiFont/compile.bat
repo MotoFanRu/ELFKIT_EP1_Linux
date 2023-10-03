@@ -3,8 +3,8 @@
 set src_files=src\app.c
 set out_elfname=bin\MultiFont.elf
 
-set sdk_path=C:\MCORE\sdk
-set gcc_path=C:\MCORE\bin
+set sdk_path=C:\MCORE_EM2\sdk
+set gcc_path=C:\MCORE_EM2\bin
 
 set gcc_params=-x c -fshort-wchar -funsigned-char -fomit-frame-pointer -fno-builtin -m340 -m4align -mbig-endian -nostdinc -nostdlib
 set ld_params=-d -EB -N -r -s -Bstatic -Bsymbolic -Bsymbolic-functions --gc-sections -nostdinc -nostdlib --unresolved-symbols=report-all -z muldefs -z combreloc -z nodefaultlib

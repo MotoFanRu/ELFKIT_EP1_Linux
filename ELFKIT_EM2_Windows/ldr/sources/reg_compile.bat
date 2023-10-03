@@ -2,8 +2,8 @@
 
 set src_files=reg_src\main.c
 
-set sdk_path=C:\MCORE\sdk
-set gcc_path=C:\MCORE\bin
+set sdk_path=C:\MCORE_EM2\sdk
+set gcc_path=C:\MCORE_EM2\bin
 
 set lib_path=lib.bin
 set out_name=elfloader.bin
