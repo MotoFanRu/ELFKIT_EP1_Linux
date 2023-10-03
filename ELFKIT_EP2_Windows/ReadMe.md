@@ -16,7 +16,7 @@ Unpack archive and copy all files to `C:\devkitARM` directory, add  `C:\devkitAR
 
 ## Install via Git Bash
 
-```bat
+```sh
 cd /c/
 git clone https://github.com/MotoFanRu/ELFKIT_EP2_Windows.git devkitARM --depth=1 -b master
 git clone git@github.com:MotoFanRu/ELFKIT_EP2_Windows.git devkitARM --depth=1 -b master
