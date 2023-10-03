@@ -1,0 +1,10 @@
+elf/*/*.o
+
+ldr/sources/ldr.bin
+ldr/sources/elfloader.fpa
+
+ldr/sources/*.o
+ldr/sources/*.obj
+ldr/sources/*.out
+ldr/sources/*.elf
+ldr/sources/lib.asm

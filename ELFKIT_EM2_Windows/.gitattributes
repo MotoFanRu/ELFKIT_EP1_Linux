@@ -1,0 +1,6 @@
+*.bat text eol=crlf
+*.cmd text eol=crlf
+*.ini text eol=crlf
+*.sym text eol=crlf
+*.pat text eol=crlf
+*.fpa text eol=crlf
