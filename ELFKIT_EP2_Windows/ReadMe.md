@@ -14,6 +14,14 @@ This package for Windows platform contains the following tools:
 
 Unpack archive and copy all files to `C:\devkitARM` directory, add  `C:\devkitARM\bin` to `%PATH%` environment variable (optional).
 
+## Install via Git Bash
+
+```bat
+cd /c/
+git clone https://github.com/MotoFanRu/ELFKIT_EP2_Windows.git devkitARM --depth=1 -b master
+git clone git@github.com:MotoFanRu/ELFKIT_EP2_Windows.git devkitARM --depth=1 -b master
+```
+
 ## Usage SDK
 
 Set proper paths to GCC compiler, libraries and SDK headers in `make.cmd`, `make.bat`, `build.cmd`, and other build scripts.
