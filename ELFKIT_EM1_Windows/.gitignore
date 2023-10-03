@@ -1,0 +1,7 @@
+applications/*.elf
+applications/*/*.o
+
+elf_loader_spawner/functions.elf
+elf_loader_spawner/out.bin
+
+elfloader/ldr.bin
