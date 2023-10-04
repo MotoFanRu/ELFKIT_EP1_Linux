@@ -1,0 +1,29 @@
+compilers:
+  - description: Thumb C Compiler, ADS1.2 [Build 848]
+    match-sources: ".*\\.c"
+    match-language: C
+    match-compiler-exe: "(.*/)?tcc(\\.exe)?"
+    code-insight-target-name: arm7tdmi
+    include-dirs: [ "${compiler-exe-dir}/SDK", "${compiler-exe-dir}/SDK/lib" ]
+    defines-text: ""
+  - description: Thumb C++ Compiler, ADS1.2 [Build 848]
+    match-sources: [".*\\.cpp", ".*\\.cxx", ".*\\.C"]
+    match-language: CPP
+    match-compiler-exe: "(.*/)?tcpp(\\.exe)?"
+    code-insight-target-name: arm7tdmi
+    include-dirs: [ "${compiler-exe-dir}/SDK", "${compiler-exe-dir}/SDK/lib" ]
+    defines-text: ""
+  - description: ARM C Compiler, ADS1.2 [Build 848]
+    match-sources: ".*\\.c"
+    match-language: C
+    match-compiler-exe: "(.*/)?armcc(\\.exe)?"
+    code-insight-target-name: arm7tdmi
+    include-dirs: [ "${compiler-exe-dir}/SDK", "${compiler-exe-dir}/SDK/lib" ]
+    defines-text: ""
+  - description: ARM C++ Compiler, ADS1.2 [Build 848]
+    match-sources: [".*\\.cpp", ".*\\.cxx", ".*\\.C"]
+    match-language: CPP
+    match-compiler-exe: "(.*/)?tcpp(\\.exe)?"
+    code-insight-target-name: arm7tdmi
+    include-dirs: [ "${compiler-exe-dir}/SDK", "${compiler-exe-dir}/SDK/lib" ]
+    defines-text: ""
