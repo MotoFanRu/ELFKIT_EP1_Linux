@@ -21,6 +21,14 @@ sudo tar -xvf arm.tar -C /opt
 echo 'PATH=$PATH:/opt/arm/bin' >> ~/.bashrc
 ```
 
+## Install via Git
+
+```sh
+cd /opt
+git clone https://github.com/MotoFanRu/ELFKIT_EP1_Linux.git arm --depth=1 -b master
+git clone git@github.com:MotoFanRu/ELFKIT_EP1_Linux.git arm --depth=1 -b master
+```
+
 ## Usage SDK
 
 Set proper paths to ADS compiler, libraries and SDK headers in `Makefile` build script.
