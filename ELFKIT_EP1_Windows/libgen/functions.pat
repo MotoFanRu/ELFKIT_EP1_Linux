@@ -668,3 +668,9 @@ flushWallpaperOnScreen A E92D401CE1A04000E5D00022E350000313500004
 # Additional SMS function for V600 and other
 
 DL_DbMessageGenericGetTotalMessage T B40FB5F0B087AE12CE60AB0070181C04
+
+######  Added by EXL, 17-Nov-2023  ########
+
+# Missing zlib reset function
+
+inflateReset T 2800D00269C12900D102200143C04770
