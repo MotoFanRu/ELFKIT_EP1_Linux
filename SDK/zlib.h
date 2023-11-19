@@ -38,6 +38,8 @@ int inflateEnd( z_stream * strm );
 int inflateInit2_(z_stream * strm, int windowBits,
 					const char * version, int stream_size);
 
+int inflateReset(z_stream * strm);
+
 #ifdef __cplusplus
 } /* extern "C" */
 #endif
