@@ -227,10 +227,14 @@ UINT32 APP_HandleUITokenRevoked( EVENT_STACK_T *ev_st,  APPLICATION_T *app );
 /* То же, что APP_UtilChangeState, но при этом ещё будет извлечён(consumed) event */
 UINT32 APP_UtilConsumeEvChangeState( UINT8 new_state,  EVENT_STACK_T *ev_st,  APPLICATION_T *app );
 
-
-// Имя приложения с app_id
+/* Имя приложения с app_id */
 UINT32 APP_UtilGetAppName( UINT16 app_id, char * app_name );
 
+/* Функция включения режима непрерывной подсветки. */
+void APP_MMC_UtilStopVariousTimers(void);
+
+/* Функция выключения режима непрерывной подсветки. */
+UINT32 APP_MMC_UtilRestartVariousTimers(void);
 
 #ifdef __cplusplus
 } /* extern "C" */
