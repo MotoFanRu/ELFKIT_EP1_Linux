@@ -44,7 +44,11 @@ int inflateReset(z_stream * strm);
 } /* extern "C" */
 #endif
 
+#if !defined(FTR_V600)
 #define inflateInit2(strm,windowBits)		inflateInit2_(strm,windowBits,"1.2.1",sizeof(z_stream))
+#else
+#define inflateInit2(strm,windowBits)		inflateInit2_(strm,windowBits,"1.1.3",sizeof(z_stream))
+#endif
 
 #ifndef MAX_WBITS
 #  define MAX_WBITS		15
