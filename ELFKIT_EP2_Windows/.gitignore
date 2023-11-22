@@ -1,5 +1,5 @@
 libgen/library.bin
-libgen/libs/*.bin
+!libgen/libs/*.bin
 !libgen/*_*-*-*.bin
 libgen/std.sa
 

@@ -709,6 +709,7 @@
 0x12745ED8 D theStatusManager
 0x10ADE928 A setCanvasControl__13StatusManagerFScPUs
 
+# Additional Functions
 0x10633C3E T DL_FsISearch
 0x10633ED4 T DL_FsSearch
 
@@ -716,3 +717,14 @@
 
 0x12744C70 D theWallpaper
 0x10B3AF40 A flushWallpaperOnScreen
+
+# Add missing functions, 23-Nov-2023
+0x106BBB9E T HAPI_BATTERY_ROM_get_unique_id
+0x106BBAC0 T HAPI_BATTERY_ROM_read
+0x10AF98F8 A UIS_CreateSelectionEditor
+0x10C1D928 T UtilLogStringData
+0x10098C3C A __rt_uwrite4
+0x106B5DBE T hPortRead
+0x106B5E4E T hPortWrite
+0x106FC980 T inflateReset
+0x10C1DF92 T u_utoa
