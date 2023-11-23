@@ -722,3 +722,31 @@
 0x002F C READY_STATUS
 0x0037 C PROVIDER_NAME_STATUS
 0x0079 C CALL_MISSED_STATUS
+
+# Added from Cool-T library, 23-Nov-2023
+0x03FAB6F4 T suDeleteTask
+0x03FAC9F8 T suCreateBSem
+0x03FACAC8 T suCreateCSem
+0x03FACBC4 T suCreateMSem
+0x03FACC9E T suDeleteSem
+0x03FACDDC T suReleaseSem
+0x03FACF12 T suAcquireSem
+0x1022791E T JavaSuspendApp
+0x102D71A8 A AhiDispState
+0x10643AE4 A DAL_GetCachedSurface
+0x10643B04 A DAL_GetCacheSize
+0x10B75BCC A setCanvasControl__13StatusManagerFScPUs
+0x146D99CC D theStatusManager
+
+# Added by EXL, 23-Nov-2023
+0x1075FBB8 T AmMemAllocPointer
+0x1075FBD4 T AmMemFreePointer
+0x1071C3B6 T HAPI_BATTERY_ROM_get_unique_id
+0x1071C2D8 T HAPI_BATTERY_ROM_read
+0x10099044 A __rt_uwrite4
+0x10B98DE4 A UIS_CreateSelectionEditor
+0x1071632C T hPortRead
+0x107163BC T hPortWrite
+0x1076C144 T inflateReset
+0x10CF21F8 T UtilLogStringData
+0x10CF2862 T u_utoa

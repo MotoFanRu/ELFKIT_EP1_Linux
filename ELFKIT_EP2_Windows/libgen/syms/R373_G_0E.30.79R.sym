@@ -688,3 +688,29 @@
 0x002F C UIS_NULL_DIALOG_TYPE
 
 0x1276B704 C UIS_FONT_INFO
+
+# Added from Cool-T library, 23-Nov-2023
+0x03FEAE60 T suDeleteTask
+0x03FECA5C T suCreateBSem
+0x03FECB2C T suCreateCSem
+0x03FECC28 T suCreateMSem
+0x03FECD02 T suDeleteSem
+0x03FECE40 T suReleaseSem
+0x03FECF76 T suAcquireSem
+0x102272AE T JavaSuspendApp
+0x102BC568 A AhiDispState
+0x10AEB470 A setCanvasControl__13StatusManagerFScPUs
+0x1276B094 D theStatusManager
+
+# Added by EXL, 23-Nov-2023
+0x107086DC T AmMemAllocPointer
+0x107086F8 T AmMemFreePointer
+0x106C41A4 T HAPI_BATTERY_ROM_read
+0x106C4282 T HAPI_BATTERY_ROM_get_unique_id
+0x10098C3C A __rt_uwrite4
+0x10B067D4 A UIS_CreateSelectionEditor
+0x106BE44A T hPortWrite
+0x106BE3BA T hPortRead
+0x10705284 T inflateReset
+0x10C30618 T UtilLogStringData
+0x10C30c82 T u_utoa
