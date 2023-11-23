@@ -568,7 +568,7 @@
 #0x103E3A78 D EV_CHANGE_MODE
 #0x1076148C D EV_SECURITY_UNLOCK_PHONE
 #0x1027FBE4 D EV_UIS_REFRESH
-#0x1407332C D Ram# не правильно
+#0x1407332C D Ram
 #0x111BF76C D _region_table
 
 
@@ -697,3 +697,30 @@
 
 #UIS dialogs
 0x0031 C UIS_NULL_DIALOG_TYPE
+
+# Added from Cool-T library, 23-Nov-2023
+0x03FC80A8 T suDeleteTask
+0x03FC9490 T suCreateBSem
+0x03FC9560 T suCreateCSem
+0x03FC965C T suCreateMSem
+0x03FC9736 T suDeleteSem
+0x03FC9874 T suReleaseSem
+0x03FC99AA T suAcquireSem
+0x10413FBC A setCanvasControl__13StatusManagerFScPUs
+0x10D2E760 A AhiDispState
+0x10D526AA T JavaSuspendApp
+0x143DA6E8 D theStatusManager
+
+# Added by EXL, 23-Nov-2023
+0x109936E8 A AhiDrawBgColorSet
+0x10D86560 T AmMemAllocPointer
+0x10D8657C T AmMemFreePointer
+0x10D8FDCA T HAPI_BATTERY_ROM_get_unique_id
+0x10D8FCEC T HAPI_BATTERY_ROM_read
+0x10C95838 A __rt_uwrite4
+0x1027B020 A UIS_CreateSelectionEditor
+0x108C6B92 T hPortWrite
+0x108C6B02 T hPortRead
+0x10E82D64 T inflateReset
+0x102AF4E8 T UtilLogStringData
+0x102AFB52 T u_utoa
