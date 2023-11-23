@@ -374,7 +374,7 @@
 0x10907278 T SEEM_FDI_OUTSIDE_SEEM_ACCESS_write
 0x10DC1BD6 T SEEM_GET_ADDRESS_LENGTH_element_length
 0x10DC1C14 T SEEM_MAX_RECORD_get_max_record
-0x40532E7C T SESSION_TIME
+0x40532E7C D SESSION_TIME
 0x111BD4A4 T snprintf
 0x111BD4FC T sprintf
 0x111BD3FC T srand
@@ -679,3 +679,31 @@
 
 #UIS dialogs
 0x0031 C UIS_NULL_DIALOG_TYPE
+
+# Added/Fixed from Cool-T library, 23-Nov-2023
+0x000008DE C EV_BT_POWER
+0x03FC4DAC T suDeleteTask
+0x03FC6194 T suCreateBSem
+0x03FC6264 T suCreateCSem
+0x03FC6360 T suCreateMSem
+0x03FC643A T suDeleteSem
+0x03FC6578 T suReleaseSem
+0x03FC66AE T suAcquireSem
+0x104142B4 A setCanvasControl__13StatusManagerFScPUs
+0x10D31C00 A AhiDispState
+0x10D51AC6 T JavaSuspendApp
+0x143D9E38 D theStatusManager
+
+# Added by EXL, 23-Nov-2023
+0x10D97E98 T AmMemAllocPointer
+0x10D97EB4 T AmMemFreePointer
+0x10D9E2C2 T HAPI_BATTERY_ROM_get_unique_id
+0x10D9E1E4 T HAPI_BATTERY_ROM_read
+0x111BD568 A __rt_uwrite4
+0x1027C1B4 A UIS_CreateSelectionEditor
+0x108C6926 T hPortRead
+0x108C69B6 T hPortWrite
+0x10E50740 T inflateReset
+0x102AFC02 T u_utoa
+0x102AF598 T UtilLogStringData
+0x10D31E20 A AhiDrawBgColorSet
