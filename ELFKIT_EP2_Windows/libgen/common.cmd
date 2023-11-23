@@ -10,7 +10,7 @@ if not defined fw (
 date /t >ver.txt
 set /p d=<ver.txt
 :: set /a version=%d:~8,2%%d:~3,2%%d:~0,2%1
-set /a version=2311231
+set /a version=2411231
 
 echo BUILD LIB %fw% %version%
 

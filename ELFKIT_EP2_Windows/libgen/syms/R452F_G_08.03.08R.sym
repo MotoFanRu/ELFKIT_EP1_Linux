@@ -65,7 +65,7 @@
 0x11016C8C A AhiDrawChar
 0x10E557A8 A AhiDrawClipDstSet
 0x10E5564C A AhiDrawClipSrcSet
-0x10E54490 A AhiDrawBgColorSet
+0x10E54494 A AhiDrawBgColorSet
 0x10E5438C A AhiDrawFgColorSet
 0x10A01904 A AhiDrawFlush
 0x1101728C A AhiDrawGlyph

@@ -624,3 +624,35 @@
 
 #UIS dialogs
 0x0031 C UIS_NULL_DIALOG_TYPE
+
+# Added from Cool-T library, 24-Nov-2023
+0x03FC6424 T suDeleteTask
+0x03FC7854 T suCreateBSem
+0x03FC7924 T suCreateCSem
+0x03FC7A20 T suCreateMSem
+0x03FC7AFA T suDeleteSem
+0x03FC7C38 T suReleaseSem
+0x03FC7D6E T suAcquireSem
+0x103BA60C A setCanvasControl__13StatusManagerFScPUs
+0x10CDB934 A AhiDispState
+0x10CFC99C T JavaSuspendApp
+0x143BA56C D theStatusManager
+
+# Added by EXL, 23-Nov-2023
+0x10CDBB54 A AhiDrawBgColorSet
+0x10D4C068 T AmMemAllocPointer
+0x10D4C084 T AmMemFreePointer
+0x10D51F72 T HAPI_BATTERY_ROM_get_unique_id
+0x10D51E94 T HAPI_BATTERY_ROM_read
+0x1087F262 T hPortWrite
+0x1087F1D2 T hPortRead
+0x10E05064 T inflateReset
+0x1118715C A __rt_uwrite4
+0x1024ADBC A UIS_CreateSelectionEditor
+0x115C0268 T UtilLogStringData
+0x115C08D2 T u_utoa
+0x104BAA20 T APP_MMC_UtilRestartVariousTimers
+0x104BACA2 T APP_MMC_UtilStopVariousTimers
+0x10CDAF84 A AhiDispModeGet
+0x10CDB7F4 A AhiDispModeSet
+0x10CDB5B4 A AhiDispUpdate
