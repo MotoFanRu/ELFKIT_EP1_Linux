@@ -1,4 +1,4 @@
-#<SYMDEFS># R4513_G_08.B7.ACR_RB
+#<SYMDEFS># EP 2.0, L7, R4513_G_08.B7.ACR_RB
 
 0x2484E000 D kpp
 0x10AB80F0 D product_version
@@ -706,3 +706,29 @@
 0x002F C UIS_NULL_DIALOG_TYPE
 
 0x12761D20 C UIS_FONT_INFO
+
+# Added from Cool-T library, 23-Nov-2023
+0x03FCCC30 T suDeleteTask
+0x03FCEBB8 T suCreateBSem
+0x03FCEC88 T suCreateCSem
+0x03FCED84 T suCreateMSem
+0x03FCEE5E T suDeleteSem
+0x03FCEF9C T suReleaseSem
+0x03FCF0D2 T suAcquireSem
+0x1023B3B0 T JavaSuspendApp
+0x102FAAA4 A AhiDispState
+0x10B9DDC4 A setCanvasControl__13StatusManagerFScPUs
+0x127616C0 D theStatusManager
+
+# Added by EXL, 23-Nov-2023
+0x1077AA64 T AmMemAllocPointer
+0x1077AA80 T AmMemFreePointer
+0x10735546 T HAPI_BATTERY_ROM_get_unique_id
+0x10735468 T HAPI_BATTERY_ROM_read
+0x10099084 A __rt_uwrite4
+0x10BB7EB0 A UIS_CreateSelectionEditor
+0x1072FAF0 T hPortWrite
+0x1072FA60 T hPortRead
+0x10787610 T inflateReset
+0x10D32A72 T u_utoa
+0x10D32408 T UtilLogStringData
