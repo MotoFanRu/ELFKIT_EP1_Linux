@@ -294,6 +294,7 @@ UINT16 DL_FsSearchResults(	FS_SEARCH_HANDLE_T		handle,
 
 UINT16 DL_FsSearchClose( FS_SEARCH_HANDLE_T handle );
 
+UINT32 URINameValid( WCHAR * uri );
 
 #ifdef __cplusplus
 } /* extern "C" */

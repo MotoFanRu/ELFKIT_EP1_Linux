@@ -455,6 +455,15 @@ UIS_DIALOG_T UIS_CreateCharacterEditor( SU_PORT_T       *port,
 UIS_DIALOG_T UIS_CreateViewer( SU_PORT_T  	   *port,
                                CONTENT_T       *contents,
                                ACTIONS_T       *actions );
+
+/* Создает диалог вывода контента, где заголовок и тело задаются отдельно */
+UIS_DIALOG_T
+UIS_CreateViewerWithTitle( SU_PORT_T *		port,
+							CONTENT_T *		title,
+							CONTENT_T *		body,
+							ACTIONS_T *		actions,
+							RESOURCE_ID		dlgres );
+
 // список с картинками и тестом                        
 UIS_DIALOG_T UIS_CreatePictureAndTextList( SU_PORT_T  	   *port,
                                            UINT32          param1,
@@ -465,9 +474,18 @@ UIS_DIALOG_T UIS_CreatePictureAndTextList( SU_PORT_T  	   *port,
                                            UINT8           param6, // = 1, try 0,2,...
                                            ACTIONS_T       *actions, 
                                            RESOURCE_ID     dlgres );
-// создаёт заставку 										   
+
+/* Создать диалог-заставку из файла (картинки) */
 UIS_DIALOG_T UIS_CreateSplashScreenFs( SU_PORT_T * port, WCHAR * uri, UINT32 unk );	// unk = 0x7D0
+
+/* Создает диалог-заставку из ресурса картинки */
 UIS_DIALOG_T UIS_CreateSplashScreen( SU_PORT_T * port, RESOURCE_ID img, UINT32 unk );	// unk = 0xD3 , 0x7D0
+
+/* Создает диалог "хранитель экрана" из картинки. Поддерживаются: GIF, JPG, PNG, BMP, и др. */
+UIS_DIALOG_T UIS_CreateScreenSaver( SU_PORT_T * post, WCHAR * uri );
+
+UIS_DIALOG_T
+UIS_CreateMixedContentViewer( SU_PORT_T * port, CONTENT_T * content, ACTIONS_T * action_list, RESOURCE_ID dlgres );
 
 // Создаёт прогрессбар
 UIS_DIALOG_T UIS_CreateProgressBar( SU_PORT_T		*port,
@@ -479,6 +497,13 @@ UIS_DIALOG_T UIS_CreateProgressBar( SU_PORT_T		*port,
 									const WCHAR			*meter_value,
 									ACTIONS_T		*actions,
 									RESOURCE_ID		dlgres );
+
+#if defined(EP1)
+// Ивенты для этого диалога
+#define EV_PB_SET_PERCENT		0x213F
+#define EV_PB_SET_VALUE_STR		0x2140
+#define EV_PB_SET_STR			0x2141
+#endif
 
 /***************************
  Скин
@@ -520,6 +545,8 @@ typedef union
 
 // запись инфы на рабочий стол
 UINT32 UIS_SetStatus(UINT8 status_id, STATUS_VALUE_T value);
+
+UINT32 UIS_SetStatusOff( UINT8 id, STATUS_VALUE_T status );
 
 // чтение инфы с рабочего стола
 UINT32 UIS_GetCurrentStatusValue(UINT8 status_id,  STATUS_VALUE_T *value);

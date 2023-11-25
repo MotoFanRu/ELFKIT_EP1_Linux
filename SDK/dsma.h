@@ -19,6 +19,11 @@
 
 typedef UINT32		CMD_NUM;
 
+typedef struct {
+
+} SOCKET_BUFFER_T;
+
+typedef struct _SOCKET_T SOCKET_T;				// Инкапсуляция структуры
 
 // proxy_state
 enum
@@ -182,7 +187,11 @@ DL_DSMA_ProxyWrite( UINT32 proxy_id, BYTE * buf, UINT32 size );
 UINT32
 DL_DSMA_ProxyRead( UINT32 proxy_id, BYTE * buf, UINT32 size );
 
+BOOL dl_wvim_alloc_socket_buff( SOCKET_BUFFER_T * buff, size_t size, BOOL param2 );	// param2 = FALSE
+void dl_wvim_socket_close( SOCKET_T * socket );
 
+// ф-ция сама выделяет память под буфер сокера :-\, возвращает сколько байт прочитано
+size_t dl_wvim_socket_read( SOCKET_T * socket );
 
 #ifdef __cplusplus
 }

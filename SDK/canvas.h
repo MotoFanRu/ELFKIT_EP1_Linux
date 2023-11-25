@@ -83,6 +83,7 @@ typedef struct
 #define COLOR_GREEN		(COLOR_T)(0x00FF0000)
 #define COLOR_BLUE		(COLOR_T)(0x0000FF00)
 #define COLOR_BLACK		(COLOR_T)(0x00000000)
+#define COLOR_TRANSPARENT	(COLOR_T)(0x000000FF)
 
 #ifdef WIN32
 	#ifdef RGB
@@ -322,6 +323,7 @@ UINT32 UIS_CanvasGetCurrentFonts ( UINT8 *working_font, UINT8 *softkey_font );
 
 //возвращает стиль шрифта
 UINT8 UIS_CanvasGetFontStyle(UIS_DIALOG_T handle);
+UINT8 UIS_CanvasGetFontId(UIS_DIALOG_T dialog);
 // задает стиль	шрифта
 UINT32 UIS_CanvasSetFontStyle(UINT8 font_style, UIS_DIALOG_T handle);
 // устанавливает шрифт canvas'а, font_id можно взять из langpack'а (CG4), значение 0x01 -- стандартный шрифт
@@ -379,6 +381,7 @@ UINT32 UIS_CanvasDrawWallpaper(CANVAS_IMAGE_HANDLE_T image_handle,
 							   WALLPAPER_LAYOUT_T layout,
 							   UIS_DIALOG_T handle);
 
+BOOL UIS_CanvasGetWallpaperFlag(UIS_DIALOG_T dialog);
 void UIS_CanvasSetWallpaperFlag(UIS_DIALOG_T handle, BOOL wallpaperFlag);
 
 UINT32 UIS_CanvasDrawColorBitmap( void*  picture_bytes,  // первый байт - ширина, второй байт высота
@@ -393,7 +396,11 @@ UINT32 UIS_CanvasDrawPicture ( 	UINT8* draw_buf,
 								COLOR_T foreground,
 								COLOR_T fill );
 
+UINT32 UIS_CanvasDrawBitmap(UINT8* p_buf, const BYTE* p_bitmap, GRAPHIC_REGION_T region, BOOL b_reverse);
 
+UINT32 UIS_CanvasFillRegion(UINT8 *	p_buf,		// UIS_DRAWING_BUFFER_T::p_buf
+					GRAPHIC_REGION_T	region,
+					UINT32		unk_0 );	// =0
 
 // открывает картинку
 CANVAS_IMAGE_HANDLE_T UIS_CanvasOpenImage(UINT8 picture_type,

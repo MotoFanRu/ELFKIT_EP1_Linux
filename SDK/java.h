@@ -35,7 +35,7 @@ UINT32 JavaStartApp( JAVA_APP_ID java_id,
 				UINT32	arg_0,	// =0
 				SU_PORT_T port
 				);
-
+//UINT32 JavaNotifyAlarm( WCHAR * title,  );
 
 JAVA_APP_ID JavaGetMidletSuite(JAVA_APP_ID java_id);
 JAVA_APP_ID JavaGetMIDletID(WCHAR *suite_name, WCHAR *midlet_name, WCHAR *vendor_name);

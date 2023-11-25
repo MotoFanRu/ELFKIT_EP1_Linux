@@ -123,6 +123,8 @@ DL_DbWebSessionsGetNumberAvailableSessions(	UINT8	device_type, // =0
 											UINT8	*available_num,
 											UINT8	unk ); // = 0
 
+UINT32 DL_DbWebSessionsFindAbsIndexByName(WCHAR* name, UINT8* ind, UINT32 unk); // unk = 4
+UINT32 DL_DbWebSessionsSetDefaultSessionIndex(SU_PORT_T* port, UINT8 ind);
 
 #ifdef __cplusplus
 } /* extern "C" */

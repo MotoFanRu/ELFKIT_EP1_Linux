@@ -94,6 +94,32 @@ UINT32 DL_ClkStartTimer( IFACE_DATA_T* iface, UINT32 period, UINT32 id );
 UINT32 DL_ClkStartCyclicalTimer( IFACE_DATA_T* iface, UINT32 period, UINT32 id );
 UINT32 DL_ClkStopTimer( IFACE_DATA_T* iface );
 
+typedef enum
+{
+    RESOURCE_UNAVAILABLE = 0,
+    STORE_SUCCESS = 1,
+    READ_SUCCESS = 2,
+    DELETE_SUCCESS = 3,
+    ALARM_ALREADY_EXPIRED = 4,
+    PORT_NOT_FOUND = 6,
+    TIMER_NOT_FOUND = 7,
+    INVALID_DATE_FORMAT = 8,
+    INVALID_TIME_FORMAT = 9
+} CLK_STATUS_T;
+
+typedef struct
+{
+    CLK_TIME_T time;
+    CLK_DATE_T date;
+    UINT8      weekday;
+    UINT8       unk;
+    UINT16     yearday;
+    UINT16    timezone;
+} CLK_PARSED_CLOCK_T;
+
+CLK_STATUS_T DL_ClkGetParsedClock(CLK_PARSED_CLOCK_T *parsed_clock);
+CLK_STATUS_T DL_ClkSetParsedClock(CLK_PARSED_CLOCK_T parsed_clock);
+
 #ifdef __cplusplus
 } /* extern "C" */
 #endif
