@@ -498,10 +498,12 @@ UIS_DIALOG_T UIS_CreateProgressBar( SU_PORT_T		*port,
 									ACTIONS_T		*actions,
 									RESOURCE_ID		dlgres );
 
+#if defined(EP1)
 // Ивенты для этого диалога
 #define EV_PB_SET_PERCENT		0x213F
 #define EV_PB_SET_VALUE_STR		0x2140
 #define EV_PB_SET_STR			0x2141
+#endif
 
 /***************************
  Скин

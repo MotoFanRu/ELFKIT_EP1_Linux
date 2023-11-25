@@ -79,8 +79,6 @@ typedef struct
 	UINT8 transparent; // прозрачность
 } COLOR_T;
 
-typedef UINT32				UIS_COLOR_T;
-
 #define COLOR_RED		(COLOR_T)(0xFF000000)
 #define COLOR_GREEN		(COLOR_T)(0x00FF0000)
 #define COLOR_BLUE		(COLOR_T)(0x0000FF00)
