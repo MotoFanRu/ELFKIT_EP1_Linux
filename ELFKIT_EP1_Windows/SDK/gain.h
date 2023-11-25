@@ -1,3 +1,5 @@
+#ifndef GAIN_H
+#define GAIN_H
 
 #define am_hw_gain_tbl_size		0x46
 #define am_hw_vol_tbl_size		0x0A
@@ -27,3 +29,5 @@ typedef struct {
 // r3 = 0xF
 // arg_0 = volume_step
 void * get_gain(UINT32 r0,  R1, R2, R3, arg_0);
+
+#endif // GAIN_H

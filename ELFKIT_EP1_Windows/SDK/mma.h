@@ -4,9 +4,6 @@
 #include <typedefs.h>
 #include <resources.h>
 
-
-
-
 typedef struct {
     RESOURCE_ID stat;	// Static icon
     RESOURCE_ID ani;	// animated icon under corsor
@@ -19,13 +16,6 @@ typedef struct {
 	UINT8	num;
 	UINT8	cursor;
 } MENU_ATTRIB_T;
- 
-
-
-
-
-
-
 
 #ifdef __cplusplus
 extern "C" {

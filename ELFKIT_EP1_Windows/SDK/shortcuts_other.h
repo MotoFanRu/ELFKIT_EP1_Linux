@@ -2,7 +2,7 @@
 #define SC_H
 
 /********************************
-  Метки
+  РњРµС‚РєРё
 *********************************/
 
 #include <typedefs.h>
@@ -19,28 +19,28 @@ extern "C" {
 
 typedef UINT8 SC_TYPE_T;
 
-// передается ивентом в аттаче при вызове меткой
+// РїРµСЂРµРґР°РµС‚СЃСЏ РёРІРµРЅС‚РѕРј РІ Р°С‚С‚Р°С‡Рµ РїСЂРё РІС‹Р·РѕРІРµ РјРµС‚РєРѕР№
 typedef struct
 {
 /*+00*/    UINT8            	seem_rec;    // seem_rec-1
-/*+01*/    UINT8				type;        // тип метки 
-/*+02*/    UINT8            	index;       // номер в списке, отсчет от 1. Номер метки
+/*+01*/    UINT8				type;        // С‚РёРї РјРµС‚РєРё 
+/*+02*/    UINT8            	index;       // РЅРѕРјРµСЂ РІ СЃРїРёСЃРєРµ, РѕС‚СЃС‡РµС‚ РѕС‚ 1. РќРѕРјРµСЂ РјРµС‚РєРё
 /*+03*/    UINT8            	unk1;        // 0xFE
 /*+04*/    UINT32            	ev_code;
-/*+08*/    UINT32            	list1_index;	 // id выделенного пункта списка
+/*+08*/    UINT32            	list1_index;	 // id РІС‹РґРµР»РµРЅРЅРѕРіРѕ РїСѓРЅРєС‚Р° СЃРїРёСЃРєР°
 /*+12*/    UINT32            	param1;       
-/*+16*/	   UINT32            	list2_index; // тоже какой-то id пункта
+/*+16*/	   UINT32            	list2_index; // С‚РѕР¶Рµ РєР°РєРѕР№-С‚Рѕ id РїСѓРЅРєС‚Р°
 /*+20*/    UINT32            	param2;       
 /*+24*/    UINT32            	data;	     // 
 /*+28*/    UINT32		        lang_text;   // RESOURCE_ID
-/*+32*/    WCHAR            	text[17];	 // имя метки // 34
-/*+66*/    UINT8            	state;       // номер state, при котором создана метка
+/*+32*/    WCHAR            	text[17];	 // РёРјСЏ РјРµС‚РєРё // 34
+/*+66*/    UINT8            	state;       // РЅРѕРјРµСЂ state, РїСЂРё РєРѕС‚РѕСЂРѕРј СЃРѕР·РґР°РЅР° РјРµС‚РєР°
 } SEEM_0002_T;
 // 68
 
 #define SHORTCUT_RECORD_T		SEEM_0002_T
 
-/* передается в аттаче с ивентом 
+/* РїРµСЂРµРґР°РµС‚СЃСЏ РІ Р°С‚С‚Р°С‡Рµ СЃ РёРІРµРЅС‚РѕРј 
 #define EV_HANDLE_SHORTCUT			0x20C5 
 */
 typedef struct 
@@ -56,56 +56,56 @@ typedef struct
 
 
 UINT32 APP_UtilShortcutBuildRecord(EVENT_STACK_T *ev_st, SHORTCUT_RECORD_T *sc_data, UINT32 ev_code, UINT32 state, UINT32 data);
-/* формирует sc_data на основе параметров ev_code, state, data и данных из аттача 
-аттач типа SHORTCUT_CREATE_T
+/* С„РѕСЂРјРёСЂСѓРµС‚ sc_data РЅР° РѕСЃРЅРѕРІРµ РїР°СЂР°РјРµС‚СЂРѕРІ ev_code, state, data Рё РґР°РЅРЅС‹С… РёР· Р°С‚С‚Р°С‡Р° 
+Р°С‚С‚Р°С‡ С‚РёРїР° SHORTCUT_CREATE_T
 */
 
 UINT32 APP_UtilShortcutCopyRecordFromEv(EVENT_STACK_T *ev_st, void *app);
-/* копирует аттач (SHORTCUT_RECORD_T) в app->sc_data (выделяет память) 
+/* РєРѕРїРёСЂСѓРµС‚ Р°С‚С‚Р°С‡ (SHORTCUT_RECORD_T) РІ app->sc_data (РІС‹РґРµР»СЏРµС‚ РїР°РјСЏС‚СЊ) 
 */
 
 UINT32 APP_UtilShortcutAcceptCreate(EVENT_STACK_T *ev_st, void *app, UINT32 ev_code, UINT32 state, UINT32 data);
-/* вызывает стандартный диалог создания метки
-формирует запись на основе параметров ev_code, state и данных из аттача
-ev_code - ивент, вызываемый меткой
-state - состояние приложения, хотя для своих целей можно и что-нить другое
-data - доп. данные, хотя для своих целей можно и что-нить другое
+/* РІС‹Р·С‹РІР°РµС‚ СЃС‚Р°РЅРґР°СЂС‚РЅС‹Р№ РґРёР°Р»РѕРі СЃРѕР·РґР°РЅРёСЏ РјРµС‚РєРё
+С„РѕСЂРјРёСЂСѓРµС‚ Р·Р°РїРёСЃСЊ РЅР° РѕСЃРЅРѕРІРµ РїР°СЂР°РјРµС‚СЂРѕРІ ev_code, state Рё РґР°РЅРЅС‹С… РёР· Р°С‚С‚Р°С‡Р°
+ev_code - РёРІРµРЅС‚, РІС‹Р·С‹РІР°РµРјС‹Р№ РјРµС‚РєРѕР№
+state - СЃРѕСЃС‚РѕСЏРЅРёРµ РїСЂРёР»РѕР¶РµРЅРёСЏ, С…РѕС‚СЏ РґР»СЏ СЃРІРѕРёС… С†РµР»РµР№ РјРѕР¶РЅРѕ Рё С‡С‚Рѕ-РЅРёС‚СЊ РґСЂСѓРіРѕРµ
+data - РґРѕРї. РґР°РЅРЅС‹Рµ, С…РѕС‚СЏ РґР»СЏ СЃРІРѕРёС… С†РµР»РµР№ РјРѕР¶РЅРѕ Рё С‡С‚Рѕ-РЅРёС‚СЊ РґСЂСѓРіРѕРµ
 */
 
 UINT32 APP_UtilShortcutCreateAppShortcut(EVENT_STACK_T *ev_st, void *app, UINT32 ev_code);
-/* вызывает стандартный диалог создания метки
-формирует запись на основе параметров ev_code и данных из аттача
-ev_code - ивент, вызываемый меткой
+/* РІС‹Р·С‹РІР°РµС‚ СЃС‚Р°РЅРґР°СЂС‚РЅС‹Р№ РґРёР°Р»РѕРі СЃРѕР·РґР°РЅРёСЏ РјРµС‚РєРё
+С„РѕСЂРјРёСЂСѓРµС‚ Р·Р°РїРёСЃСЊ РЅР° РѕСЃРЅРѕРІРµ РїР°СЂР°РјРµС‚СЂРѕРІ ev_code Рё РґР°РЅРЅС‹С… РёР· Р°С‚С‚Р°С‡Р°
+ev_code - РёРІРµРЅС‚, РІС‹Р·С‹РІР°РµРјС‹Р№ РјРµС‚РєРѕР№
 SHORTCUT_RECORD_T.type = SC_TYPE_APP
 SHORTCUT_RECORD_T.state = 0xFF
 */
 
 UINT32 APP_UtilShortcutGetShortcutType(UINT32 t /*SC_RECORD_T.type*/);
-// получить тип метки из записи (не равен SHORTCUT_RECORD_T.type)
+// РїРѕР»СѓС‡РёС‚СЊ С‚РёРї РјРµС‚РєРё РёР· Р·Р°РїРёСЃРё (РЅРµ СЂР°РІРµРЅ SHORTCUT_RECORD_T.type)
 
 UINT32 APP_UtilShortcutRejectInvoke(EVENT_STACK_T *ev_st, void *app);
-/* вызывает нотайс о запрете вызова метки
- данные берутся или из app->sc_data или из аттача */
+/* РІС‹Р·С‹РІР°РµС‚ РЅРѕС‚Р°Р№СЃ Рѕ Р·Р°РїСЂРµС‚Рµ РІС‹Р·РѕРІР° РјРµС‚РєРё
+ РґР°РЅРЅС‹Рµ Р±РµСЂСѓС‚СЃСЏ РёР»Рё РёР· app->sc_data РёР»Рё РёР· Р°С‚С‚Р°С‡Р° */
 
 UINT32 APP_UtilShortcutRejectCreate(EVENT_STACK_T *ev_st, void *app);
-/* если ивент != EV_HANDLE_SHORTCUT то вернет RESULT_FAIL
-иначе вызывает нотайс о запрете создания метки */
+/* РµСЃР»Рё РёРІРµРЅС‚ != EV_HANDLE_SHORTCUT С‚Рѕ РІРµСЂРЅРµС‚ RESULT_FAIL
+РёРЅР°С‡Рµ РІС‹Р·С‹РІР°РµС‚ РЅРѕС‚Р°Р№СЃ Рѕ Р·Р°РїСЂРµС‚Рµ СЃРѕР·РґР°РЅРёСЏ РјРµС‚РєРё */
 
 
 
 /********************************
-  Метки
+  РњРµС‚РєРё
 *********************************/
-// непроверено !
+// РЅРµРїСЂРѕРІРµСЂРµРЅРѕ !
 
-// при чтении метки
-#define EV_SHORTCUT_READ_RECORD                0x820F7 // в аттаче SHORTCUT_READ_RECORD_T
-// при чтении URL метки
-#define EV_SHORTCUT_READ_URL	               0x82112 // в аттаче  SHORTCUT_READ_URL_T
+// РїСЂРё С‡С‚РµРЅРёРё РјРµС‚РєРё
+#define EV_SHORTCUT_READ_RECORD                0x820F7 // РІ Р°С‚С‚Р°С‡Рµ SHORTCUT_READ_RECORD_T
+// РїСЂРё С‡С‚РµРЅРёРё URL РјРµС‚РєРё
+#define EV_SHORTCUT_READ_URL	               0x82112 // РІ Р°С‚С‚Р°С‡Рµ  SHORTCUT_READ_URL_T
 
 typedef struct 
 {
-    UINT8       	result; // 0 - если успешно
+    UINT8       	result; // 0 - РµСЃР»Рё СѓСЃРїРµС€РЅРѕ
     UINT8       	unk0;
     SEEM_0002_T 	*record;
 } SHORTCUT_READ_RECORD_T;
@@ -118,37 +118,37 @@ typedef struct
 } SHORTCUT_READ_URL_T;
 
 
-// создание метки									
+// СЃРѕР·РґР°РЅРёРµ РјРµС‚РєРё									
 UINT8 DL_DbShortcutCreateRecord( IFACE_DATA_T  *data, SEEM_0002_T  record );
 
-// обновление метки
+// РѕР±РЅРѕРІР»РµРЅРёРµ РјРµС‚РєРё
 UINT8 DL_DbShortcutUpdateRecord( IFACE_DATA_T  *data, SEEM_0002_T  record );
 
-// удаление метки
+// СѓРґР°Р»РµРЅРёРµ РјРµС‚РєРё
 UINT8 DL_DbShortcutDeleteRecord( IFACE_DATA_T  *data, UINT8 seem_rec);
 
-// получение метки. Функция асинхронная. Отправляет EV_SHORTCUT_READ_RECORD. В aatchment  будет SHORTCUT_READ_RECORD_T
+// РїРѕР»СѓС‡РµРЅРёРµ РјРµС‚РєРё. Р¤СѓРЅРєС†РёСЏ Р°СЃРёРЅС…СЂРѕРЅРЅР°СЏ. РћС‚РїСЂР°РІР»СЏРµС‚ EV_SHORTCUT_READ_RECORD. Р’ aatchment  Р±СѓРґРµС‚ SHORTCUT_READ_RECORD_T
 UINT8 DL_DbShortcutGetRecordByRecordId( IFACE_DATA_T  *data, UINT8  seem_rec);
 
-// получает ко-во доступных записей
+// РїРѕР»СѓС‡Р°РµС‚ РєРѕ-РІРѕ РґРѕСЃС‚СѓРїРЅС‹С… Р·Р°РїРёСЃРµР№
 UINT16 DL_DbShortcutGetNumOfRecordsAvailable( void ); 
 
-// получает кол-во используемых записей
+// РїРѕР»СѓС‡Р°РµС‚ РєРѕР»-РІРѕ РёСЃРїРѕР»СЊР·СѓРµРјС‹С… Р·Р°РїРёСЃРµР№
 UINT16 DL_DbShortcutGetNumOfRecordsUsed( BOOL voice_shortcut );
 
-// получает первый доступный номер
+// РїРѕР»СѓС‡Р°РµС‚ РїРµСЂРІС‹Р№ РґРѕСЃС‚СѓРїРЅС‹Р№ РЅРѕРјРµСЂ
 UINT8 DL_DbGetFirstAvailableNumber( void ); 
 
-// получает кол-во используемых  записей URL
+// РїРѕР»СѓС‡Р°РµС‚ РєРѕР»-РІРѕ РёСЃРїРѕР»СЊР·СѓРµРјС‹С…  Р·Р°РїРёСЃРµР№ URL
 UINT16 DL_DbShortcutGetNumOfURLRecordsUsed( void );
 
-// получает кол-во доступных записей URL
+// РїРѕР»СѓС‡Р°РµС‚ РєРѕР»-РІРѕ РґРѕСЃС‚СѓРїРЅС‹С… Р·Р°РїРёСЃРµР№ URL
 UINT16 DL_DbShortcutGetNumOfURLRecordsAvailable( void );
 
-// получает URL. Функция асинхронная. Отправляет EV_SHORTCUT_READ_URL
+// РїРѕР»СѓС‡Р°РµС‚ URL. Р¤СѓРЅРєС†РёСЏ Р°СЃРёРЅС…СЂРѕРЅРЅР°СЏ. РћС‚РїСЂР°РІР»СЏРµС‚ EV_SHORTCUT_READ_URL
 UINT32 DL_DbShortcutGetURLByURLId( IFACE_DATA_T *data, UINT32 URLId);
 
-// получение типа записи
+// РїРѕР»СѓС‡РµРЅРёРµ С‚РёРїР° Р·Р°РїРёСЃРё
 SC_TYPE_T DL_DbShortcutGetshortcutType( UINT8 index );
 
 
