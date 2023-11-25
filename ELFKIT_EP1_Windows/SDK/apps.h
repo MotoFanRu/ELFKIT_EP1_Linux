@@ -133,7 +133,6 @@ UINT32 APP_Register( const EVENT_CODE_T *			reg_table,
 /* Искать приложение по reg_id */
 UINT32 AFW_InquireRoutingStackByRegId( REG_ID_T reg_id );
 
-
 APPLICATION_T* APP_InitAppData(	void             *main_event_handler,
 								UINT32            sizeof_app,
 								REG_ID_T          reg_id,
@@ -143,6 +142,14 @@ APPLICATION_T* APP_InitAppData(	void             *main_event_handler,
 								UINT8             centricity,		// AFW_APP_CENTRICNESS_T
 								UINT8             routing_stack,	// AFW_APP_RSTACK_TYPE_T
 								UINT8             stack_priority );	// AFW_APP_RSTACK_POS_T
+
+APPLICATION_T* APP_InitData( void *	main_event_handler,
+							UINT32		sizeof_app,
+							REG_ID_T	reg_id,
+							UINT32		sizeof_hist,		// =0
+							UINT16		history_size,
+							UINT32		priority,
+							UINT16		priority2 );
 
 /* Стандартная функция управления ивентами для нефоновых приложений */
 void APP_HandleEvent(	EVENT_STACK_T           *ev_st,
@@ -235,6 +242,8 @@ void APP_MMC_UtilStopVariousTimers(void);
 
 /* Функция выключения режима непрерывной подсветки. */
 UINT32 APP_MMC_UtilRestartVariousTimers(void);
+
+UINT32 AlertStatusStart(EVENT_STACK_T *ev_st, REG_ID_T reg_id, void *reg_hdl);
 
 #ifdef __cplusplus
 } /* extern "C" */
