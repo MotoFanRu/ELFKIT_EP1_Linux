@@ -243,6 +243,22 @@ void PFprintf( const char *format, ... ); // %d %x %s, a-la printf
 int Nsscanf( const char *buffer, const char *format, ... /*arguments*/ );
 #define sscanf(buffer, format, ...) Nsscanf(buffer,format, ## __VA_ARGS__)
 
-//void suLogData(UINT32 * phandle, UINT32 msgid, UINT32 num_pairs, ...);
+void suLogData(UINT32 * phandle, UINT32 msgid, UINT32 num_pairs, ...);
+
+#define LOG(format, ...) \
+	do { \
+			PFprintf("%s:%d: " format, __func__, __LINE__, ##__VA_ARGS__); \
+	} while(0);
+
+#if !defined(DEBUG)
+#define D(format, ...)
+#define P()
+#else
+#define D(format, ...) \
+	do { \
+			PFprintf("%s:%d: " format, __func__, __LINE__, ##__VA_ARGS__); \
+	} while(0);
+#define P() D("%s\n", "Debug Line!")
+#endif
 
 #endif

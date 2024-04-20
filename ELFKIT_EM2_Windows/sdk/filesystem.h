@@ -137,7 +137,7 @@ UINT8 DL_FsRenameFile (FILE_HANDLE_T handle,  WCHAR *new_name);
 UINT8 DL_FsSRenameFile (const WCHAR *old_uri,  WCHAR* new_name,  UINT16 owner);
 
 // Óהאכטעü פאיכ
-UINT8 DL_FsDeleteFile (WCHAR *uri, UINT16 param1);
+UINT8 DL_FsDeleteFile (const WCHAR *uri, UINT16 param1);
 
 // Ïונולוסעטעü פאיכ
 UINT8 DL_FsFMoveFile (WCHAR *src_uri, WCHAR *dst_uri, UINT16 owner);
