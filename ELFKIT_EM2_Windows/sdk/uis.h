@@ -154,8 +154,8 @@ typedef struct
         RESOURCE_ID        marks[UIS_MAX_NUM_MARKS];
         RESOURCE_ID        unk3[2];
         RESOURCE_ID        unk4[2];
-//        UINT8              unk5;
-	UINT8		   can_mark;   //???
+        UINT8              unk5[4];
+        UINT8              can_mark;   //???
         UINT8              formatting;                      // = 1
 
 } STATIC_LIST_ENTRY_T;
@@ -176,7 +176,7 @@ typedef struct
         INT32                      tag;             //
         LIST_CONTENT_T             content;         //
 
-	UINT8                      pad1[4];
+        // UINT8                      pad1[4];
         UINT8                      unk;
         UINT8                      pad2[7];
 
