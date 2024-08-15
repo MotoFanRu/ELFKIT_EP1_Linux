@@ -3,6 +3,15 @@
 
 #include <typedefs.h>
 
+enum DISPLAY_TYPE_ENUM {
+	DISPLAY_MAIN = 0,
+	DISPLAY_CLI,
+	DISPLAY_EXTERNAL,
+	DISPLAY_MAIN_AND_CLI,
+	DISPLAY_NONE
+};
+typedef UINT8 DISPLAY_TYPE_T;
+
 //0x801AD34 - Адрес состояния DAL. 0 - не инициализирован, 1 - инициализирован (для v3x)
 
 //Выключить дисплей

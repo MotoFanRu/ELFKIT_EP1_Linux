@@ -13,8 +13,11 @@
 #define TRACE_U_STR	"udbg: "
 
 // Имя приложения будет браться из глобальной переменной
-extern const char app_name[];
+#if defined(EM1) || defined(EM2)
+#define app_name g_app_name
+#endif
 
+extern const char app_name[];
 
 //#define DEBUG в начале файла для использования отладочных сообщений
 #ifdef DEBUG
