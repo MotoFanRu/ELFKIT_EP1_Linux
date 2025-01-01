@@ -1,0 +1,101 @@
+<!-- Copyright (c) ARM Limited 2000.  All Rights Reserved. -->
+<!-- A document definition for ARM peripheral description files -->
+<!-- Author: $Author: hbullman $ -->
+<!-- Revision: $Revision: 1.3.4.3 $ -->
+<!-- Date: $Date: 2002/04/26 14:05:02 $ -->
+
+<!ELEMENT armperip (cvs_info?,
+                    (displaytype | module | board | eice | processor | peripheral)*)>
+
+<!ELEMENT cvs_info (author, revision, date)>
+<!ELEMENT author (#PCDATA)*>
+<!ELEMENT revision (#PCDATA)*>
+<!ELEMENT date (#PCDATA)*>
+<!ATTLIST revision
+          min CDATA #IMPLIED
+          max CDATA #IMPLIED>
+
+<!ELEMENT displaytype (name, requires?, definition)>
+<!ELEMENT name (#PCDATA)*>
+<!ELEMENT requires (#PCDATA)*>
+<!ELEMENT definition (#PCDATA)*>
+
+<!ELEMENT module (type, register+)>
+<!ELEMENT type (#PCDATA)*>
+<!ELEMENT register
+   (name, bank?, description?,
+      (memory+ | cpreg+ | cpreg2+ | cpmem+ | jtag+)?,
+    attrib?, operation?, access, width, display?, revision?, dwarf?)>
+
+<!ELEMENT description (#PCDATA)*>
+
+<!ELEMENT memory EMPTY>
+<!ATTLIST memory
+          width    CDATA  "32"          
+          base     CDATA  "0"
+          offset   CDATA  "0"
+          count    CDATA  "1">
+
+<!ELEMENT cpreg EMPTY>
+<!ATTLIST cpreg
+          cp       CDATA  #REQUIRED
+          crn      CDATA  #REQUIRED
+          crm      CDATA  #REQUIRED
+          opcode_1 CDATA  "0"
+          opcode_2 CDATA  "0"
+          car      CDATA  "">
+
+<!ELEMENT cpreg2 EMPTY>
+<!ATTLIST cpreg2
+          cp       CDATA  #REQUIRED
+          crn      CDATA  #REQUIRED
+          crm      CDATA  #REQUIRED
+          opcode_1 CDATA  "0"
+          opcode_2 CDATA  "0"
+          car      CDATA  "">
+
+<!ELEMENT cpmem EMPTY>
+<!ATTLIST cpmem
+          cp       CDATA  #REQUIRED
+          p        CDATA  #REQUIRED
+          u        CDATA  #REQUIRED
+          n        CDATA  "0"
+          w        CDATA  #REQUIRED
+          crd      CDATA  #REQUIRED
+          car      CDATA  "">
+
+<!ELEMENT jtag EMPTY>
+<!ATTLIST jtag
+          reg      CDATA  #REQUIRED>
+
+<!ELEMENT revisions (#PCDATA)*>
+<!ATTLIST revisions
+          default CDATA "0">
+
+<!ELEMENT bank (#PCDATA)*>
+<!ELEMENT attrib (#PCDATA)*>
+<!ELEMENT access (#PCDATA)*>
+<!ATTLIST access
+          mode     CDATA  "user">
+<!ELEMENT width (#PCDATA)*>
+<!ELEMENT operation (#PCDATA)*>
+<!ELEMENT display (#PCDATA)*>
+
+<!ELEMENT board (name, component+)>
+<!ELEMENT peripheral (name, component+)>
+<!ELEMENT eice (name, component+)>
+<!ELEMENT component (name, type, base?)>
+<!ELEMENT base (#PCDATA)*>
+<!ELEMENT dwarf (#PCDATA)*>
+
+<!ELEMENT processor (name, revisions?, core?, component*)>
+<!ELEMENT core (#PCDATA)*>
+
+<!ATTLIST displaytype version CDATA "0">
+<!ATTLIST module version CDATA "0">
+<!ATTLIST board version CDATA "0">
+<!ATTLIST eice version CDATA "0">
+<!ATTLIST processor version CDATA "0">
+<!ATTLIST peripheral version CDATA "0">
+
+<!-- EOF -->

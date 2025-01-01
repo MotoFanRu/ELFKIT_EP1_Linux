@@ -1,0 +1,20 @@
+PACKAGE ads armlmd 1.2 E32F0DE5161D COMPONENTS="armasm compiler bats \
+	armulate axd adwu fromelf armlink codewarrior armsd"
+INCREMENT ads armlmd 1.2 permanent uncounted 5FC8131F51CB HOSTID=ANY \
+	ISSUER="ARM Limited" ck=133
+INCREMENT armasm armlmd 1.2 permanent uncounted ACFAEEB635A4C0BE7659 \
+	HOSTID=ANY ISSUER="ARM Limited"
+INCREMENT compiler armlmd 1.2 permanent uncounted \
+	3CEEDE0654A14DB9992E HOSTID=ANY ISSUER="ARM Limited"
+INCREMENT armulate armlmd 1.2 permanent uncounted \
+	6C4A1EC62C878879A7A9 HOSTID=ANY ISSUER="ARM Limited"
+INCREMENT axd armlmd 1.2 permanent uncounted 3CEADE76A34C2797F7E1 \
+	HOSTID=ANY ISSUER="ARM Limited"
+INCREMENT fromelf armlmd 1.2 permanent uncounted AC8A1ED6F87252FC0EC9 \
+	HOSTID=ANY ISSUER="ARM Limited"
+INCREMENT armlink armlmd 1.2 permanent uncounted 3CAA3E7676367A7A84DF \
+	HOSTID=ANY ISSUER="ARM Limited"
+INCREMENT codewarrior armlmd 1.2 permanent uncounted \
+	FCFA9E7617016D4C763B HOSTID=ANY ISSUER="ARM Limited"
+INCREMENT armsd armlmd 1.2 permanent uncounted 1CFA2786EC63A4CBAAF3 \
+	HOSTID=ANY ISSUER="ARM Limited"
