@@ -1,0 +1,10 @@
+[Patch_Info]
+SW_Ver=R252211_U_85.9B.E1P
+Description=MultiFont patch
+Author=MIG~
+
+[Patch_Code]
+07B4DC8: 09 6C 3C 00
+0B26862: 00
+0B2687A: 00
+0B26880: 00
