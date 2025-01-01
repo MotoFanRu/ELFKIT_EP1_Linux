@@ -1,0 +1,10 @@
+[Patch_Info]
+SW_Ver=R452F_G_08.03.08R
+Description=отключение логгера UIS_LogString. чтоб юзать его буфер
+Author=tim apple, портировал Евгений89
+
+[Patch_Code]
+0025B218: E12FFF1E
+
+[Patch_Undo]
+0025B218: E92D000F

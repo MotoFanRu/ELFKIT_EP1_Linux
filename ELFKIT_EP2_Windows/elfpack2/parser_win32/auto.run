@@ -1,0 +1,7 @@
+;Test autorun file
+
+  file://b/Screener.elf
+
+
+		file://b/FBrowser.elf	some params
+"file://b/New Elfs/Screener2.elf"	10

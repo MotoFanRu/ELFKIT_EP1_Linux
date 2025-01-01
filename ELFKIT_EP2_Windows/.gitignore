@@ -1,0 +1,11 @@
+libgen/library.bin
+!libgen/libs/*.bin
+!libgen/*_*-*-*.bin
+libgen/std.sa
+
+elfpack2/build/*.fpa
+elfpack2/build/*.bin
+elfpack2/build/*.ini
+elfpack2/build/*.elf
+elfpack2/build/build.txt
+elfpack2/obj/info.txt
