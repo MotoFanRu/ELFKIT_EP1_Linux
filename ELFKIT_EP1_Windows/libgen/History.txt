@@ -1,0 +1,564 @@
+
+Update 1.1 
+
+fix для lte2
+
+Update 1.2 
++ memset
++ UIS_SetCenterSelectAction
+
+Update 1.3 
++DL_Char_convUCS2toUTF8String
++DL_Char_convUTF8toUCS2String
+
++EVENT_BT - эвент передачи по бт универсальный (дерзаем разработчики )
+
++SBCM_ATOD_vltg - адрес в оперативке со значением напряжения батареи (special for Last1Left)
+но тк у него адеес не четный добавить его как адрес не получается, тоесть это ссылка на адрес
+
+или использовать другой адрес SBCM_ATOD_supply (он тоже есть в libgen) если к нему прибавить 1 то получим SBCM_ATOD_vltg
+
+Update 1.4
+ 
+поддержка R4513_B7.B7R и других из этой же серии
+
++UIS_CanvasDrawPixel
+
+Update 1.5
+
++DL_DbFeatureMasterReset
++DL_DbFeatureMasterClear
++DL_DbFeatureResetLifeTimer
++DL_Char_convGB2312toUCS2Buf
++DL_Char_convBig5toUCS2Buf
+
+Update 1.6 
+EV_LOC_KPAD - эвент блокировки клавы
+EV_UNLOC_KPAD - эвент разблокировки клавы
+EV_DisplayTimeout - эвент выключения дисплея
+
+Update 1.7 
+
+исправил KEYPAD_STATE - обновить либу всем
+
+Update 1.8 
+
+Добавлены:
++__rt_memset (оригинальная)
++u_strncat
++u_strchr
++u_strrchr
++u_strstr
++u_stristr
++u_itoh
++u_strcut
++u_strncpy
++DL_SigMsgSendTextMsgReq
++SEEM_IMSI
+
+Update 1.9
+
+Fix SEEM_IMSI
+
+добавил 
+_itoa
+
+Update 2.0
+
+Fix SEEM_IMSI
++SEEM_GET_ADDRESS_LENGTH_element_length
++SEEM_MAX_RECORD_get_max_record
+
+Update 2.1
+
+Fix SEEM_IMSI
+Fix SEEM_GET_ADDRESS_LENGTH_element_length
++DL_SigRegGetCellID
+
+Update 2.2
+
++ITUNES_STATUS
+
+
+Update 2.3
+
++ EV_FLIPClOSE
+PS.  EV_FLIPOPEN = EV_FLIPClOSE+1
+
+Update 2.4
+
++GAIN_TABLE
++PARAM_TABLE
+(у кого желание написать эльф эквалайзер)
+
++sprintf
++suCreateQueue
++suCreateMessage
++suDeleteMessage
++suReceiveMessageFromQueue
++suCreatePortFromQueue
++suSendMessage
++suGetMessageType
++suSleep
++suPalPanic
+
+Update 2.5
++UIS_CanvasDrawTitleBar
++UIS_CanvasDrawTitleBarWithIcon
++UIS_CanvasDrawColorSoftkey
++UIS_CanvasDrawColorScrollBar
++UIS_CanvasGetMainDisplaySoftkeyArea
++UIS_CanvasGetSoftkeyTextRegion
++UIS_CanvasGetSoftkeyRegion
+
+Update 2.6
++utility_draw_image
++HAPI_ATOD_read_pcap
++UIS_CanvasDrawPicture
++UIS_CanvasDrawText
++UIS_CanvasGetCharacterSize
++UIS_CanvasGetPictureSize
++UIS_CanvasGetCurrentFonts
++UIS_CanvasGetWorkingArea
++UIS_CanvasGetDefaultDisplayBuffer
++UIS_CanvasSetDefaultDisplayBuffer
++UIS_CreateColorCanvasWithWallpaper
++UIS_Delete
++UIS_CreateSplashScreenFs
++HAPI_ATOD_read
++DL_DbFeatureGetValue
++DL_PwrGetActiveBatteryPercent
++FSS_SendFileViaObex
++device_Get_SoftwareVersion
++JavaStartApp
++toupper
++tolower
++strtok
++strstr
++strspn
++strrchr
++strncpy
++strncat
++strcspn
++strchr
++qsort
++bsearch
++abs_0
++EV_PREVIEW_START
+
+Update 2.7
++__rt_memclr_w
++UIS_CreateIncomingCallNotice
++UIS_SetNoticeStatus
++DL_DbPhoneBookFindCachedRecordByTelno
++DL_DbPhoneBookGetRecordByIndex
++DL_DbPhoneBookGetNumberRecords
++DL_DbPhoneBookGetUsedRecords
++DL_DbPhoneBookDeleteAllRecords
++DL_DbPhoneBookStoreRecord
++EV_MISSEDCALLS
+
+Update 2.8
++DL_DbPhoneBookGetCategoryRecordByIndex
++DL_DbPhoneBookGetNumberofCategories
++DL_DbPhoneBookStoreCategoryRecord
+
+Update 2.9
+-__rt_memclr_w -вынесен в темп файл , кому нужен тот добавит
++ADN_storage_mgr
+
+Update 3.0
++utility_get_image_size
++EV_IDLE_GAIN_FOCUS
+
+Update 3.1
++DL_ClkStartTimer
++DL_ClkStartCyclicalTimer
++DL_ClkStopTimer
++DL_AudStopTone
+
+Update 3.2
++EV_CALL_PLACE1 (=EV_CALL_SETUP)
++EV_CALL_PLACE2 (=EV_SETUP_COLD_TRANSFER)
+
+Update 3.3
++JkGraphicsCreateContext 
++JkGraphicsSetColor 
++JkVideoEndPaintOnVirtual 
++JkVideoDrawRect 
++JkVideoDrawString 
+
++BEGIN_4A__IN_DB   O офсет сима 4а в базе
++db_state_KP_LOCK_OFFSET  (=KEYPAD_STATE)
++UIS_CreateFormattedEditor
+
+Update 3.4
++APP_UtilShortcutRejectCreate
++APP_UtilShortcutCreateAppShortcut
++APP_UtilShortcutRejectInvoke
++APP_UtilShortcutGetShortcutType
++APP_UtilShortcutCopyRecordFromEv
++APP_UtilShortcutAcceptCreate
++APP_UtilShortcutBuildRecord
++UIS_CreateExtendedNotice
+
+Update 3.5
+DL_SigRegQueryGprsEgprs
+MsgUtilGetUnreadMsgsInAllFolders
+
+Update 3.6
+для добавления функции _ll_cmpu в либу добавьте её название в эту строку в файле make.cmd ->  findstr "Ldr UtilLogStringData namecmp u_utoa _ll_cmpu" elfpack.sym >>functions.sym
+_ll_ushift_r
+UIS_GetCurrentSkinIndex
+UIS_GetSkinName
+SKIN_FOLDER  - константа  папка скина в юникоде
+
+
+Update 3.7
+Fix:
+UIS_GetCurrentSkinIndex
+UIS_GetSkinName
+
+Add:
+UIS_SetSkin
+UIS_GetNumSkins
+UIS_GetDefaultSkinIndex
+MsgUtilGetUnreadMsgs
+
+Del: (mov in temp.txt)
+UIS_CreateFormattedEditor
+JavaStartApp
+
+
+Update 3.8
+add:
+APP_ChangeRoutingStack
+DL_AccIsHeadsetAvailable
+
+fix v3i:
+UIS_GetDefaultSkinIndex
+
+Update 3.8.1
+UIS_CreateIconicMenu
+UIS_CreateIconicAppPickerTab
+
+Update 3.9
+
+inflateInit2_
+inflate
+inflateEnd
+
+Update 4.0
+
+Вернул:
+JavaStartApp
+Добавил:
+UIS_CanvasIsImageAnimated
+UIS_CanvasPauseAnimation
+UIS_CreateScreenSaver
+PS чтоб работал тюнс 3.X нужна функция _ll_cmpu , чтоб она добавилась замените make.cmd из либгена.
+
+Update 4.1
+add: функции работы с сетью
+DL_DSMA_ProxyCreate
+DL_DSMA_ProxyDestroy
+DL_DSMA_ProxyAttributeSet
+DL_DSMA_ProxyAttributeGet
+DL_DSMA_ProxyActivate
+DL_DSMA_ProxyDeactivate
+DL_DSMA_ProxyDeactivateSocket
+DL_DSMA_ProxyWrite
+DL_DSMA_ProxyRead
+
+EV_DisplayActivity - эвент включения дисплея
+
+DL_DbWebSessionsFindAbsIndexByName
+DL_DbWebSessionsSetDefaultSessionIndex
+
+Update 4.2
+DL_DbWebSessionsGetSessionByIndex
+DL_DbWebSessionsGetDefaultSessionIndex
+
+Update 4.3
+DL_SigCallSSAbortUSSDReq
+DL_SigCallSSSendUSSDResponseReq
+
+Update 4.4
+_ll_rsblu
+_ll_sdiv
+
+Update 4.5
+Nsscanf
+DL_ClkSetTime
+DL_ClkSetDate
+
+Update 4.6
+get_connection_status
+USB_DRIVER_select_config
+connect_status_USB_CABLE - данные для подачи в функцию get_connection_status 
+JavaAppRunning
+JavaResumeApp
+MsgUtilFileUtilsReadLn - This function reads a line from a file and return it
+
+Update 4.7 (11729/11591)
+с этой версии буду писать размер elfloader.lib (lte/lte2) , если у вас не такой ищите ошибку.
+fix- connect_status_USB_CABLE
+DL_Char_convKOI8RtoUCS2String
+
+Update 4.8 (11779/11641)
+APP_ExitStateAndApp -This function exits the current state and Exits the App
+APP_StateExit -Delete the current dialog and exit the current State
+
+Update 4.9 (11818/11680)
+DL_Char_convCP1251toUCS2String
+
+Update 5.0 (11886/11748)
+UIS_CreateStaticSelectionEditor
+current_usb_cfg_set
+
+Update 5.1 (11876/11738)
+отправил в темп за ненадбностью кто звдумает испольовать добавлю обратно
+-JkGraphicsCreateContext T B5F849??1C0622??????6808
+-JkGraphicsSetColor T B5F81C0448??1C0E21??3004
+-JkVideoEndPaintOnVirtual T B5F0B0852800D04D4C??68
+-JkVideoDrawRect T B5F01C0F2100B0871C0648??9102
+-JkVideoDrawString T 2 B5FF1C0548??21????C91C021851B083
+добавил
+UIS_CreateProgressBar
+DL_DbMessageGenericGetMessageIDList
+DL_DbMessageGenericGetMessage
+EV_MsgNotif - эвент прихода смс
+Изменил
+GAIN_TABLE - теперь это не адрес в оперативке, а ссылка на адрес в опреативке
+PARAM_TABLE
+
+Update 5.2 (11903/11765)
+clipboard_data_buf -буфер клипборда 10242 байт , пишем в него текст в юникоде, а забираем в любом редакторе -> Вставить
+
+Update 5.3 (11998/11860)
+EV_MSGG_PHBK_SEARCH - Эвент поиска в справочнике (Osta)
+UIS_ClearAndSetActionList 
+DL_SigCallSSOperationReq -отправка USSD запроса
+
+Update 5.4 (12194/12056)
+add:
+uisAllocateMemory
+uisFreeMemory
+uisReAllocMemory
+UIS_CanvasGetClippingRegion
+UIS_CanvasSetClippingRegion
+RestartDisplayTimer - включение подсветки
+EV_UIS_REFRESH - эвент смены скина и обновления уиса
+fix:
+EV_UNLOC_KPAD
+DL_DbMessageGenericGetMessageIDList
+DL_DbMessageGenericGetMessage
+
+Update 5.5 (12374/12236)
+add:
+AFW_GetActiveSession
+AFW_GetAppsInSession
+AFW_GetNumSessions
+AFW_GetSessionList
+AFW_AddSvcEvNoD
+UIS_CanvasDrawColorTextWithClipping
+
+Update 5.6 (12468/12330)
+DL_FsICopyFile
+HAPI_IC_ID_unique_id_read
+SBCM_BATT_DATA_get_tbl_elmnt
+
+Update 5.7 (14254/14116)
+
+JavaStartMarquee
+JavaStopMarquee
+jsapi_marquee_text
+
+DL_DbFeatureGetBlock
+AhiDispWaitVBlank 
+AFW_CreateInternalQueuedEvPriv
+DL_SigRegGetLAI
+setjmp
+mmm_handle_file_copy  (DL_FS_RESULT_T mmm_handle_file_copy(const WCHAR* src_uri, const WCHAR* dest_uri, const UINT16 owner_id, const UINT8 shandle); )
+
+DL_FsGetFileName
+DL_FsSGetFileName
+DL_FsGetFileNameWithExt
+DL_FsSGetFileNameWithExt
+DL_FsGetFileType
+DL_FsSGetFileType
+DL_FsSGetLastDirName
+DL_FsGetPath
+DL_FsSGetPath
+
+UIS_CanvasDrawColorTextWithClipping
+
+AhiDevEnum
+AhiDispWaitVBlank
+AhiDispSurfGet
+AhiDrawSurfDstSet
+AhiDrawSurfSrcSet
+AhiDrawFgColorSet
+AhiDrawBrushFgColorSet
+AhiDrawBrushBgColorSet
+AhiDrawBrushSet
+AhiDrawClipDstSet
+AhiDrawClipSrcSet
+AhiDrawLines
+AhiDrawBitBlt
+AhiDrawRopSet
+AhiDrawAlphaSet
+AhiDrawAlphaBlt
+AhiDrawChar
+AhiDrawBitmapBlt
+AhiSurfAlloc
+AhiSurfFree
+AhiDrawSpans
+AhiDrawSpriteBlt
+
+graph_decodePNG
+graph_PngDecoder
+graph_PngGetDimensionsAndAlphaTag
+
+png_get_io_ptr
+png_check_sig
+png_create_read_struct
+png_create_info_struct
+png_destroy_read_struct
+png_set_read_fn
+png_set_sig_bytes
+png_read_info
+png_get_IHDR
+png_get_valid
+png_set_tRNS_to_alpha
+png_set_gray_1_2_4_to_8
+png_set_strip_16
+png_set_packing
+png_set_palette_to_rgb
+png_set_gray_to_rgb
+png_set_filler
+png_read_update_info
+png_get_rowbytes
+png_read_end
+png_set_swap_alpha
+
+MME_IMG_interface_create
+MME_IMG_interface_parse
+MME_IMG_interface_decode
+MME_IMG_interface_close
+
+__pvfn__Fv
+
+----------------------------------------- Update 5.8 (15281/15143) -------------------------
+snprintf
+vsnprintf
+memcpy
+product_version
+
+AhiDevOpen
+AhiDevClose
+AhiDispModeClip
+AhiDispIsInVBlank
+AhiDispModeEnum
+AhiDispModeGet
+AhiDispModeSet
+AhiDispSurfSet
+AhiDispUpdate
+AhiDrawAlphaSet
+AhiDrawBitBltMulti
+AhiDrawFlush
+AhiDrawGlyph
+AhiDrawLineStyleSet
+AhiDrawMaskBltEx
+AhiDrawMonoBltMulti
+AhiDrawRotateBlt
+AhiDrawStretchBlt
+AhiDrawSwapBlt
+AhiDrawTileBlt
+AhiDrawTransBlt
+AhiIntersect=bIntersect
+
+APP_SYNCMLMGR_MainRegister
+DL_KeyKjavaGetKeyState
+EV_CALL_INCOMING   - эвент входящего вызова
+EV_CALL_TERMINATED - эвент завершения разговора
+
+MME_GC_capture_create
+MME_GC_capture_delete
+MME_GC_capture_set_attribute
+MME_GC_capture_get_attribute
+MME_GC_capture_start
+MME_GC_capture_stop
+MME_GC_capture_pause
+
+----------------------------------------- Update 5.9 (15450/15312) -------------------------
+DAL_FreeCache
+DAL_ATIDevMemConfiguration
+DAL_GetActiveATIDevMemConfiguration
+EV_BacklightContinueOn - эвент включения режима непрерывной подсветки
+EV_BacklightRestore - эвент выключения режима непрерывной подсветки
+FlashDevWrite  (UINT8 * buf, UINT32 addr, UINT32 size); -пишет данные на флешку телефона
+DL_FsLnkSGetTime
+__rt_memmove
+
+----------------------------------------- Update 6.0 (15529/15391) -------------------------
+APP_MMC_UtilRestartVariousTimers - функция выключения режима непрерывной подсветки
+APP_MMC_UtilStopVariousTimers - функция включения режима непрерывной подсветки
+
+----------------------------------------- Update 6.1 (15688/15530) -------------------------
+FlashDevEraseBlock
+suDisableAllInt
+suSetInt
+
+DL_DbSigNamGetTrueIMSI
+localtime
+__rt_memclr_w 
+
+----------------------------------------- Update 6.2 (16182/16044) -------------------------
+
+!!! ВНИМАНИЕ !!! Обязательно замените RAMTrans.exe из архива
+
+DL_DbAlmclkRegisterApplication
+DL_DbAlmclkUnregisterApplication
+DL_DbAlmclkGetRecordByIndex
+DL_DbAlmclkCreateRecord
+DL_DbAlmclkDeleteAllRecords
+DL_DbAlmclkDeleteRecordByIndex
+
+DL_DBK_RegisterApplication
+DL_DBK_UnregisterApplication
+DL_DBK_AddEventToDatabase
+DL_DBK_UpdateEventData
+DL_DBK_DeleteEventFromDatabase
+DL_DBK_GetFirstEventInTimeFrame
+DL_DBK_GetEventInstanceByIdNumber
+
+EV_SECURITY_UNLOCK_PHONE - ивент вызова юзер-кода 
+
+----------------------------------------- Update 6.3 (16315/16177) -------------------------
+
+DL_DBK_GetNextEventForDayView
+DL_DBK_GetWeekView 
+DL_DBK_GetMonthView
+
+DL_DbPhoneBookFindRecordByTelno
+----------------------------------------- Update 6.4 (16496/16358) -------------------------
+!Вимание  при поиске не найдёт suLogData это нормально, их там две для разных платформ
++ добавлена поддержка v3r
+
+u_uint64tou 
+APP_UtilGetDataVolume
+DL_SigCallReleaseReq
+DL_ClkGetParsedClock
+DL_ClkSetParsedClock
+SENDED_TRAFFIC
+SESSION_TIME
+----------------------------------------- Update 6.5 (16642/16504) -------------------------
+DL_ClkStoreIndividualEvent 
+DL_ClkDeleteIndividualEvent 
+DL_ClkSetClock
+DL_ClkSetWakeupEvent
+EV_CHANGE_MODE - эвент смены стиля с текушего на бесшумный и обратно
+
+В архиве obj.zip - лежат объектники эльфака  с автопоиском либы и авторана на а потом на b дисках, отключением эльфпак по 0 (для R373) ,фикс не запуска эльфов, после попытки запуска несущестующего эльфа. 
+пс .  адреса совпадут со старым эльфпаком , поэтому совместимость старые патчи + новая либа остаётся.

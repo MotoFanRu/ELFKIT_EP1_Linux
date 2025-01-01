@@ -1,0 +1,185 @@
+@echo off
+set PATH=%PATH%;..\
+setlocal enabledelayedexpansion
+
+
+
+rem ------------------------------ 1. COMPILATION ------------------------------
+
+echo Compiling the stuff...
+echo.
+
+set lastsrc=
+
+for %%S in (*.asm) do (
+
+	echo Compiling %%S
+	set lastsrc=%%S
+
+	armasm -16 -bigend -apcs /interwork %%~nS.asm -o obj\%%~nS.o
+	if errorlevel 1 goto cerror
+
+)
+
+echo Compiling suCreateTask.c
+
+set lastsrc=suCreateTask.c
+tcc -ISDK --bss_threshold=256 %1 -c -bigend -O2 -apcs /interwork suCreateTask.c -o obj\suCreateTask.o
+if errorlevel 1 goto cerror
+
+echo.
+echo Done
+echo.
+
+
+
+rem -------------------------------- 2. LINKAGE --------------------------------
+
+echo Linking the stuff together...
+echo.
+
+pushd obj\
+
+armlink -scatter ..\scatter.lnk ..\functions.sym my_usr_sysinit.o suAllocMem.o suFreeMem.o suCreateTask.o suDeleteTask_ven.o -o ..\build\patch.elf
+if errorlevel 1 goto lerror
+
+popd
+
+echo.
+echo Done
+echo.
+
+
+
+rem ----------------------------- 3. ROMIFICATION ------------------------------
+
+echo Making binaries...
+echo.
+
+pushd build\
+
+fromelf patch.elf -bin -output .
+if errorlevel 1 goto berror
+
+popd
+
+echo.
+echo Done
+echo.
+
+
+
+rem ---------------------------- 4. PATCHIFICATION -----------------------------
+
+echo Making patches...
+echo.
+
+pushd build\
+
+BinToFpa $ PATCH.bin
+if errorlevel 1 goto perror
+
+BinToFpa $ SUALLOC.bin
+if errorlevel 1 goto perror
+
+BinToFpa $ SUFREE.bin
+if errorlevel 1 goto perror
+
+BinToFpa $ SUCREATETASK.bin
+if errorlevel 1 goto perror
+
+BinToFpa $ SUDELETETASK.bin
+if errorlevel 1 goto perror
+
+popd
+
+echo.
+echo Done
+echo.
+
+
+
+rem ------------------------------ 5. UNIFICATION ------------------------------
+
+
+echo Unifying patches...
+echo.
+
+pushd build\
+
+Uniter PATCH.fpa SUALLOC.fpa SUFREE.fpa SUCREATETASK.fpa SUDELETETASK.fpa ntsk_increase.fpa disable_powerdown_report.fpa move_tasktab.fpa
+if errorlevel 1 goto uerror
+
+move /Y ..\ResultPatch.fpa . >nul
+
+popd
+
+echo.
+echo Done
+
+
+
+
+rem -------------------------------- 6. CLEANUP --------------------------------
+
+rem goto :EOF
+
+echo Cleaning up...
+
+del /Q build\*.bin >nul
+del /Q build\*.elf >nul
+
+del /Q obj\*.o >nul
+
+del /Q scatter.lnk >nul
+del /Q defines.h >nul
+del /Q equs.inc >nul
+del /Q tables.inc >nul
+del /Q functions.sym >nul
+
+echo.
+echo Done
+
+goto :EOF
+
+
+rem ---------------------------- COMPILATION ERRORS ----------------------------
+
+:cerror
+echo.
+echo * ERROR: %lastsrc% compilation failed!
+goto :EOF
+
+
+rem ------------------------------ LINKAGE ERRORS ------------------------------
+
+:lerror
+echo.
+echo * ERROR: Linkage failed!
+goto :EOF
+
+
+rem --------------------------- ROMIFICATION ERRORS ----------------------------
+
+:berror
+echo.
+echo * ERROR: Romification failed!
+goto :EOF
+
+
+rem -------------------------- PATCHIFICATION ERRORS ---------------------------
+
+:perror
+echo.
+echo * ERROR: Patchification failed!
+goto :EOF
+
+
+rem ---------------------------- UNIFICATION ERRORS ----------------------------
+
+:uerror
+echo.
+echo * ERROR: Unification failed!
+goto :EOF
+
+
