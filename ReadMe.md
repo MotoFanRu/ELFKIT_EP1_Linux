@@ -2,7 +2,7 @@ P2K-ELF-SDK-OLD
 ===============
 
 > [!IMPORTANT]
-> This project is outdated, please use the new and actual **P2K-ELF-SDK** project:
+> This project is outdated, please use the new and actual **[P2K-ELF-SDK](https://github.com/MotoFanRu/P2K-ELF-SDK)** toolset:
 >
 > **https://github.com/MotoFanRu/P2K-ELF-SDK**
 
